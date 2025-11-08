@@ -1,8 +1,11 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <h1>This is the About Us page</h1>
+  <Form></Form>
 </template>
+
+<script>
+import Form from '../components/AboutUs/Form.vue'
+</script>
 
 <style>
 @media (min-width: 1024px) {
