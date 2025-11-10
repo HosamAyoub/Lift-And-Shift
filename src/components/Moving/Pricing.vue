@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-surface-50 dark:bg-surface-950 px-6 py-20 md:px-12 lg:px-20">
+  <!-- <div class="bg-surface-50 dark:bg-surface-950 px-6 py-20 md:px-12 lg:px-20">
     <div class="flex flex-col gap-4 items-center justify-center mb-12">
       <div
         class="text-surface-900 dark:text-surface-0 font-bold text-4xl lg:text-5xl text-center leading-tight"
@@ -163,11 +163,10 @@
         <Button label="Buy Now" rounded class="w-full"></Button>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script scope>
-import Button from 'primevue/button'
 export default {
   name: 'Pricing',
 }
