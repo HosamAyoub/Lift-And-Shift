@@ -1,4 +1,3 @@
-import './assets/css/main.css'
 import 'primeicons/primeicons.css'
 
 import { createApp } from 'vue'
@@ -71,12 +70,12 @@ app.use(PrimeVue, {
   theme: {
     preset: myPreset,
     options: {
-      prefix: 'lift-and-shift',
+      prefix: 'p',
       darkModeSelector: '.my-app-dark',
       cssLayer: false,
-      ripple: true,
     },
   },
+  ripple: true,
 })
 
 app.directive('ripple', Ripple)

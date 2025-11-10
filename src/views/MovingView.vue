@@ -1,11 +1,17 @@
 <template>
-  <main></main>
-  <Form></Form>
-  <h1>This is the Moving page</h1>
+  <Test></Test>
+  <!-- <Pricing></Pricing> -->
+  <!-- <h1>This is the Moving page</h1> -->
 </template>
 
 <script>
-import Form from '../components/Moving/Form.vue'
-</script>
+import Pricing from '../components/Moving/Pricing.vue'
+import Test from '../components/Moving/Test.vue'
 
-<script scoped></script>
+export default {
+  components: {
+    Pricing,
+    Test,
+  },
+}
+</script>

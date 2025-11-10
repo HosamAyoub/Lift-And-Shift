@@ -1,12 +1,34 @@
 <template>
-  <main>
-    <h1>This is the Home page</h1>
-  </main>
-  <Form></Form>
+  <div class="home-view">
+    <hero-section></hero-section>
+    <services-section></services-section>
+    <about-section></about-section>
+    <why-choose-section></why-choose-section>
+    <cta-section></cta-section>
+  </div>
 </template>
 
 <script>
-import Form from '../components/Home/Form.vue'
+import HeroSection from '../components/Home/HeroSection.vue'
+import ServicesSection from '../components/Home/ServicesSection.vue'
+import AboutSection from '../components/Home/AboutSection.vue'
+import WhyChooseSection from '../components/Home/WhyChooseSection.vue'
+import CTASection from '../components/Home/CTASection.vue'
+
+export default {
+  name: 'HomeView',
+  components: {
+    HeroSection,
+    ServicesSection,
+    AboutSection,
+    WhyChooseSection,
+    CTASection
+  }
+}
 </script>
 
-<script scoped></script>
+<style scoped>
+.home-view {
+  background-color: var(--bg-dark);
+}
+</style>
