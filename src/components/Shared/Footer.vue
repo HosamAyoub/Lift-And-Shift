@@ -8,7 +8,7 @@
             <div class="footer-widget">
               <div class="footer-logo mb-3">
                 <img :src="logo" alt="Lift & Shift" />
-                <span class="footer-brand">Lift & Shift</span>
+                <!-- <span class="footer-brand">Lift & Shift</span> -->
               </div>
               <p class="footer-description">
                 Move Today. Build Tomorrow. Professional moving, packing, and storage services with
@@ -47,8 +47,8 @@
                   </router-link>
                 </li>
                 <li>
-                  <router-link to="/removal">
-                    <i class="fas fa-chevron-right"></i> Removal
+                  <router-link to="/hauling">
+                    <i class="fas fa-chevron-right"></i> Hauling
                   </router-link>
                 </li>
                 <li>
@@ -104,6 +104,10 @@
                   <i class="fas fa-clock"></i>
                   <span>24/7 Available Service</span>
                 </li>
+                <li>
+                  <i class="fas fa-phone"></i>
+                  <a href="tel:+1 (800) 889-9788">+1 (800) 889-9788</a>
+                </li>
               </ul>
               <router-link to="/demo" class="btn btn-primary mt-3 w-100">
                 <i class="fas fa-calculator"></i> Get Free Estimate
@@ -131,7 +135,7 @@
 </template>
 
 <script>
-import logoImage from '../../assets/images/logo.png'
+import logoImage from '../../../public/assets/images/logo.png'
 
 export default {
   name: 'Footer',
@@ -181,7 +185,7 @@ export default {
 }
 
 .footer-logo img {
-  height: 40px;
+  height: 50px;
   width: auto;
 }
 

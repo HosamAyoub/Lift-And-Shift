@@ -5,7 +5,7 @@ import CareersView from '@/views/CareersView.vue'
 import ContactView from '@/views/ContactView.vue'
 import DemoView from '@/views/DemoView.vue'
 import MovingView from '@/views/MovingView.vue'
-import RemovalView from '@/views/RemovalView.vue'
+import HaulingView from '@/views/HaulingView.vue'
 import StorageView from '@/views/StorageView.vue'
 
 const router = createRouter({
@@ -42,9 +42,9 @@ const router = createRouter({
       component: MovingView,
     },
     {
-      path: '/removal',
-      name: 'removal',
-      component: RemovalView,
+      path: '/hauling',
+      name: 'hauling',
+      component: HaulingView,
     },
     {
       path: '/storage',

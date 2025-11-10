@@ -35,4 +35,5 @@ coverage
 # Vitest
 __screenshots__/
 
-.firebase/hosting.ZGlzdA.cache
+# Firebase
+.firebase/

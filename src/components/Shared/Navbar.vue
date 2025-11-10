@@ -3,7 +3,7 @@
     <div class="container">
       <router-link class="navbar-brand" to="/">
         <img :src="logo" alt="Lift & Shift" class="navbar-logo" />
-        <span class="brand-text">Lift & Shift</span>
+        <!-- <span class="brand-text">Lift & Shift</span> -->
       </router-link>
 
       <button
@@ -36,8 +36,8 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/removal" active-class="active">
-              <i class="fas fa-trash-alt"></i> Removal
+            <router-link class="nav-link" to="/hauling" active-class="active">
+              <i class="fas fa-trailer"></i> Hauling
             </router-link>
           </li>
           <li class="nav-item">
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import logoImage from '../../assets/images/logo.png'
+import logoImage from '../../../public/assets/images/logo.png'
 
 export default {
   name: 'Navbar',
@@ -123,7 +123,7 @@ export default {
 }
 
 .navbar-logo {
-  height: 45px;
+  height: 50px;
   width: auto;
 }
 

@@ -120,7 +120,7 @@ export default {
   right: -100px;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, var(--orange-10) 0%, transparent 70%);
+  /* background: radial-gradient(circle, var(--orange-10) 0%, transparent 70%); */
   border-radius: var(--radius-round);
   transform: translateY(-50%);
 }

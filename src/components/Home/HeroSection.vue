@@ -22,7 +22,7 @@
         <div class="col-lg-6 hero-image-wrapper">
           <div class="hero-image">
             <img
-              src="../../assets/images/HeroPhoto.png"
+              src="../../../public/assets/images/HeroPhoto.png"
               alt="Lift & Shift Services"
               class="img-fluid"
             />

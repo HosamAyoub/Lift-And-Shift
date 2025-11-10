@@ -3,9 +3,9 @@
   /* Main Colors */
   --primary-dark: #1a1a1a;
   --secondary-dark: #2d2d2d;
-  --accent-orange: #ff6b35;
-  --accent-orange-light: #ff8c61;
-  --accent-orange-dark: #e55a2b;
+  --accent-orange: #dd963f;
+  --accent-orange-light: #e8ad5f;
+  --accent-orange-dark: #c7802d;
   --text-light: #ffffff;
   --text-gray: #b0b0b0;
   --bg-dark: #0f0f0f;
@@ -23,11 +23,11 @@
   --black-50: rgba(0, 0, 0, 0.5);
   --black-95: rgba(15, 15, 15, 0.98);
 
-  --orange-10: rgba(255, 107, 53, 0.1);
-  --orange-15: rgba(255, 107, 53, 0.15);
-  --orange-20: rgba(255, 107, 53, 0.2);
-  --orange-25: rgba(255, 107, 53, 0.25);
-  --orange-40: rgba(255, 107, 53, 0.4);
+  --orange-10: rgba(221, 150, 63, 0.1);
+  --orange-15: rgba(221, 150, 63, 0.15);
+  --orange-20: rgba(221, 150, 63, 0.2);
+  --orange-25: rgba(221, 150, 63, 0.25);
+  --orange-40: rgba(221, 150, 63, 0.4);
 
   /* Border Radius */
   --radius-sm: 5px;
