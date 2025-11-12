@@ -25,7 +25,7 @@
               <li><i class="fas fa-check-circle text-orange"></i> Simple Count</li>
               <li><i class="fas fa-check-circle text-orange"></i> Photo Documentation</li>
               <li><i class="fas fa-check-circle text-orange"></i> Secure Transport</li>
-              <li><i class="fas fa-check-circle text-orange"></i> Starting at $145</li>
+              <li><i class="fas fa-check-circle text-orange"></i> Starting at $125</li>
             </ul>
             <button class="btn btn-outline-primary w-100 mt-3" @click="goToMoving">
               Learn More
@@ -97,7 +97,8 @@ export default {
 
 <style scoped>
 .services-section {
-  background-color: var(--bg-section);
+  background-color: var(--bg-dark);
+  /* background-color: var(--bg-section); */
 }
 
 .section-title {

@@ -41,8 +41,8 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/demo" active-class="active">
-              <i class="fas fa-person-digging"></i> Demo
+            <router-link class="nav-link" to="/demolition" active-class="active">
+              <i class="fas fa-person-digging"></i> Demolition
             </router-link>
           </li>
           <li class="nav-item dropdown">

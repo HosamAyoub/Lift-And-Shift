@@ -5,20 +5,13 @@
         <div class="col-lg-6 mb-4 mb-lg-0">
           <div class="about-content">
             <h2 class="section-title mb-4">About <span class="text-orange">Lift & Shift</span></h2>
-            <p class="lead mb-4">
-              <strong class="text-orange">Move Today. Build Tomorrow.</strong>
-            </p>
-            <p class="mb-4">
-              We're more than just a moving company. Lift & Shift is built on a mission to empower
-              individuals by providing meaningful work opportunities while delivering exceptional
-              service to our customers.
-            </p>
 
             <div class="mission-statement mb-4">
               <h4 class="text-orange mb-3">Our Mission</h4>
               <p>
-                Professional movers with clear communication. Responsible people who work thoroughly
-                and leave you worry-free.
+                We're more than just a moving company. Lift & Shift is built on a mission to empower
+                individuals by providing meaningful work opportunities while delivering exceptional
+                service to our customers.
               </p>
             </div>
 

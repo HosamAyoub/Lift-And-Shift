@@ -52,9 +52,7 @@
                   </router-link>
                 </li>
                 <li>
-                  <router-link to="/demo">
-                    <i class="fas fa-chevron-right"></i> Get Quote
-                  </router-link>
+                  <router-link to="/demolition"> <i class="fas fa-chevron-right"></i> Demolition </router-link>
                 </li>
               </ul>
             </div>

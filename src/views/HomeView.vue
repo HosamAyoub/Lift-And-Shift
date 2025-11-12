@@ -11,7 +11,7 @@
 <script>
 import HeroSection from '../components/Home/HeroSection.vue'
 import ServicesSection from '../components/Home/ServicesSection.vue'
-import AboutSection from '../components/Home/AboutSection.vue'
+import AboutSection from '../components/Home/AboutSection/AboutSection.vue'
 import WhyChooseSection from '../components/Home/WhyChooseSection.vue'
 import CTASection from '../components/Home/CTASection.vue'
 
