@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutUsView from '../views/AboutUsView.vue'
 import CareersView from '@/views/CareersView.vue'
 import ContactView from '@/views/ContactView.vue'
-import DemoView from '@/views/DemoView.vue'
+import DemolitionView from '@/views/DemolitionView.vue'
 import MovingView from '@/views/MovingView.vue'
 import HaulingView from '@/views/HaulingView.vue'
 import StorageView from '@/views/StorageView.vue'
@@ -32,9 +32,9 @@ const router = createRouter({
       component: ContactView,
     },
     {
-      path: '/demo',
-      name: 'demo',
-      component: DemoView,
+      path: '/demolition',
+      name: 'demolition',
+      component: DemolitionView,
     },
     {
       path: '/moving',

@@ -7,22 +7,18 @@
             Move Today. <span class="text-orange">Build Tomorrow.</span>
           </h1>
           <p class="hero-subtitle mb-4">
-            Lift & Shift turns strength into opportunity for people building their futures. We pay a
-            true living wage and choose integrity over short term gain.
-          </p>
-          <p class="hero-description mb-5">
-            Every shift builds a stronger body and a better future.
-            <strong class="text-orange">Why work out for free when you can get paid for it?</strong>
+            Fast, reliable moving and logistics based in DFW we get you settled now, so you can
+            start building your next chapter tomorrow.
           </p>
           <div class="hero-buttons">
             <button class="btn btn-primary btn-lg me-3" @click="getQuote">Get A Quote</button>
-            <button class="btn btn-outline-primary btn-lg" @click="learnMore">Learn More</button>
+            <a class="btn btn-outline-primary btn-lg" href="tel:+18008899788">Get Contact</a>
           </div>
         </div>
         <div class="col-lg-6 hero-image-wrapper">
           <div class="hero-image">
             <img
-              src="../../../public/assets/images/HeroPhoto.png"
+              src="../../../public/assets/images/HeroPhoto.jpg"
               alt="Lift & Shift Services"
               class="img-fluid"
             />
@@ -59,7 +55,8 @@ export default {
 
 <style scoped>
 .hero-section {
-  background: linear-gradient(135deg, var(--bg-dark) 0%, var(--secondary-dark) 100%);
+  /* background: linear-gradient(135deg, var(--bg-dark) 0%, var(--secondary-dark) 100%); */
+  background-color: var(--bg-dark);
   position: relative;
   overflow: hidden;
 }
@@ -71,7 +68,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 20% 50%, var(--orange-10) 0%, transparent 50%);
+  /* background: radial-gradient(circle at 20% 50%, var(--orange-10) 0%, transparent 50%); */
   pointer-events: none;
 }
 
