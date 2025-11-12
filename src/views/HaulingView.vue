@@ -1,11 +1,14 @@
 <template>
-  <main></main>
-  <Form></Form>
-  <h1>This is the Hauling page</h1>
+  <HaulingForm></HaulingForm>
 </template>
 
 <script>
-import Form from '../components/Hauling/Form.vue'
-</script>
+import HaulingForm from '../components/Hauling/Form.vue'
 
-<script scoped></script>
+export default {
+  name: 'HaulingView',
+  components: {
+    HaulingForm,
+  },
+}
+</script>
