@@ -4,7 +4,9 @@
       <div class="text-center mb-5">
         <h2 class="section-title">Why Choose <span class="text-orange">Lift & Shift?</span></h2>
         <p class="section-subtitle">
-          We're committed to providing exceptional service while empowering our team members
+          At Lift & Shift, we understand that moving isn't just transporting boxes . it's launching
+          your next step. That's why our team combines efficiency, care, and a forward-looking
+          attitude to make your transition smooth and stress-free.
         </p>
       </div>
 
@@ -124,7 +126,8 @@ export default {
 
 <style scoped>
 .why-choose-section {
-  background-color: var(--bg-section);
+  background-color: var(--bg-dark);
+  /* background-color: var(--bg-section); */
 }
 
 .section-title {
@@ -135,7 +138,7 @@ export default {
 .section-subtitle {
   font-size: 1.1rem;
   color: var(--text-gray);
-  max-width: 700px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
