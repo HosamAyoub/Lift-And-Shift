@@ -1,14 +1,14 @@
 <template>
-  <HaulingForm></HaulingForm>
+  <Hauling></Hauling>
 </template>
 
 <script>
-import HaulingForm from '../components/Hauling/Form.vue'
+import Hauling from '../components/Hauling/Hauling.vue'
 
 export default {
   name: 'HaulingView',
   components: {
-    HaulingForm,
+    Hauling,
   },
 }
 </script>
