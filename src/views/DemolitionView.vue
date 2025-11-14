@@ -1,11 +1,15 @@
+
 <template>
-  <main></main>
-  <Form @update:bed="onBed" @update:cabin="onCabin" />
-  <h1>This is the Demo page</h1>
+  <DemolitionForm></DemolitionForm>
 </template>
 
 <script>
-import Form from '../components/Demolition/Form.vue'
-</script>
+import DemolitionForm from '../components/Demolition/Form.vue'
 
-<script scoped></script>
+export default {
+  name: 'DemolitionView',
+  components: {
+    DemolitionForm,
+  },
+}
+</script>

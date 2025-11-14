@@ -1,268 +1,497 @@
 <template>
-  <div class="truck-load">
-    <!-- Truck drawing -->
-    <div class="truck">
-      <!-- Cabin (slot 1) -->
-      <button
-        class="cabin"
-        :class="{ active: cabinOn }"
-        @click="toggleCabin"
-        aria-pressed="cabinOn"
-        title="Cabin (slot 1)"
-      ></button>
-
-      <!-- Container (slots 2-5 / 4 segments) -->
-      <div class="bed" role="group" aria-label="Truck container">
-        <button
-          v-for="i in 4"
-          :key="i"
-          class="segment"
-          :class="{ active: i <= bedActive }"
-          @click="onSegmentClick(i)"
-          :aria-pressed="i <= bedActive"
-          :title="`Container slot ${i}`"
-        ></button>
+  <section class="section section-dark py-5">
+    <div class="container-lg">
+      <!-- Hero Section -->
+      <div class="mb-5 pb-4">
+        <h1 class="h2 text-white mb-3">Demo Lab</h1>
+        <p class="text-gray mb-0">Plan your demolition with an instant scope + price ballpark.</p>
       </div>
 
-      <!-- Wheels just for looks -->
-      <div class="wheels">
-        <div class="wheel"></div>
-        <div class="wheel"></div>
+      <!-- Main Instant Estimate Section -->
+      <div class="row g-4 align-items-stretch">
+        <!-- Left Column: Visual Controls -->
+        <div class="col-lg-6 d-flex flex-column">
+          <div class="card-dark shadow-lg h-100">
+            <h3 class="text-white mb-4">Demolition Scope</h3>
+            <p class="text-gray small mb-4">Select your project type and adjust the parameters for an instant estimate.</p>
+
+            <!-- Scope Selection -->
+            <div class="mb-4">
+              <label class="text-white fw-bold d-block mb-3">Select Structure Type</label>
+              <div class="scope-buttons">
+                <button
+                  v-for="scope in scopes"
+                  :key="scope"
+                  class="scope-btn"
+                  :class="{ active: selectedScope === scope }"
+                  @click="selectScope(scope)"
+                >
+                  {{ scope }}
+                </button>
+              </div>
+            </div>
+
+            <!-- Area Slider -->
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <label class="text-white fw-bold">Area / length</label>
+                <div class="load-tier-display bg-secondary-dark px-3 py-2 rounded">
+                  <span class="text-orange fw-bold">{{ area }} sq ft</span>
+                </div>
+              </div>
+
+              <div class="slider-wrapper">
+                <input
+                  type="range"
+                  class="slider"
+                  min="10"
+                  max="200"
+                  step="5"
+                  v-model="area"
+                  @input="updateArea"
+                  :style="{ background: `linear-gradient(to right, var(--accent-orange) 0%, var(--accent-orange) ${(area / 200) * 100}%, var(--secondary-dark) ${(area / 200) * 100}%, var(--secondary-dark) 100%)` }"
+                />
+              </div>
+
+              <div class="d-flex justify-content-between mt-3 text-small text-gray">
+                <span>10 sq ft</span>
+                <span>200 sq ft</span>
+              </div>
+
+              <div class="d-flex justify-content-between mt-2 text-small text-gray">
+                <span>Debris: {{ debrisYards }} yd³</span>
+                <span>Tier: {{ currentTier }}</span>
+              </div>
+            </div>
+
+            <!-- Material Selection -->
+            <div class="mb-4">
+              <label class="text-white fw-bold d-block mb-2">Material</label>
+              <select v-model="material" class="form-control" @change="updateMaterial">
+                <option value="Wood">Wood</option>
+                <option value="Drywall">Drywall</option>
+                <option value="Tile">Tile</option>
+                <option value="Concrete">Concrete</option>
+                <option value="Mixed">Mixed</option>
+              </select>
+            </div>
+
+            <!-- Checkbox Options -->
+            <div class="mb-4">
+              <div class="checkbox-group">
+                <label class="checkbox-label">
+                  <input
+                    type="checkbox"
+                    v-model="includesConcrete"
+                    @change="updateConcrete"
+                    class="checkbox-input"
+                  />
+                  <span class="checkmark"></span>
+                  Includes concrete/footings
+                </label>
+                <label class="checkbox-label">
+                  <input
+                    type="checkbox"
+                    v-model="upstairsAccess"
+                    @change="updateUpstairs"
+                    class="checkbox-input"
+                  />
+                  <span class="checkmark"></span>
+                  Upstairs / tight access
+                </label>
+              </div>
+            </div>
+
+            <!-- Photo Upload -->
+            <div>
+              <label class="text-white fw-bold d-block mb-3">Upload demo photos (optional)</label>
+              <div class="upload-area position-relative rounded" @click="triggerFileInput" @dragover.prevent="isDragging = true" @dragleave.prevent="isDragging = false" @drop.prevent="handleFileDrop">
+                <input
+                  ref="fileInput"
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  @change="handleFileSelect"
+                  style="display: none"
+                />
+                <div class="text-center py-5">
+                  <i class="fas fa-cloud-upload text-orange" style="font-size: 2.5rem"></i>
+                  <p class="text-gray mt-3 mb-0">Drag & drop or click to upload</p>
+                </div>
+              </div>
+              <p v-if="uploadedFiles.length > 0" class="text-success text-small mt-2">{{ uploadedFiles.length }} file(s) uploaded</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Estimate & Booking -->
+        <div class="col-lg-6 d-flex flex-column">
+          <div class="card-dark shadow-lg h-100">
+            <!-- Price Display -->
+            <div class="mb-4 pb-4 border-bottom" style="border-bottom: 1px solid rgba(221, 150, 63, 0.25)">
+              <p class="text-small text-gray mb-2">Ballpark Price</p>
+              <h2 class="h1 text-orange mb-2">${{ computedPrice }}</h2>
+              <p class="text-small text-gray mb-0">
+                Includes demo labor + haul-off. Disposal fees may vary by material and site rules.
+              </p>
+            </div>
+
+            <!-- Project Details -->
+            <div class="mb-4">
+              <h4 class="text-white mb-3">Project Details</h4>
+              <div class="project-details">
+                <div class="detail-item d-flex justify-content-between mb-2">
+                  <span class="text-gray">Scope:</span>
+                  <span class="text-white">{{ selectedScope }} = {{ area }} sq ft</span>
+                </div>
+                <div class="detail-item d-flex justify-content-between mb-2">
+                  <span class="text-gray">Debris:</span>
+                  <span class="text-white">≥ {{ debrisYards }} cubic yards</span>
+                </div>
+                <div class="detail-item d-flex justify-content-between mb-2">
+                  <span class="text-gray">Material:</span>
+                  <span class="text-white">{{ material }}</span>
+                </div>
+                <div class="detail-item d-flex justify-content-between mb-2" v-if="includesConcrete">
+                  <span class="text-gray">Concrete:</span>
+                  <span class="text-white">Included</span>
+                </div>
+                <div class="detail-item d-flex justify-content-between mb-2" v-if="upstairsAccess">
+                  <span class="text-gray">Access:</span>
+                  <span class="text-white">Upstairs/Tight</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex gap-2 mb-4">
+              <button class="btn btn-primary flex-grow-1" @click="lockInQuote">Lock this in</button>
+              <button class="btn btn-outline-primary" @click="showDisposalTiers">See disposal tiers</button>
+            </div>
+
+            <p class="text-small text-gray mb-0 text-center">
+              Final quote confirmed after a quick walkthrough or photo review.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features Section -->
+      <div class="mt-5 pt-5" style="border-top: 1px solid rgba(221, 150, 63, 0.1); padding-top: 3rem">
+        <h2 class="text-white mb-4">Before / After Preview</h2>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3" v-for="feature in features" :key="feature.title">
+            <div class="text-center">
+              <div class="mb-3">
+                <i :class="feature.icon" style="font-size: 2.5rem; color: var(--accent-orange)"></i>
+              </div>
+              <h5 class="text-white mb-2">{{ feature.title }}</h5>
+              <p class="text-gray small">{{ feature.description }}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Controls -->
-    <div class="controls">
-      <label class="control-label">Pickup Bed</label>
-
-      <input
-        class="range"
-        type="range"
-        min="0"
-        max="4"
-        step="1"
-        v-model.number="bedActive"
-        :aria-valuetext="`${bedActive}/4 full`"
-      />
-
-      <div class="tiers">
-        <button class="tier" :class="{ selected: bedActive >= 1 }" @click="setBed(1)">1/4</button>
-        <button class="tier" :class="{ selected: bedActive >= 2 }" @click="setBed(2)">1/2</button>
-        <button class="tier" :class="{ selected: bedActive >= 3 }" @click="setBed(3)">3/4</button>
-        <button class="tier" :class="{ selected: bedActive >= 4 }" @click="setBed(4)">Full</button>
-        <button class="tier ghost" @click="setBed(0)">Clear</button>
-      </div>
-
-      <div class="readout">
-        <span>Load: {{ loadPct }}%</span>
-        <span>Tier: {{ tierLabel }}</span>
-        <span>Cabin: {{ cabinOn ? 'On' : 'Off' }}</span>
-      </div>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
 export default {
-  name: 'Form',
-  emits: ['update:cabin', 'update:bed'],
+  name: 'DemolitionForm',
+  emits: ['update:scope', 'update:area', 'update:material', 'update:concrete', 'update:upstairs'],
   data() {
     return {
-      cabinOn: true,
-      bedActive: 0, // 0..4
+      scopes: ['Shed', 'Deck', 'Fence', 'Bathroom', 'Kitchen', 'Interior wall'],
+      selectedScope: 'Bathroom',
+      area: 20,
+      material: 'Wood',
+      includesConcrete: false,
+      upstairsAccess: false,
+      uploadedFiles: [],
+      isDragging: false,
+      features: [
+        {
+          icon: 'fas fa-shield-alt',
+          title: 'Licensed & Insured',
+          description: 'Fully licensed and insured for your peace of mind and protection.',
+        },
+        {
+          icon: 'fas fa-truck-loading',
+          title: 'Debris Haul-off',
+          description: 'Complete debris removal and eco-friendly disposal included.',
+        },
+        {
+          icon: 'fas fa-wind',
+          title: 'Dust Control',
+          description: 'Professional dust control and site protection measures.',
+        },
+        {
+          icon: 'fas fa-file-alt',
+          title: 'Permit Guidance',
+          description: 'Expert assistance with permits and local regulations.',
+        },
+      ],
     }
   },
   computed: {
-    loadPct() {
-      return Math.round((this.bedActive / 4) * 100)
+    debrisYards() {
+      return (this.area / 7).toFixed(1)
     },
-    tierLabel() {
-      return this.bedActive === 0 ? 'Empty' : `${this.bedActive}/4 Load`
+    currentTier() {
+      if (this.area <= 50) return 'Small'
+      if (this.area <= 100) return 'Medium'
+      return 'Large'
     },
-  },
-  watch: {
-    cabinOn(value) {
-      this.$emit('update:cabin', value)
-    },
-    bedActive(value) {
-      this.$emit('update:bed', value)
-    },
+    computedPrice() {
+      const basePrices = {
+        'Shed': 250,
+        'Deck': 300,
+        'Fence': 180,
+        'Bathroom': 120,
+        'Kitchen': 180,
+        'Interior wall': 140
+      }
+      
+      let price = basePrices[this.selectedScope] || 120
+      
+      if (this.area > 20) {
+        price += Math.floor((this.area - 20) / 10) * 25
+      }
+      
+      const materialMultipliers = {
+        'Wood': 1.0,
+        'Drywall': 0.9,
+        'Tile': 1.25,
+        'Concrete': 1.6,
+        'Mixed': 1.1
+      }
+      price *= materialMultipliers[this.material] || 1.0
+      
+      if (this.includesConcrete) price += 40
+      if (this.upstairsAccess) price += 25
+      
+      return Math.max(125, Math.round(price))
+    }
   },
   methods: {
-    setBed(n) {
-      this.bedActive = Math.min(4, Math.max(0, n))
+    selectScope(scope) {
+      this.selectedScope = scope
+      this.$emit('update:scope', scope)
     },
-    onSegmentClick(i) {
-      // Sequential fill: clicking slot i fills 1..i.
-      // Clicking the currently highest active slot will decrease by 1 (nice toggle UX).
-      if (this.bedActive === i) this.setBed(i - 1)
-      else this.setBed(i)
+    updateArea() {
+      this.$emit('update:area', this.area)
     },
-    toggleCabin() {
-      this.cabinOn = !this.cabinOn
+    updateMaterial() {
+      this.$emit('update:material', this.material)
     },
+    updateConcrete() {
+      this.$emit('update:concrete', this.includesConcrete)
+    },
+    updateUpstairs() {
+      this.$emit('update:upstairs', this.upstairsAccess)
+    },
+    triggerFileInput() {
+      this.$refs.fileInput.click()
+    },
+    handleFileSelect(event) {
+      const files = Array.from(event.target.files)
+      this.uploadedFiles = [...this.uploadedFiles, ...files]
+    },
+    handleFileDrop(event) {
+      this.isDragging = false
+      const files = Array.from(event.dataTransfer.files)
+      this.uploadedFiles = [...this.uploadedFiles, ...files]
+    },
+    lockInQuote() {
+      alert('Quote locked! Redirecting to booking...')
+    },
+    showDisposalTiers() {
+      alert('Showing disposal tiers...')
+    }
   },
+  mounted() {
+    this.$emit('update:scope', this.selectedScope)
+    this.$emit('update:area', this.area)
+    this.$emit('update:material', this.material)
+    this.$emit('update:concrete', this.includesConcrete)
+    this.$emit('update:upstairs', this.upstairsAccess)
+  }
 }
 </script>
 
 <style scoped>
-:root {
-  --bg: #0f1115;
-  --panel: #151820;
-  --stroke: #2a2f3a;
-  --segment: #1a1f2b;
-  --segment-active: #3b82f6;
-  --glow: rgba(59, 130, 246, 0.5);
-  --text: #d6d8e0;
-  --muted: #9097a7;
-}
-
-/* Container styling and slot highlighting */
-.truck-load {
-  display: grid;
-  gap: 14px;
-  color: var(--text);
-  background: var(--bg);
-  padding: 16px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) inset;
-}
-
-.truck {
-  position: relative;
-  background: var(--panel);
-  border: 1px solid var(--stroke);
-  border-radius: 18px;
-  padding: 28px 20px 44px 20px;
-}
-
-.cabin,
-.bed {
-  display: inline-grid;
-  vertical-align: top;
-  height: 60px;
-  border: 1px solid var(--stroke);
-  background: linear-gradient(180deg, #151a22, #0f131a);
-}
-
-.cabin {
-  width: 18%;
-  border-radius: 14px 6px 6px 14px;
-  margin-right: 10px;
-  transition:
-    box-shadow 0.2s,
-    background 0.2s,
-    transform 0.2s;
-}
-
-.cabin.active {
-  outline: 2px solid var(--segment-active);
-  box-shadow: 0 0 0 6px var(--glow);
-}
-
-.bed {
-  width: calc(82% - 10px);
-  border-radius: 8px 14px 14px 8px;
-  padding: 6px;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-}
-
-.segment {
-  border: 1px dashed #2b3341;
-  border-radius: 10px;
-  background: var(--segment);
-  transition:
-    background 0.2s,
-    box-shadow 0.2s,
-    border-color 0.2s,
-    transform 0.06s;
-  height: 100%;
-}
-
-.segment.active {
-  background: linear-gradient(180deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.08));
-  border-color: rgba(59, 130, 246, 0.8);
-  box-shadow:
-    inset 0 0 0 2px rgba(59, 130, 246, 0.35),
-    0 0 0 4px var(--glow);
-}
-
-.segment:active {
-  transform: translateY(1px);
-}
-
-.wheels {
-  position: absolute;
-  left: 16%;
-  right: 6%;
-  bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
-}
-
-.wheel {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: #0b0e14;
-  border: 3px solid #2c3340;
-  box-shadow: inset 0 0 0 2px #121722;
-}
-
-/* Control panel styling */
-.controls {
-  display: grid;
-  gap: 10px;
-}
-
-.control-label {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.range {
-  width: 100%;
-}
-
-.tiers {
+.scope-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
-.tier {
+.scope-btn {
+  background: var(--primary-dark);
+  border: 1px solid var(--orange-10);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: var(--text-gray);
+  font-size: 0.875rem;
   cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1px solid var(--stroke);
-  background: #0f131a;
-  color: var(--text);
-  transition:
-    background 0.15s,
-    border-color 0.15s,
-    transform 0.06s;
+  transition: all 0.2s;
+  flex: 1;
+  min-width: calc(33.333% - 0.5rem);
 }
 
-.tier.selected {
-  border-color: rgba(59, 130, 246, 0.7);
-  background: rgba(59, 130, 246, 0.12);
-  box-shadow: 0 0 0 3px var(--glow);
+.scope-btn:hover {
+  background: var(--orange-10);
+  border-color: var(--accent-orange);
 }
 
-.tier.ghost {
-  opacity: 0.75;
+.scope-btn.active {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+  color: #000000;
+  font-weight: 600;
 }
 
-.tier:active {
-  transform: translateY(1px);
+.slider-wrapper {
+  position: relative;
 }
 
-.readout {
+.slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--orange-20);
+  transition: var(--transition-base);
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px var(--orange-20);
+}
+
+.slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 10px var(--orange-20);
+  transition: var(--transition-base);
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px var(--orange-20);
+}
+
+.checkbox-group {
   display: flex;
-  gap: 16px;
-  color: var(--muted);
-  font-size: 14px;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-gray);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.checkbox-input {
+  display: none;
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--orange-10);
+  border-radius: 0.25rem;
+  background: var(--primary-dark);
+  position: relative;
+  transition: all 0.2s;
+}
+
+.checkbox-input:checked + .checkmark {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+}
+
+.checkbox-input:checked + .checkmark::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid #000000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.upload-area {
+  background: var(--primary-dark);
+  border: 2px dashed var(--orange-20);
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.upload-area:hover {
+  border-color: var(--accent-orange);
+  background: var(--orange-10);
+}
+
+.form-control {
+  border: 1px solid var(--orange-10) !important;
+  background-color: var(--primary-dark) !important;
+  color: var(--text-light) !important;
+  transition: var(--transition-base);
+}
+
+.form-control:focus {
+  border-color: var(--accent-orange) !important;
+  box-shadow: 0 0 0 0.2rem var(--orange-20) !important;
+  background-color: var(--primary-dark) !important;
+}
+
+.form-control::placeholder {
+  color: var(--text-gray) !important;
+}
+
+.project-details {
+  background: var(--primary-dark);
+  border: 1px solid var(--orange-10);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.text-small {
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .scope-btn {
+    min-width: calc(50% - 0.5rem);
+  }
+  
+  .d-flex.gap-2 {
+    flex-direction: column;
+  }
 }
 </style>
