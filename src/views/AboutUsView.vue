@@ -1,18 +1,14 @@
 <template>
-  <h1>This is the About Us page</h1>
-  <Form></Form>
+  <AboutUsForm></AboutUsForm>
 </template>
 
 <script>
-import Form from '../components/AboutUs/Form.vue'
-</script>
+import AboutUsForm from '../components/AboutUs/Form.vue'
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+export default {
+  name: 'AboutUsView',
+  components: {
+    AboutUsForm,
+  },
 }
-</style>
+</script>

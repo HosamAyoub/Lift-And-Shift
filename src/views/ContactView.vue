@@ -1,11 +1,23 @@
 <template>
-  <main></main>
-  <Form></Form>
-  <h1>This is the Contact page</h1>
+  <main class="contact-page">
+    <ContactForm></ContactForm>
+  </main>
 </template>
 
 <script>
-import Form from '../components/Contact/Form.vue'
+import ContactForm from '../components/Contact/Form.vue'
+
+export default {
+  name: 'ContactView',
+  components: {
+    ContactForm
+  }
+}
 </script>
 
-<script scoped></script>
+<style scoped>
+.contact-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+</style>
