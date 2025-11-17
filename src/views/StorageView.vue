@@ -1,11 +1,14 @@
 <template>
-  <main></main>
-  <Form></Form>
-  <h1>This is the storage page</h1>
+  <StorageForm></StorageForm>
 </template>
 
 <script>
-import Form from '../components/Storage/Form.vue'
-</script>
+import StorageForm from '../components/Storage/Form.vue'
 
-<script scoped></script>
+export default {
+  name: 'StorageView',
+  components: {
+    StorageForm,
+  },
+}
+</script>
