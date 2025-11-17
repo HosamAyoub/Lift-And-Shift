@@ -129,7 +129,7 @@
             <!-- Price Display -->
             <div class="price-display mb-4 pb-4">
               <p class="text-small text-gray mb-2">Your Estimated Price</p>
-              <h2 class="h1 text-orange mb-2">${{ estimatedPrice }}</h2>
+              <h2 class="h1 mb-2">${{ estimatedPrice }}</h2>
               <p class="text-small text-gray mb-0">
                 Starting price for {{ currentTier }}. Final pricing may vary based on item type,
                 accessibility, stairs, and disposal requirements. Minimum charge $125.
@@ -139,7 +139,7 @@
             <!-- Photo Upload -->
             <div class="photo-upload mb-4 pb-4">
               <label class="text-white fw-bold d-block mb-3"
-                >Upload Photos for Accurate Pricing (Optional)</label
+                >Upload Photos for Accurate Pricing <span class="text-orange">*</span></label
               >
               <div
                 class="upload-area position-relative rounded"
@@ -172,7 +172,7 @@
 
             <!-- Location Input -->
             <div class="mb-4">
-              <label class="text-white fw-bold d-block mb-2">Your Location</label>
+              <label class="text-white fw-bold d-block mb-2">Your Location <span class="text-orange">*</span></label>
               <input
                 v-model="location"
                 type="text"

@@ -4,11 +4,13 @@
       <div class="row align-items-center min-vh-100">
         <div class="col-lg-6 hero-content">
           <h1 class="hero-title mb-4 fade-in-up">
-            Move Today. <span class="text-orange">Build Tomorrow.</span>
+            Move Today.
+            <p class="text-orange">Build Tomorrow.</p>
           </h1>
-          <p class="hero-subtitle mb-4">
-            Fast, reliable moving and logistics based in DFW we get you settled now, so you can
-            start building your next chapter tomorrow.
+          <h4>Residential • Commercial • Campuses</h4>
+          <p class="hero-subtitle my-4">
+            A fast, reliable moving and logistics company based in DFW. We get you settled today, so
+            you can start building your next chapter tomorrow.
           </p>
           <div class="hero-buttons">
             <button class="btn btn-primary btn-lg me-3" @click="getQuote">Get A Quote</button>
@@ -22,12 +24,12 @@
               alt="Lift & Shift Services"
               class="img-fluid"
             />
-            <div class="hero-badge">
+            <!-- <div class="hero-badge">
               <div class="badge-content">
                 <span class="badge-number">24/7</span>
                 <span class="badge-text">Available</span>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

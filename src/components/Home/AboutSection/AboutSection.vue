@@ -64,12 +64,12 @@
                 <i class="fas fa-graduation-cap"></i>
               </div>
               <div class="feature-content">
-                <h4>Campus</h4>
+                <h4>Campuses</h4>
                 <p>Specialized student moving services for dormitories and campus housing.</p>
               </div>
             </div>
 
-            <div class="feature-item">
+            <!-- <div class="feature-item">
               <div class="feature-icon">
                 <i class="fas fa-shield-alt"></i>
               </div>
@@ -77,7 +77,7 @@
                 <h4>Integrity First</h4>
                 <p>We choose integrity over short-term gain, ensuring trust and reliability.</p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
