@@ -1,16 +1,16 @@
 <template>
   <main class="contact-page">
-    <ContactForm></ContactForm>
+    <Contact></Contact>
   </main>
 </template>
 
 <script>
-import ContactForm from '../components/Contact/Form.vue'
+import Contact from '../components/Contact/Contact.vue'
 
 export default {
   name: 'ContactView',
   components: {
-    ContactForm
+    Contact
   }
 }
 </script>

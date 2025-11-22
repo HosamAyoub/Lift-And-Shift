@@ -96,7 +96,7 @@
                 </li>
                 <li>
                   <i class="fas fa-map-marker-alt"></i>
-                  <span>North Dallas & Surrounding Areas</span>
+                  <span>DFW & Surrounding Areas</span>
                 </li>
                 <li>
                   <i class="fas fa-clock"></i>

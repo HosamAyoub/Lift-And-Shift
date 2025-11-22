@@ -1,15 +1,14 @@
-
 <template>
-  <DemolitionForm></DemolitionForm>
+  <Demolition />
 </template>
 
 <script>
-import DemolitionForm from '../components/Demolition/Form.vue'
+import Demolition from '../components/Demolition/Demolition.vue'
 
 export default {
   name: 'DemolitionView',
   components: {
-    DemolitionForm,
+    Demolition,
   },
 }
 </script>

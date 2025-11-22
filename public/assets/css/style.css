@@ -185,7 +185,7 @@ p {
 .btn-outline-primary {
   background-color: transparent !important;
   border: 2px solid var(--accent-orange) !important;
-  color: var(--accent-orange) !important;
+  color: var(--text-light) !important;
   padding: 12px 30px;
   font-weight: 600;
   border-radius: var(--radius-sm);

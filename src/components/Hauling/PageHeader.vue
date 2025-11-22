@@ -1,8 +1,8 @@
 <template>
   <div class="page-header mb-5">
-    <h1 class="display-4 text-white mb-3">
+    <h2 class="display-4 text-white mb-3">
       <slot name="title"></slot>
-    </h1>
+    </h2>
     <p class="lead text-gray mb-0">
       <slot name="subtitle"></slot>
     </p>

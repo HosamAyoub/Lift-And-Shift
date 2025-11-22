@@ -3,7 +3,7 @@
     <div class="container-lg">
       <!-- Hero Section -->
       <div class="mb-5 pb-4">
-        <h1 class="h2 text-white mb-3">Demo Lab</h1>
+        <h2 class="mb-3">Demolition</h2>
         <p class="text-gray mb-0">Plan your demolition with an instant scope + price ballpark.</p>
       </div>
 
@@ -49,7 +49,7 @@
                   step="5"
                   v-model="area"
                   @input="updateArea"
-                  :style="{ background: `linear-gradient(to right, var(--accent-orange) 0%, var(--accent-orange) ${(area / 200) * 100}%, var(--secondary-dark) ${(area / 200) * 100}%, var(--secondary-dark) 100%)` }"
+                  :style="{ background: `linear-gradient(to right, var(--accent-orange) 0%, var(--accent-orange) ${area / 2.0}%, var(--secondary-dark) ${area / 2.0}%, var(--secondary-dark) 100%)` }"
                 />
               </div>
 
@@ -104,7 +104,7 @@
 
             <!-- Photo Upload -->
             <div>
-              <label class="text-white fw-bold d-block mb-3">Upload demo photos (optional)</label>
+              <label class="text-white fw-bold d-block mb-3">Upload demo photos <span class="text-orange">*</span></label>
               <div class="upload-area position-relative rounded" @click="triggerFileInput" @dragover.prevent="isDragging = true" @dragleave.prevent="isDragging = false" @drop.prevent="handleFileDrop">
                 <input
                   ref="fileInput"
@@ -130,7 +130,7 @@
             <!-- Price Display -->
             <div class="mb-4 pb-4 border-bottom" style="border-bottom: 1px solid rgba(221, 150, 63, 0.25)">
               <p class="text-small text-gray mb-2">Ballpark Price</p>
-              <h2 class="h1 text-orange mb-2">${{ computedPrice }}</h2>
+              <h2 class="h1 mb-2">${{ computedPrice }}</h2>
               <p class="text-small text-gray mb-0">
                 Includes demo labor + haul-off. Disposal fees may vary by material and site rules.
               </p>
@@ -165,8 +165,10 @@
 
             <!-- Action Buttons -->
             <div class="d-flex gap-2 mb-4">
-              <button class="btn btn-primary flex-grow-1" @click="lockInQuote">Lock this in</button>
-              <button class="btn btn-outline-primary" @click="showDisposalTiers">See disposal tiers</button>
+              <!-- <button class="btn btn-primary flex-grow-1" @click="lockInQuote">Lock this in</button>
+              <button class="btn btn-outline-primary" @click="showDisposalTiers">See disposal tiers</button> -->
+              <button class="btn btn-primary flex-grow-1">Lock this in</button>
+              <button class="btn btn-outline-primary">See disposal tiers</button>
             </div>
 
             <p class="text-small text-gray mb-0 text-center">
@@ -197,7 +199,7 @@
 
 <script>
 export default {
-  name: 'DemolitionForm',
+  name: 'Demolition',
   emits: ['update:scope', 'update:area', 'update:material', 'update:concrete', 'update:upstairs'],
   data() {
     return {
@@ -323,20 +325,20 @@ export default {
 .scope-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--gap-sm);
 }
 
 .scope-btn {
   background: var(--primary-dark);
   border: 1px solid var(--orange-10);
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  padding: var(--gap-sm) var(--gap-lg);
   color: var(--text-gray);
   font-size: 0.875rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: var(--transition-fast);
   flex: 1;
-  min-width: calc(33.333% - 0.5rem);
+  min-width: calc(33.333% - var(--gap-sm));
 }
 
 .scope-btn:hover {
@@ -358,7 +360,7 @@ export default {
 .slider {
   width: 100%;
   height: 8px;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   outline: none;
   -webkit-appearance: none;
   appearance: none;
@@ -371,7 +373,7 @@ export default {
   appearance: none;
   width: 24px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: var(--radius-round);
   background: var(--accent-orange);
   cursor: pointer;
   box-shadow: 0 0 10px var(--orange-20);
@@ -386,7 +388,7 @@ export default {
 .slider::-moz-range-thumb {
   width: 24px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: var(--radius-round);
   background: var(--accent-orange);
   cursor: pointer;
   border: none;
@@ -402,13 +404,13 @@ export default {
 .checkbox-group {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--gap-md);
 }
 
 .checkbox-label {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: var(--gap-md);
   color: var(--text-gray);
   font-size: 0.875rem;
   cursor: pointer;
@@ -422,10 +424,10 @@ export default {
   width: 18px;
   height: 18px;
   border: 1px solid var(--orange-10);
-  border-radius: 0.25rem;
+  border-radius: var(--radius-sm);
   background: var(--primary-dark);
   position: relative;
-  transition: all 0.2s;
+  transition: var(--transition-fast);
 }
 
 .checkbox-input:checked + .checkmark {
@@ -477,8 +479,8 @@ export default {
 .project-details {
   background: var(--primary-dark);
   border: 1px solid var(--orange-10);
-  border-radius: 0.5rem;
-  padding: 1rem;
+  border-radius: var(--radius-md);
+  padding: var(--gap-lg);
 }
 
 .text-small {
@@ -487,7 +489,7 @@ export default {
 
 @media (max-width: 768px) {
   .scope-btn {
-    min-width: calc(50% - 0.5rem);
+    min-width: calc(50% - var(--gap-sm));
   }
   
   .d-flex.gap-2 {
