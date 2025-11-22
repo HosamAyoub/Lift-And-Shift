@@ -70,7 +70,7 @@
                   :value="currentTierIndex"
                   @input="handleSliderInput"
                   :style="{
-                    background: `linear-gradient(to right, var(--accent-orange) 0%, var(--accent-orange) ${(currentTierIndex / 4) * 100}%, var(--secondary-dark) ${(currentTierIndex / 4) * 100}%, var(--secondary-dark) 100%)`,
+                    background: `linear-gradient(to right, var(--accent-orange) 0%, var(--accent-orange) ${(currentTierIndex / 4) * 100}%, var(--white-10) ${(currentTierIndex / 4) * 100}%, var(--white-10) 100%)`,
                   }"
                 />
               </div>
@@ -86,28 +86,28 @@
                 </button>
                 <button
                   class="tier-btn"
-                  :class="{ selected: currentTierIndex >= 1 }"
+                  :class="{ selected: currentTierIndex === 1 }"
                   @click="setBed(1)"
                 >
                   1/4
                 </button>
                 <button
                   class="tier-btn"
-                  :class="{ selected: currentTierIndex >= 2 }"
+                  :class="{ selected: currentTierIndex === 2 }"
                   @click="setBed(2)"
                 >
                   1/2
                 </button>
                 <button
                   class="tier-btn"
-                  :class="{ selected: currentTierIndex >= 3 }"
+                  :class="{ selected: currentTierIndex === 3 }"
                   @click="setBed(3)"
                 >
                   3/4
                 </button>
                 <button
                   class="tier-btn"
-                  :class="{ selected: currentTierIndex >= 4 }"
+                  :class="{ selected: currentTierIndex === 4 }"
                   @click="setBed(4)"
                 >
                   Full
@@ -172,7 +172,9 @@
 
             <!-- Location Input -->
             <div class="mb-4">
-              <label class="text-white fw-bold d-block mb-2">Your Location <span class="text-orange">*</span></label>
+              <label class="text-white fw-bold d-block mb-2"
+                >Your Location <span class="text-orange">*</span></label
+              >
               <input
                 v-model="location"
                 type="text"
@@ -308,14 +310,12 @@ export default {
         {
           icon: 'fas fa-bolt',
           title: 'Same-Day Service',
-          description:
-            'Quick turnaround with same-day pickup available. Fast space clearing.',
+          description: 'Quick turnaround with same-day pickup available. Fast space clearing.',
         },
         {
           icon: 'fas fa-hand-holding-heart',
           title: 'Co-Conscious',
-          description:
-            'We donate usable items to local charities before recycling or disposal.',
+          description: 'We donate usable items to local charities before recycling or disposal.',
         },
         {
           icon: 'fas fa-tag',
@@ -325,8 +325,7 @@ export default {
         {
           icon: 'fas fa-users',
           title: 'Expert Crew',
-          description:
-            'Licensed, insured professionals who treat your property with care.',
+          description: 'Licensed, insured professionals who treat your property with care.',
         },
       ],
     }

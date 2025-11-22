@@ -7,7 +7,7 @@
             <h2 class="section-title mb-4">About <span class="text-orange">Lift & Shift</span></h2>
 
             <div class="mission-statement mb-4">
-              <h4 class="text-orange mb-3">Our Mission</h4>
+              <h4 class="mb-3">Our Mission</h4>
               <p>
                 We're more than just a moving company. Lift & Shift is built on a mission to empower
                 individuals by providing meaningful work opportunities while delivering exceptional
@@ -18,13 +18,13 @@
             <div class="row mt-4">
               <div class="col-6 mb-3">
                 <div class="stat-box">
-                  <h3 class="text-orange mb-0">24/7</h3>
+                  <h3 class="mb-0">24/7</h3>
                   <p class="mb-0">Available Service</p>
                 </div>
               </div>
               <div class="col-6 mb-3">
                 <div class="stat-box">
-                  <h3 class="text-orange mb-0">100%</h3>
+                  <h3 class="mb-0">100%</h3>
                   <p class="mb-0">Satisfaction</p>
                 </div>
               </div>

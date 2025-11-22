@@ -54,7 +54,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <i class="fas fa-info-circle"></i> About
+              About
             </a>
             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
               <li>
@@ -205,6 +205,10 @@ export default {
 
 .navbar-toggler:focus {
   box-shadow: 0 0 0 0.25rem var(--orange-25);
+}
+
+.nav-link:focus-visible {
+  box-shadow: 0 0 0 0.25rem var(--orange-10);
 }
 
 .navbar-toggler-icon {

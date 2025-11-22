@@ -18,9 +18,6 @@
                 <a href="#" class="social-link" aria-label="Facebook">
                   <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="#" class="social-link" aria-label="Twitter">
-                  <i class="fab fa-twitter"></i>
-                </a>
                 <a href="#" class="social-link" aria-label="Instagram">
                   <i class="fab fa-instagram"></i>
                 </a>
@@ -52,7 +49,9 @@
                   </router-link>
                 </li>
                 <li>
-                  <router-link to="/demolition"> <i class="fas fa-chevron-right"></i> Demolition </router-link>
+                  <router-link to="/demolition">
+                    <i class="fas fa-chevron-right"></i> Demolition
+                  </router-link>
                 </li>
               </ul>
             </div>
@@ -90,19 +89,19 @@
             <div class="footer-widget">
               <h5 class="footer-title">Contact Us</h5>
               <ul class="footer-contact">
-                <li>
+                <li class="align-items-center">
                   <i class="fas fa-envelope"></i>
                   <a href="mailto:contact@liftshiftservices.com"> contact@liftshiftservices.com </a>
                 </li>
-                <li>
+                <li class="align-items-center">
                   <i class="fas fa-map-marker-alt"></i>
                   <span>DFW & Surrounding Areas</span>
                 </li>
-                <li>
+                <li class="align-items-center">
                   <i class="fas fa-clock"></i>
                   <span>24/7 Available Service</span>
                 </li>
-                <li>
+                <li class="align-items-center">
                   <i class="fas fa-phone"></i>
                   <a href="tel:+1 (800) 889-9788">+1 (800) 889-9788</a>
                 </li>

@@ -13,7 +13,9 @@
         <div class="col-lg-6 d-flex flex-column">
           <div class="card-dark shadow-lg h-100">
             <h3 class="text-white mb-4">Demolition Scope</h3>
-            <p class="text-gray small mb-4">Select your project type and adjust the parameters for an instant estimate.</p>
+            <p class="text-gray small mb-4">
+              Select your project type and adjust the parameters for an instant estimate.
+            </p>
 
             <!-- Scope Selection -->
             <div class="mb-4">
@@ -49,7 +51,9 @@
                   step="5"
                   v-model="area"
                   @input="updateArea"
-                  :style="{ background: `linear-gradient(to right, var(--accent-orange) 0%, var(--accent-orange) ${area / 2.0}%, var(--secondary-dark) ${area / 2.0}%, var(--secondary-dark) 100%)` }"
+                  :style="{
+                    background: `linear-gradient(to right, var(--accent-orange) 0%, var(--accent-orange) ${((area - 10) / (200 - 10)) * 100}%, var(--white-10) ${((area - 10) / (200 - 10)) * 100}%, var(--white-10) 100%)`,
+                  }"
                 />
               </div>
 
@@ -72,6 +76,7 @@
                 <option value="Drywall">Drywall</option>
                 <option value="Tile">Tile</option>
                 <option value="Concrete">Concrete</option>
+                <option value="Metal">Metal</option>
                 <option value="Mixed">Mixed</option>
               </select>
             </div>
@@ -104,8 +109,16 @@
 
             <!-- Photo Upload -->
             <div>
-              <label class="text-white fw-bold d-block mb-3">Upload demo photos <span class="text-orange">*</span></label>
-              <div class="upload-area position-relative rounded" @click="triggerFileInput" @dragover.prevent="isDragging = true" @dragleave.prevent="isDragging = false" @drop.prevent="handleFileDrop">
+              <label class="text-white fw-bold d-block mb-3"
+                >Upload demo photos <span class="text-orange">*</span></label
+              >
+              <div
+                class="upload-area position-relative rounded"
+                @click="triggerFileInput"
+                @dragover.prevent="isDragging = true"
+                @dragleave.prevent="isDragging = false"
+                @drop.prevent="handleFileDrop"
+              >
                 <input
                   ref="fileInput"
                   type="file"
@@ -119,7 +132,9 @@
                   <p class="text-gray mt-3 mb-0">Drag & drop or click to upload</p>
                 </div>
               </div>
-              <p v-if="uploadedFiles.length > 0" class="text-success text-small mt-2">{{ uploadedFiles.length }} file(s) uploaded</p>
+              <p v-if="uploadedFiles.length > 0" class="text-success text-small mt-2">
+                {{ uploadedFiles.length }} file(s) uploaded
+              </p>
             </div>
           </div>
         </div>
@@ -128,7 +143,10 @@
         <div class="col-lg-6 d-flex flex-column">
           <div class="card-dark shadow-lg h-100">
             <!-- Price Display -->
-            <div class="mb-4 pb-4 border-bottom" style="border-bottom: 1px solid rgba(221, 150, 63, 0.25)">
+            <div
+              class="mb-4 pb-4 border-bottom"
+              style="border-bottom: 1px solid rgba(221, 150, 63, 0.25)"
+            >
               <p class="text-small text-gray mb-2">Ballpark Price</p>
               <h2 class="h1 mb-2">${{ computedPrice }}</h2>
               <p class="text-small text-gray mb-0">
@@ -152,7 +170,10 @@
                   <span class="text-gray">Material:</span>
                   <span class="text-white">{{ material }}</span>
                 </div>
-                <div class="detail-item d-flex justify-content-between mb-2" v-if="includesConcrete">
+                <div
+                  class="detail-item d-flex justify-content-between mb-2"
+                  v-if="includesConcrete"
+                >
                   <span class="text-gray">Concrete:</span>
                   <span class="text-white">Included</span>
                 </div>
@@ -179,7 +200,10 @@
       </div>
 
       <!-- Features Section -->
-      <div class="mt-5 pt-5" style="border-top: 1px solid rgba(221, 150, 63, 0.1); padding-top: 3rem">
+      <div
+        class="mt-5 pt-5"
+        style="border-top: 1px solid rgba(221, 150, 63, 0.1); padding-top: 3rem"
+      >
         <h2 class="text-white mb-4">Before / After Preview</h2>
         <div class="row g-4">
           <div class="col-md-6 col-lg-3" v-for="feature in features" :key="feature.title">
@@ -246,34 +270,34 @@ export default {
     },
     computedPrice() {
       const basePrices = {
-        'Shed': 250,
-        'Deck': 300,
-        'Fence': 180,
-        'Bathroom': 120,
-        'Kitchen': 180,
-        'Interior wall': 140
+        Shed: 250,
+        Deck: 300,
+        Fence: 180,
+        Bathroom: 120,
+        Kitchen: 180,
+        'Interior wall': 140,
       }
-      
+
       let price = basePrices[this.selectedScope] || 120
-      
+
       if (this.area > 20) {
         price += Math.floor((this.area - 20) / 10) * 25
       }
-      
+
       const materialMultipliers = {
-        'Wood': 1.0,
-        'Drywall': 0.9,
-        'Tile': 1.25,
-        'Concrete': 1.6,
-        'Mixed': 1.1
+        Wood: 1.0,
+        Drywall: 0.9,
+        Tile: 1.25,
+        Concrete: 1.6,
+        Mixed: 1.1,
       }
       price *= materialMultipliers[this.material] || 1.0
-      
+
       if (this.includesConcrete) price += 40
       if (this.upstairsAccess) price += 25
-      
+
       return Math.max(125, Math.round(price))
-    }
+    },
   },
   methods: {
     selectScope(scope) {
@@ -309,7 +333,7 @@ export default {
     },
     showDisposalTiers() {
       alert('Showing disposal tiers...')
-    }
+    },
   },
   mounted() {
     this.$emit('update:scope', this.selectedScope)
@@ -317,7 +341,7 @@ export default {
     this.$emit('update:material', this.material)
     this.$emit('update:concrete', this.includesConcrete)
     this.$emit('update:upstairs', this.upstairsAccess)
-  }
+  },
 }
 </script>
 
@@ -491,7 +515,7 @@ export default {
   .scope-btn {
     min-width: calc(50% - var(--gap-sm));
   }
-  
+
   .d-flex.gap-2 {
     flex-direction: column;
   }
