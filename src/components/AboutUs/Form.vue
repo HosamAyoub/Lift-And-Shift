@@ -60,18 +60,6 @@
             <div class="values-list">
               <div class="value-item mb-4">
                 <div class="value-icon">
-                  <i class="fas fa-dollar-sign text-orange"></i>
-                </div>
-                <div class="value-content">
-                  <h5 class="text-white mb-2">Living Wage Commitment</h5>
-                  <p class="text-gray small mb-0">
-                    We believe work should cover real costs of living and reward effort. That's our baseline, not our ceiling.
-                  </p>
-                </div>
-              </div>
-
-              <div class="value-item mb-4">
-                <div class="value-icon">
                   <i class="fas fa-handshake text-orange"></i>
                 </div>
                 <div class="value-content">
@@ -94,7 +82,7 @@
                 </div>
               </div>
 
-              <div class="value-item">
+              <div class="value-item mb-4">
                 <div class="value-icon">
                   <i class="fas fa-shield-alt text-orange"></i>
                 </div>
@@ -105,6 +93,19 @@
                   </p>
                 </div>
               </div>
+
+              <div class="value-item mb-2">
+                <div class="value-icon">
+                  <i class="fas fa-dollar-sign text-orange"></i>
+                </div>
+                <div class="value-content">
+                  <h5 class="text-white mb-2">Living Wage Commitment</h5>
+                  <p class="text-gray small mb-0">
+                    We believe work should cover real costs of living and reward effort. That's our baseline, not our ceiling.
+                  </p>
+                </div>
+              </div>
+
             </div>
 
             <!-- Stats -->

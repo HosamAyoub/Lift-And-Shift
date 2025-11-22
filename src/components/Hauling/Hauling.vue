@@ -388,14 +388,6 @@ export default {
 </script>
 
 <style scoped>
-/* Font weights matching home page */
-h2 {
-  font-weight: 800;
-}
-h3 {
-  font-weight: 700;
-}
-
 label {
   font-weight: 700;
 }
