@@ -1,11 +1,16 @@
 <template>
-  <main></main>
-  <Form></Form>
-  <h1>This is the Careers page</h1>
+  <Careers></Careers>
 </template>
 
 <script>
-import Form from '../components/Careers/Form.vue'
+import Careers from '../components/Careers/Careers.vue'
+
+export default {
+  name: 'CareersView',
+  components: {
+    Careers,
+  },
+}
 </script>
 
 <script scoped></script>

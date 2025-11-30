@@ -1,14 +1,14 @@
 <template>
-  <AboutUsForm></AboutUsForm>
+  <AboutUs></AboutUs>
 </template>
 
 <script>
-import AboutUsForm from '../components/AboutUs/Form.vue'
+import AboutUs from '../components/AboutUs/AboutUs.vue'
 
 export default {
   name: 'AboutUsView',
   components: {
-    AboutUsForm,
+    AboutUs,
   },
 }
 </script>

@@ -1,14 +1,14 @@
 <template>
-  <StorageForm></StorageForm>
+  <Storage></Storage>
 </template>
 
 <script>
-import StorageForm from '../components/Storage/Form.vue'
+import Storage from '../components/Storage/Storage.vue'
 
 export default {
   name: 'StorageView',
   components: {
-    StorageForm,
+    Storage,
   },
 }
 </script>

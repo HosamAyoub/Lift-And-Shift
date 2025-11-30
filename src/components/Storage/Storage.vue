@@ -282,7 +282,7 @@
 
 <script>
 export default {
-  name: 'StorageForm',
+  name: 'Storage',
   data() {
     return {
       selectedSize: null,

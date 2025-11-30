@@ -163,7 +163,7 @@
 
 <script>
 export default {
-  name: 'AboutUsForm',
+  name: 'AboutUs',
   data() {
     return {
       services: [

@@ -136,64 +136,144 @@
               </p>
             </div>
 
-            <!-- Photo Upload -->
-            <div class="photo-upload mb-4 pb-4">
-              <label class="text-white fw-bold d-block mb-3"
-                >Upload Photos for Accurate Pricing <span class="text-orange">*</span></label
-              >
-              <div
-                class="upload-area position-relative rounded"
-                :class="{ dragging: isDragging }"
-                @click="triggerFileInput"
-                @dragover.prevent="isDragging = true"
-                @dragleave.prevent="isDragging = false"
-                @drop.prevent="handleFileDrop"
-              >
-                <input
-                  ref="fileInput"
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  @change="handleFileSelect"
-                  style="display: none"
-                />
-                <div class="text-center py-5">
-                  <i class="fas fa-cloud-upload text-orange" style="font-size: 2.5rem"></i>
-                  <p class="text-gray mt-3 mb-0">Drag & drop photos or click to browse</p>
-                  <p class="text-gray text-small mt-2 mb-0">
-                    Help us provide the most accurate quote
-                  </p>
+            <!-- Booking Form -->
+            <form @submit.prevent="handleSubmit">
+              <input type="hidden" name="load_size" :value="currentTier" />
+              <input type="hidden" name="estimated_price" :value="estimatedPrice" />
+
+              <!-- Name & Phone -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label class="text-white fw-bold d-block mb-2"
+                    >Name <span class="text-orange">*</span></label
+                  >
+                  <input
+                    v-model="formData.name"
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    :class="{ invalid: fieldTouched.name && fieldErrors.name }"
+                    placeholder="John Doe"
+                    @blur="validateField('name')"
+                    @input="clearFieldError('name')"
+                  />
+                  <div v-if="fieldTouched.name && fieldErrors.name" class="field-error">
+                    {{ fieldErrors.name }}
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="text-white fw-bold d-block mb-2"
+                    >Phone <span class="text-orange">*</span></label
+                  >
+                  <input
+                    v-model="formData.phone"
+                    type="tel"
+                    name="phone"
+                    class="form-control"
+                    :class="{ invalid: fieldTouched.phone && fieldErrors.phone }"
+                    placeholder="(555) 123-4567"
+                    @blur="validateField('phone')"
+                    @input="handlePhoneInput"
+                  />
+                  <div v-if="fieldTouched.phone && fieldErrors.phone" class="field-error">
+                    {{ fieldErrors.phone }}
+                  </div>
                 </div>
               </div>
-              <p v-if="uploadedFiles.length > 0" class="text-success text-small mt-2">
-                <i class="fas fa-check-circle me-1"></i>{{ uploadedFiles.length }} file(s) uploaded
-              </p>
-            </div>
 
-            <!-- Location Input -->
-            <div class="mb-4">
-              <label class="text-white fw-bold d-block mb-2"
-                >Your Location <span class="text-orange">*</span></label
-              >
-              <input
-                v-model="location"
-                type="text"
-                class="form-control"
-                placeholder="Enter your city or ZIP code"
+              <!-- Email & ZIP -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label class="text-white fw-bold d-block mb-2">Email</label>
+                  <input
+                    v-model="formData.email"
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    :class="{ invalid: fieldTouched.email && fieldErrors.email }"
+                    placeholder="john@example.com"
+                    @blur="validateField('email')"
+                    @input="clearFieldError('email')"
+                  />
+                  <div v-if="fieldTouched.email && fieldErrors.email" class="field-error">
+                    {{ fieldErrors.email }}
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="text-white fw-bold d-block mb-2"
+                    >ZIP Code <span class="text-orange">*</span></label
+                  >
+                  <input
+                    v-model="formData.zip"
+                    type="text"
+                    name="zip"
+                    class="form-control"
+                    :class="{ invalid: fieldTouched.zip && fieldErrors.zip }"
+                    placeholder="75001"
+                    maxlength="10"
+                    @blur="validateField('zip')"
+                    @input="clearFieldError('zip')"
+                  />
+                  <div v-if="fieldTouched.zip && fieldErrors.zip" class="field-error">
+                    {{ fieldErrors.zip }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Photo Upload -->
+              <FileUpload
+                v-model="uploadedFiles"
+                label="Upload Photos"
+                name="attachments"
+                placeholder="Drag & drop or click to browse"
+                accept="image/*,video/*,application/pdf"
+                :required="true"
+                :max-size="10 * 1024 * 1024"
+                :max-files="10"
+                :error-message="fieldErrors.files"
+                :show-error="fieldTouched.files"
+                @change="handleFilesChange"
+                class="py-3"
               />
-            </div>
 
-            <!-- Action Buttons -->
-            <div class="d-flex gap-2">
-              <button class="btn btn-primary flex-grow-1">Book Now</button>
-              <button class="btn btn-outline-primary">View All Tiers</button>
-            </div>
+              <!-- Action Buttons -->
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary flex-grow-1" :disabled="isSubmitting">
+                  <span v-if="!isSubmitting">
+                    <i class="fas fa-paper-plane me-2"></i>Book Now - ${{ estimatedPrice }}
+                  </span>
+                  <span v-else> <i class="fas fa-spinner fa-spin me-2"></i>Sending... </span>
+                </button>
+                <button type="button" class="btn btn-outline-primary" @click="scrollToPricingTiers">
+                  <span>View All Tiers</span>
+                </button>
+              </div>
+
+              <!-- Success/Error Messages -->
+              <div
+                v-if="submitMessage"
+                class="mt-3 p-3 rounded"
+                :class="
+                  submitSuccess
+                    ? 'bg-success bg-opacity-10 border border-success'
+                    : 'bg-danger bg-opacity-10 border border-danger'
+                "
+              >
+                <p class="mb-0 small" :class="submitSuccess ? 'text-success' : 'text-danger'">
+                  <i
+                    :class="submitSuccess ? 'fas fa-check-circle' : 'fas fa-exclamation-circle'"
+                    class="me-2"
+                  ></i>
+                  {{ submitMessage }}
+                </p>
+              </div>
+            </form>
           </div>
         </div>
       </div>
 
       <!-- Pricing Tiers Section -->
-      <div class="mt-5 pt-5">
+      <div class="mt-5 pt-5" id="pricingTiers">
         <h2 class="text-white mb-4 text-center">Our Pricing Tiers</h2>
         <div class="row g-4">
           <div class="col-md-6 col-lg-4" v-for="(tier, index) in pricingTiers" :key="tier.id">
@@ -230,6 +310,8 @@
 import PageHeader from './PageHeader.vue'
 import PricingCard from './PricingCard.vue'
 import BenefitCard from './BenefitCard.vue'
+import FileUpload from '../Shared/FileUpload.vue'
+import { validators } from '../../utils/validators.js'
 
 export default {
   name: 'Hauling',
@@ -237,13 +319,35 @@ export default {
     PageHeader,
     PricingCard,
     BenefitCard,
+    FileUpload,
   },
   data() {
     return {
       currentTierIndex: 0,
-      location: '',
       uploadedFiles: [],
-      isDragging: false,
+      isSubmitting: false,
+      submitMessage: '',
+      submitSuccess: false,
+      formData: {
+        name: '',
+        phone: '',
+        email: '',
+        zip: '',
+      },
+      fieldErrors: {
+        name: '',
+        phone: '',
+        email: '',
+        zip: '',
+        files: '',
+      },
+      fieldTouched: {
+        name: false,
+        phone: false,
+        email: false,
+        zip: false,
+        files: false,
+      },
       pricingTiers: [
         {
           id: 1,
@@ -366,17 +470,145 @@ export default {
         this.setBed(i)
       }
     },
-    triggerFileInput() {
-      this.$refs.fileInput.click()
+    handleFilesChange(files) {
+      this.validateField('files')
     },
-    handleFileSelect(event) {
-      const files = Array.from(event.target.files)
-      this.uploadedFiles = [...this.uploadedFiles, ...files]
+    validateField(fieldName) {
+      this.fieldTouched[fieldName] = true
+
+      if (fieldName === 'files') {
+        const result = validators.files.validate(this.uploadedFiles, {
+          required: true,
+          maxSize: 10 * 1024 * 1024, // 10MB
+          maxFiles: 10,
+        })
+        this.fieldErrors.files = result.error
+        return result.valid
+      }
+
+      if (fieldName === 'email') {
+        const result = validators.email.validate(this.formData.email, false) // optional
+        this.fieldErrors.email = result.error
+        return result.valid
+      }
+
+      const result = validators[fieldName].validate(this.formData[fieldName])
+      this.fieldErrors[fieldName] = result.error
+      return result.valid
     },
-    handleFileDrop(event) {
-      this.isDragging = false
-      const files = Array.from(event.dataTransfer.files)
-      this.uploadedFiles = [...this.uploadedFiles, ...files]
+    clearFieldError(fieldName) {
+      this.fieldErrors[fieldName] = ''
+    },
+    handlePhoneInput() {
+      // Format phone number as user types
+      this.formData.phone = validators.phone.format(this.formData.phone)
+      this.clearFieldError('phone')
+    },
+    validateAllFields() {
+      const fields = ['name', 'phone', 'email', 'zip', 'files']
+      let isValid = true
+
+      fields.forEach((field) => {
+        if (!this.validateField(field)) {
+          isValid = false
+        }
+      })
+
+      return isValid
+    },
+    async handleSubmit(event) {
+      // Validate all fields before submitting
+      if (!this.validateAllFields()) {
+        this.submitSuccess = false
+        this.submitMessage = 'Please fix the errors before submitting'
+        return
+      }
+
+      this.isSubmitting = true
+      this.submitMessage = ''
+
+      try {
+        // Build FormData with all form fields and files
+        const formData = new FormData()
+        formData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY)
+        formData.append('form', 'Hauling')
+        formData.append('name', this.formData.name)
+        formData.append('phone', this.formData.phone)
+        formData.append('email', this.formData.email || '')
+        formData.append('zip', this.formData.zip)
+        formData.append('load_size', this.currentTier)
+        formData.append('estimated_price', '$' + this.estimatedPrice)
+
+        // Create a text field with file information for Google Sheets
+        const fileList = this.uploadedFiles
+          .map(
+            (file, index) =>
+              `File ${index + 1}: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`,
+          )
+          .join(' | ')
+        formData.append('attachments', fileList || 'No files uploaded')
+
+        // Add all uploaded files as attachment
+        this.uploadedFiles.forEach((file) => {
+          formData.append('attachment', file)
+        })
+
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData,
+        })
+
+        const data = await response.json()
+
+        if (data.success) {
+          this.submitSuccess = true
+          this.submitMessage =
+            "Thank you! Your booking request has been submitted. We'll contact you within 24 hours."
+
+          // Reset form after 3 seconds
+          setTimeout(() => {
+            this.formData = {
+              name: '',
+              phone: '',
+              email: '',
+              zip: '',
+            }
+            this.uploadedFiles = []
+            this.submitMessage = ''
+            this.fieldErrors = {
+              name: '',
+              phone: '',
+              email: '',
+              zip: '',
+              files: '',
+            }
+            this.fieldTouched = {
+              name: false,
+              phone: false,
+              email: false,
+              zip: false,
+              files: false,
+            }
+            this.$refs.fileInput.value = ''
+          }, 3000)
+        } else {
+          this.submitSuccess = false
+          this.submitMessage =
+            'Something went wrong. Please try again or call us at (800) 889-9788.'
+        }
+      } catch (error) {
+        this.submitSuccess = false
+        this.submitMessage = 'Network error. Please check your connection and try again.'
+      } finally {
+        this.isSubmitting = false
+      }
+    },
+    // Smooth-scroll to the pricing tiers section
+    scrollToPricingTiers() {
+      const el = document.getElementById('pricingTiers')
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     },
     selectTier(index) {
       this.currentTierIndex = index
@@ -650,29 +882,6 @@ label {
   border-bottom: 1px solid var(--orange-20);
 }
 
-/* Photo Upload */
-.photo-upload {
-  border-bottom: 1px solid var(--orange-10);
-}
-
-.upload-area {
-  background: var(--primary-dark);
-  border: 2px dashed var(--orange-20);
-  cursor: pointer;
-  transition: var(--transition-base);
-}
-
-.upload-area:hover {
-  border-color: var(--accent-orange);
-  background: var(--orange-10);
-}
-
-.upload-area.dragging {
-  border-color: var(--accent-orange);
-  background: var(--orange-20);
-  transform: scale(1.02);
-}
-
 /* Form Controls */
 .form-control {
   border: 1px solid var(--orange-10) !important;
@@ -689,6 +898,33 @@ label {
 
 .form-control::placeholder {
   color: var(--text-gray) !important;
+}
+
+/* Validation Styles */
+.form-control.invalid {
+  border-color: var(--accent-orange) !important;
+  box-shadow: 0 0 0 3px var(--orange-10) !important;
+}
+
+.upload-area-compact.invalid {
+  border-color: var(--accent-orange) !important;
+  background: var(--orange-10) !important;
+}
+
+.field-error {
+  color: var(--accent-orange);
+  font-size: 12px;
+  margin-top: 6px;
+  text-align: left;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.field-error::before {
+  content: '⚠';
+  font-size: 12px;
 }
 
 /* Responsive */
