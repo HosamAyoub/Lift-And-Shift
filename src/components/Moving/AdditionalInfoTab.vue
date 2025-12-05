@@ -60,42 +60,32 @@
     <!-- Summary Card -->
     <div class="summary-card">
       <h5 class="text-white mb-3">
-        <i class="fas fa-check-circle text-orange me-2"></i>Request Summary
+        <i class="fas fa-file-alt text-orange me-2"></i>Request Summary
       </h5>
-
-      <div class="summary-section">
-        <h6 class="text-orange mb-2">Contact Information</h6>
+      <div class="summary-grid">
         <div class="summary-item">
-          <span class="summary-label">Name:</span>
-          <span class="summary-value">{{ fullName || 'Not provided' }}</span>
+          <div class="summary-label">Name</div>
+          <div class="summary-value">{{ fullName || 'Not provided' }}</div>
         </div>
         <div class="summary-item">
-          <span class="summary-label">Phone:</span>
-          <span class="summary-value">{{ formData.phone || 'Not provided' }}</span>
+          <div class="summary-label">Service Type</div>
+          <div class="summary-value">{{ serviceLabel || 'Not selected' }}</div>
         </div>
         <div class="summary-item">
-          <span class="summary-label">Service:</span>
-          <span class="summary-value">{{ serviceLabel || 'Not selected' }}</span>
-        </div>
-      </div>
-
-      <div class="summary-section">
-        <h6 class="text-orange mb-2">Moving Details</h6>
-        <div class="summary-item">
-          <span class="summary-label">From:</span>
-          <span class="summary-value">{{ pickupAddress || 'Not provided' }}</span>
+          <div class="summary-label">From</div>
+          <div class="summary-value">{{ pickupAddress || 'Not provided' }}</div>
         </div>
         <div class="summary-item">
-          <span class="summary-label">To:</span>
-          <span class="summary-value">{{ dropoffAddress || 'Not provided' }}</span>
+          <div class="summary-label">To</div>
+          <div class="summary-value">{{ dropoffAddress || 'Not provided' }}</div>
         </div>
         <div class="summary-item">
-          <span class="summary-label">Date:</span>
-          <span class="summary-value">{{ formattedDate || 'Not provided' }}</span>
+          <div class="summary-label">Date</div>
+          <div class="summary-value">{{ formattedDate || 'Not selected' }}</div>
         </div>
         <div class="summary-item">
-          <span class="summary-label">Time:</span>
-          <span class="summary-value">{{ timeLabel || 'Not selected' }}</span>
+          <div class="summary-label">Time</div>
+          <div class="summary-value">{{ timeLabel || 'Not selected' }}</div>
         </div>
       </div>
     </div>
@@ -215,65 +205,39 @@ textarea.form-control {
 
 .summary-card {
   background: var(--primary-dark);
-  border: 2px solid var(--accent-orange);
+  border: 2px solid var(--orange-10);
   border-radius: var(--radius-lg);
-  padding: var(--gap-xl);
-  margin-top: var(--gap-xl);
+  padding: var(--gap-lg);
+  margin-top: var(--gap-lg);
 }
 
-.summary-section {
-  margin-bottom: var(--gap-lg);
-}
-
-.summary-section:last-child {
-  margin-bottom: 0;
-}
-
-.summary-section h6 {
-  font-size: var(--font-sm);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: var(--gap-md);
-  padding-bottom: var(--gap-sm);
-  border-bottom: 1px solid var(--orange-10);
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--gap-md);
 }
 
 .summary-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--gap-md);
-  padding: var(--gap-sm) 0;
-  border-bottom: 1px solid var(--orange-10);
-}
-
-.summary-item:last-child {
-  border-bottom: none;
+  padding: var(--gap-sm);
 }
 
 .summary-label {
   color: var(--text-gray);
-  font-size: var(--font-sm);
-  font-weight: 500;
-  min-width: 80px;
+  font-size: var(--font-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--gap-sm);
 }
 
 .summary-value {
   color: var(--text-light);
-  font-size: var(--font-sm);
-  text-align: right;
-  flex: 1;
   font-weight: 600;
+  font-size: var(--font-sm);
 }
 
 @media (max-width: 768px) {
-  .summary-item {
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .summary-value {
-    text-align: left;
+  .summary-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

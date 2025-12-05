@@ -132,13 +132,11 @@
 </template>
 
 <script>
-import logoImage from '../../../public/assets/images/logo.png'
-
 export default {
   name: 'Footer',
   computed: {
     logo() {
-      return logoImage
+      return '/assets/images/logo.png'
     },
     currentYear() {
       return new Date().getFullYear()

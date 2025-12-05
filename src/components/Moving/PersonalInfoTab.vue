@@ -52,7 +52,7 @@
         <input
           type="tel"
           :value="formData.phone"
-          @input="handlePhoneInput"
+          @input="handlePhoneInput($event)"
           @blur="handleBlur('phone')"
           class="form-control"
           :class="{ invalid: fieldTouched.phone && fieldErrors.phone }"
@@ -149,6 +149,8 @@ export default {
     updateFormField(field, value) {
       const updated = { ...this.formData, [field]: value }
       this.$emit('update:formData', updated)
+      // Clear error when user starts typing
+      this.clearFieldError(field)
     },
     handleBlur(field) {
       const updatedTouched = { ...this.fieldTouched, [field]: true }
@@ -157,6 +159,10 @@ export default {
     handlePhoneInput(event) {
       const formatted = validators.phone.format(event.target.value)
       this.updateFormField('phone', formatted)
+    },
+    clearFieldError(field) {
+      const updatedErrors = { ...this.fieldErrors, [field]: '' }
+      this.$emit('update:fieldErrors', updatedErrors)
     },
   },
 }

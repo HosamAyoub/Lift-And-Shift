@@ -1,8 +1,11 @@
 <template>
   <div class="features-section mt-5 pt-5" style="border-top: 1px solid var(--orange-10)">
-    <h2 class="text-white text-center mb-4">Why Choose Our Moving Services</h2>
+    <h2 class="text-white text-center mb-4">What Makes Us Different</h2>
+    <p class="text-center text-gray mb-5 lead">
+      Professional moving services backed by experience, dedication, and customer satisfaction
+    </p>
     <div class="row g-4">
-      <div class="col-md-6 col-lg-3" v-for="feature in features" :key="feature.title">
+      <div class="col-md-6 col-lg-4" v-for="feature in features" :key="feature.title">
         <div class="feature-card text-center h-100">
           <div class="feature-icon mb-3">
             <i :class="feature.icon"></i>
@@ -22,24 +25,40 @@ export default {
     return {
       features: [
         {
-          icon: 'fas fa-shield-alt',
-          title: 'Licensed & Insured',
-          description: 'Fully licensed and insured for your peace of mind and protection.',
+          icon: 'fas fa-truck-loading',
+          title: 'Heavy Lifting Expertise',
+          description:
+            'Specialized equipment and trained professionals for safely moving heavy furniture, appliances, and delicate items.',
         },
         {
-          icon: 'fas fa-users',
-          title: 'Professional Team',
-          description: 'Experienced movers who handle your belongings with care.',
+          icon: 'fas fa-box-open',
+          title: 'Professional Packing',
+          description:
+            'Expert packing services with quality materials to protect your valuables during transit and storage.',
         },
         {
-          icon: 'fas fa-dollar-sign',
-          title: 'Transparent Pricing',
-          description: 'No hidden fees. Get an accurate quote before we start.',
+          icon: 'fas fa-route',
+          title: 'Door-to-Door Service',
+          description:
+            'Complete moving solution from pickup to delivery, handling every step of your relocation journey.',
         },
         {
-          icon: 'fas fa-clock',
-          title: 'On-Time Service',
-          description: 'We value your time and always arrive as scheduled.',
+          icon: 'fas fa-headset',
+          title: '24/7 Support',
+          description:
+            'Round-the-clock customer support team ready to assist you before, during, and after your move.',
+        },
+        {
+          icon: 'fas fa-hand-holding-usd',
+          title: 'Flexible Payment Options',
+          description:
+            'Multiple payment methods accepted with customized payment plans to fit your budget.',
+        },
+        {
+          icon: 'fas fa-medal',
+          title: '10+ Years Experience',
+          description:
+            'Decade of proven excellence in residential and commercial moves across all distances.',
         },
       ],
     }
@@ -65,22 +84,24 @@ export default {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px var(--orange-20);
 }
-
 .feature-icon {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
-  border-radius: var(--radius-round);
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  font-size: var(--font-4xl);
+  font-size: 2rem;
   color: var(--text-light);
   transition: var(--transition-base);
+  box-shadow: 0 5px 15px rgba(255, 115, 0, 0.3);
 }
 
 .feature-card:hover .feature-icon {
+  transform: scale(1.15);
+  box-shadow: 0 8px 25px rgba(255, 115, 0, 0.5);
   transform: scale(1.1) rotate(5deg);
 }
 

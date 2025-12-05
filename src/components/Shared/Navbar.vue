@@ -87,13 +87,11 @@
 </template>
 
 <script>
-import logoImage from '../../../public/assets/images/logo.png'
-
 export default {
   name: 'Navbar',
   computed: {
     logo() {
-      return logoImage
+      return '/assets/images/logo.png'
     },
   },
 }
