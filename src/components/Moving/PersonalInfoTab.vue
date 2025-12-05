@@ -1,7 +1,7 @@
 <template>
   <div class="tab-content-wrapper">
-    <h4 class="text-white mb-4">
-      <i class="fas fa-user text-orange me-2"></i>Personal Information
+    <h4 class="text-white mb-2">
+      Personal Information
     </h4>
     <p class="text-gray small mb-4">Let us know who you are and how to reach you.</p>
 

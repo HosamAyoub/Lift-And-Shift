@@ -291,7 +291,7 @@
 
       <!-- Why Choose Us Section -->
       <div class="mt-5 pt-5" style="border-top: 1px solid var(--orange-10)">
-        <h2 class="text-white mb-5">Why Choose Us?</h2>
+        <h2 class="text-white mb-4">Why Choose <span class="text-orange">Us</span></h2>
         <div class="row g-4">
           <div class="col-md-6 col-lg-3" v-for="benefit in benefits" :key="benefit.title">
             <BenefitCard

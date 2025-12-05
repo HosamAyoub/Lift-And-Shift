@@ -1,7 +1,7 @@
 <template>
   <div class="tab-content-wrapper">
-    <h4 class="text-white mb-4">
-      <i class="fas fa-map-marker-alt text-orange me-2"></i>Location Details
+    <h4 class="text-white mb-2">
+      Location Details
     </h4>
     <p class="text-gray small mb-4">Tell us where we're picking up and dropping off your items.</p>
 

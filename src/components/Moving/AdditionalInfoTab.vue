@@ -1,7 +1,7 @@
 <template>
   <div class="tab-content-wrapper">
-    <h4 class="text-white mb-4">
-      <i class="fas fa-clipboard-list text-orange me-2"></i>Additional Information
+    <h4 class="text-white mb-2">
+      Additional Information
     </h4>
     <p class="text-gray small mb-4">
       Help us serve you better by providing more details about your move.

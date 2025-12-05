@@ -1,14 +1,14 @@
 <template>
   <div class="features-section mt-5 pt-5" style="border-top: 1px solid var(--orange-10)">
-    <h2 class="text-white text-center mb-4">What Makes Us Different</h2>
-    <p class="text-center text-gray mb-5 lead">
-      Professional moving services backed by experience, dedication, and customer satisfaction
-    </p>
+    <h2 class="text-white mb-4">Why Choose <span class="text-orange">Us</span></h2>
     <div class="row g-4">
-      <div class="col-md-6 col-lg-4" v-for="feature in features" :key="feature.title">
-        <div class="feature-card text-center h-100">
-          <div class="feature-icon mb-3">
+      <div class="col-md-6 col-lg-3" v-for="feature in features" :key="feature.title">
+        <div class="text-center">
+          <!-- <div class="feature-icon mb-3">
             <i :class="feature.icon"></i>
+          </div> -->
+          <div class="mb-3">
+            <i :class="feature.icon" style="font-size: 2.5rem; color: var(--accent-orange)"></i>
           </div>
           <h5 class="text-white mb-2">{{ feature.title }}</h5>
           <p class="text-gray small mb-0">{{ feature.description }}</p>
@@ -25,40 +25,24 @@ export default {
     return {
       features: [
         {
-          icon: 'fas fa-truck-loading',
-          title: 'Heavy Lifting Expertise',
-          description:
-            'Specialized equipment and trained professionals for safely moving heavy furniture, appliances, and delicate items.',
+          icon: 'fas fa-shield-alt',
+          title: 'Licensed & Insured',
+          description: 'Fully licensed and insured for your peace of mind and protection.',
         },
         {
-          icon: 'fas fa-box-open',
-          title: 'Professional Packing',
-          description:
-            'Expert packing services with quality materials to protect your valuables during transit and storage.',
+          icon: 'fas fa-users',
+          title: 'Professional Crew',
+          description: 'Expert movers who treat your belongings with care and respect.',
         },
         {
-          icon: 'fas fa-route',
-          title: 'Door-to-Door Service',
-          description:
-            'Complete moving solution from pickup to delivery, handling every step of your relocation journey.',
+          icon: 'fas fa-warehouse',
+          title: 'Storage Units',
+          description: 'Flexible storage units that grow with your needs, perfect for managing inventory.',
         },
         {
-          icon: 'fas fa-headset',
-          title: '24/7 Support',
-          description:
-            'Round-the-clock customer support team ready to assist you before, during, and after your move.',
-        },
-        {
-          icon: 'fas fa-hand-holding-usd',
+          icon: 'fas fa-dollar-sign',
           title: 'Flexible Payment Options',
-          description:
-            'Multiple payment methods accepted with customized payment plans to fit your budget.',
-        },
-        {
-          icon: 'fas fa-medal',
-          title: '10+ Years Experience',
-          description:
-            'Decade of proven excellence in residential and commercial moves across all distances.',
+          description: 'Multiple Payment Methods & Customized payment plans to fit your budget.',
         },
       ],
     }
@@ -79,12 +63,16 @@ export default {
   transition: var(--transition-base);
 }
 
-.feature-card:hover {
+/* .feature-card:hover {
   border-color: var(--accent-orange);
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px var(--orange-20);
+} */
+
+.features-section {
+  padding-top: 3rem;
 }
-.feature-icon {
+
+/* .feature-icon {
   width: 70px;
   height: 70px;
   background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
@@ -97,20 +85,19 @@ export default {
   color: var(--text-light);
   transition: var(--transition-base);
   box-shadow: 0 5px 15px rgba(255, 115, 0, 0.3);
-}
+} */
 
-.feature-card:hover .feature-icon {
-  transform: scale(1.15);
-  box-shadow: 0 8px 25px rgba(255, 115, 0, 0.5);
+/* .feature-icon:hover {
   transform: scale(1.1) rotate(5deg);
-}
+  box-shadow: 0 8px 25px rgba(255, 115, 0, 0.5);
+} */
 
-.feature-card h5 {
+h5 {
   font-size: 1.1rem;
   font-weight: 700;
 }
 
-.feature-card p {
+p {
   line-height: 1.6;
 }
 </style>

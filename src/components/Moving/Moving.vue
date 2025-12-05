@@ -1,14 +1,44 @@
 <template>
-  <section class="section section-dark py-5">
-    <div class="container-lg">
-      <!-- Hero Section -->
-      <div class="mb-5 pb-4 text-center">
-        <h2 class="display-4 mb-3">Professional Moving Services</h2>
-        <p class="lead text-gray mb-0">
-          Your trusted partner for seamless relocations. From packing to delivery, we handle it all.
-        </p>
-      </div>
+  <!-- Hero Landing Section -->
+  <SharedPageHero
+    title="Professional <span class='text-orange'>Moving</span> Services"
+    subtitle="From residential relocations to commercial moves, we deliver excellence with every move. Experience stress-free moving with our expert team."
+    badge="Door-to-Door Service"
+    badgeIcon="fas fa-route"
+    :features="[
+      'Licensed & Insured',
+      'On-Time Guarantee',
+      'Transparent Pricing',
+      'Professional Packing',
+    ]"
+    :primaryButton="{
+      text: 'Get Free Quote',
+      icon: 'fas fa-arrow-down',
+      scrollTo: '.moving-form-section',
+    }"
+    :secondaryButton="{
+      text: 'Call Us Now',
+      icon: 'fas fa-phone',
+    }"
+    :stats="[
+      { number: '10K+', label: 'Happy Customers' },
+      { number: '15+', label: 'Years Experience' },
+      { number: '98%', label: 'Satisfaction Rate' },
+    ]"
+    @secondary-click="callNow"
+  />
 
+  <!-- Services Overview -->
+  <SharedServiceCards
+    title="Our <span class='text-orange'>services:</span>"
+    :services="movingServices"
+    :columnSize="4"
+    sectionClass="section section-dark"
+    @service-click="handleServiceClick"
+  />
+
+  <section class="section section-dark py-5 moving-form-section">
+    <div class="container-lg">
       <!-- Moving Form Card -->
       <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -133,6 +163,8 @@ import PersonalInfoTab from './PersonalInfoTab.vue'
 import LocationDetailsTab from './LocationDetailsTab.vue'
 import AdditionalInfoTab from './AdditionalInfoTab.vue'
 import FeaturesSection from './FeaturesSection.vue'
+import SharedPageHero from '../Shared/SharedPageHero.vue'
+import SharedServiceCards from '../Shared/SharedServiceCards.vue'
 import citiesByStateData from '../../../public/assets/JSON/US_CitiesByState.json'
 import { validators } from '../../utils/validators.js'
 
@@ -143,11 +175,31 @@ export default {
     PersonalInfoTab,
     LocationDetailsTab,
     AdditionalInfoTab,
+    SharedPageHero,
+    SharedServiceCards,
     FeaturesSection,
   },
   data() {
     return {
       citiesByState: citiesByStateData,
+      movingServices: [
+        {
+          icon: 'fas fa-box-open',
+          title: 'PACKING',
+          description: 'Experience our White Glove Professional Packing or DIY Pack and Save.',
+        },
+        {
+          icon: 'fas fa-truck-moving',
+          title: 'MOVING',
+          description:
+            "Whether it's across town, or across the country, we'll get it safely to your new home.",
+        },
+        {
+          icon: 'fas fa-warehouse',
+          title: 'STORAGE',
+          description: 'Need a month of storage while you find a new lease?',
+        },
+      ],
       currentTab: 1,
       completedTabs: [],
       tabs: [
@@ -220,6 +272,16 @@ export default {
     }
   },
   methods: {
+    callNow() {
+      window.location.href = 'tel:+18008899788'
+    },
+    handleServiceClick(service) {
+      // Scroll to form when service is clicked
+      const formSection = document.querySelector('.moving-form-section')
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    },
     handleTabChange(tabId) {
       if (tabId < this.currentTab || this.completedTabs.includes(this.currentTab)) {
         this.currentTab = tabId
@@ -384,7 +446,7 @@ export default {
     async handleSubmit() {
       // Prevent double submission
       if (this.isSubmitting) return
-      
+
       // Validate all tabs
       const tab1Valid = this.validateTab1()
       const tab2Valid = this.validateTab2()
