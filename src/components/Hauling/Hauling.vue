@@ -226,7 +226,7 @@
                 label="Upload Photos"
                 name="attachments"
                 placeholder="Drag & drop or click to browse"
-                accept="image/*,video/*,application/pdf"
+                accept="image/*,application/pdf"
                 :required="true"
                 :max-size="10 * 1024 * 1024"
                 :max-files="10"
@@ -291,7 +291,7 @@
 
       <!-- Why Choose Us Section -->
       <div class="mt-5 pt-5" style="border-top: 1px solid var(--orange-10)">
-        <h2 class="text-white mb-5 text-center">Why Choose Our Hauling Service?</h2>
+        <h2 class="text-white mb-5">Why Choose Us?</h2>
         <div class="row g-4">
           <div class="col-md-6 col-lg-3" v-for="benefit in benefits" :key="benefit.title">
             <BenefitCard
@@ -898,33 +898,6 @@ label {
 
 .form-control::placeholder {
   color: var(--text-gray) !important;
-}
-
-/* Validation Styles */
-.form-control.invalid {
-  border-color: var(--accent-orange) !important;
-  box-shadow: 0 0 0 3px var(--orange-10) !important;
-}
-
-.upload-area-compact.invalid {
-  border-color: var(--accent-orange) !important;
-  background: var(--orange-10) !important;
-}
-
-.field-error {
-  color: var(--accent-orange);
-  font-size: 12px;
-  margin-top: 6px;
-  text-align: left;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.field-error::before {
-  content: '⚠';
-  font-size: 12px;
 }
 
 /* Responsive */

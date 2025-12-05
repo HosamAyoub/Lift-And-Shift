@@ -101,6 +101,7 @@ export default {
 
 <style scoped>
 .navbar {
+  background: var(--primary-dark);
   background: rgba(26, 26, 26, 0.95);
   backdrop-filter: blur(10px);
   padding: var(--gap-lg) 0;

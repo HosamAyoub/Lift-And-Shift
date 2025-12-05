@@ -4,7 +4,9 @@
       <!-- Hero Section -->
       <div class="mb-5 pb-4">
         <h1 class="h2 text-white mb-3">AboutUs</h1>
-        <p class="text-gray mb-0">Turning strength into opportunity for people building their futures.</p>
+        <p class="text-gray mb-0">
+          Turning strength into opportunity for people building their futures.
+        </p>
       </div>
 
       <!-- Main Content Section -->
@@ -13,26 +15,32 @@
         <div class="col-lg-6 d-flex flex-column">
           <div class="card-dark shadow-lg h-100">
             <h3 class="text-white mb-4">Our Story</h3>
-            
+
             <div class="mb-4">
               <p class="text-gray">
-                Lift & Shift was founded on a simple but powerful idea: why work out for free when you can get paid for it? 
-                We saw an opportunity to connect physical strength with meaningful work, creating a business that benefits 
-                both our customers and our team members.
+                Lift & Shift was founded on a simple but powerful idea: why work out for free when
+                you can get paid for it? We saw an opportunity to connect physical strength with
+                meaningful work, creating a business that benefits both our customers and our team
+                members.
               </p>
-              
+
               <p class="text-gray">
-                Based in Plano and serving North Dallas, we've built a reputation for reliability, transparency, 
-                and treating both our customers and employees with the respect they deserve.
+                Based in Plano and serving North Dallas, we've built a reputation for reliability,
+                transparency, and treating both our customers and employees with the respect they
+                deserve.
               </p>
             </div>
 
             <!-- Mission Statement -->
-            <div class="mb-4 p-4 rounded" style="background: var(--orange-10); border: 1px solid var(--orange-25);">
+            <div
+              class="mb-4 p-4 rounded"
+              style="background: var(--orange-10); border: 1px solid var(--orange-25)"
+            >
               <h4 class="text-orange mb-3">Our Mission</h4>
               <p class="text-white mb-0">
-                "Lift & Shift turns strength into opportunity for people building their futures. We pay a true living wage 
-                and choose integrity over short term gain. Every shift builds a stronger body and a better future."
+                "Lift & Shift turns strength into opportunity for people building their futures. We
+                pay a true living wage and choose integrity over short term gain. Every shift builds
+                a stronger body and a better future."
               </p>
             </div>
 
@@ -65,7 +73,8 @@
                 <div class="value-content">
                   <h5 class="text-white mb-2">People First</h5>
                   <p class="text-gray small mb-0">
-                    We keep promises and communicate clearly. Relationships come before short term wins.
+                    We keep promises and communicate clearly. Relationships come before short term
+                    wins.
                   </p>
                 </div>
               </div>
@@ -101,15 +110,15 @@
                 <div class="value-content">
                   <h5 class="text-white mb-2">Living Wage Commitment</h5>
                   <p class="text-gray small mb-0">
-                    We believe work should cover real costs of living and reward effort. That's our baseline, not our ceiling.
+                    We believe work should cover real costs of living and reward effort. That's our
+                    baseline, not our ceiling.
                   </p>
                 </div>
               </div>
-
             </div>
 
             <!-- Stats -->
-            <div class="mt-4 pt-4" style="border-top: 1px solid rgba(221, 150, 63, 0.25)">
+            <div class="mt-4 pt-4" style="border-top: 1px solid var(--orange-25)">
               <div class="row text-center">
                 <div class="col-4">
                   <div class="text-orange h4 mb-1">100+</div>
@@ -130,7 +139,7 @@
       </div>
 
       <!-- Services Overview Section -->
-      <div class="mt-5 pt-5" style="border-top: 1px solid rgba(221, 150, 63, 0.1); padding-top: 3rem">
+      <div class="mt-5 pt-5" style="border-top: 1px solid var(--orange-10); padding-top: 3rem">
         <h2 class="text-white mb-4">What We Do</h2>
         <div class="row g-4">
           <div class="col-md-4" v-for="service in services" :key="service.title">
@@ -174,8 +183,8 @@ export default {
           features: [
             '1/4, 1/2, 3/4 & Full load options',
             'Same/next-day pickup available',
-            'Furniture, appliances, construction debris'
-          ]
+            'Furniture, appliances, construction debris',
+          ],
         },
         {
           icon: 'fas fa-truck-moving',
@@ -184,8 +193,8 @@ export default {
           features: [
             '2 movers + truck standard',
             'Local residential & office moves',
-            'Month-to-month storage options'
-          ]
+            'Month-to-month storage options',
+          ],
         },
         {
           icon: 'fas fa-hammer',
@@ -194,15 +203,15 @@ export default {
           features: [
             'Sheds, decks, fences, interiors',
             'Debris haul-off included',
-            'Fully insured and licensed'
-          ]
-        }
-      ]
+            'Fully insured and licensed',
+          ],
+        },
+      ],
     }
   },
   methods: {
     // You can add methods here if needed for interactivity
-  }
+  },
 }
 </script>
 
@@ -223,7 +232,7 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-background: var(--orange-10);
+  background: var(--orange-10);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -266,7 +275,7 @@ background: var(--orange-10);
 
 .card-dark:hover {
   border-color: var(--accent-orange);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .text-orange {
@@ -284,7 +293,7 @@ background: var(--orange-10);
 .btn-primary {
   background: var(--accent-orange);
   border: 1px solid var(--accent-orange);
-color: var(--text-light);
+  color: var(--text-light);
   font-weight: 600;
   padding: 0.75rem 2rem;
   border-radius: 0.5rem;
@@ -292,7 +301,7 @@ color: var(--text-light);
 }
 
 .btn-primary:hover {
- background: var(--accent-orange-dark);
+  background: var(--accent-orange-dark);
   border-color: var(--accent-orange-dark);
   transform: translateY(-2px);
 }
@@ -308,7 +317,7 @@ color: var(--text-light);
 
 .btn-outline-primary:hover {
   background: var(--accent-orange);
-color: var(--text-light);
+  color: var(--text-light);
   transform: translateY(-2px);
 }
 
@@ -317,16 +326,16 @@ color: var(--text-light);
     flex-direction: column;
     text-align: center;
   }
-  
+
   .service-areas {
     justify-content: center;
   }
-  
+
   .d-flex.gap-3 {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .btn-primary,
   .btn-outline-primary {
     width: 100%;

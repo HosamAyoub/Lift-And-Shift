@@ -1,19 +1,21 @@
 <template>
-  <div style="background-color: #0f0f0f; padding: 50px;">
+  <div style="background-color: var(--bg-dark); padding: 50px">
     <div class="container">
-      <h1 style="color: white; margin-bottom: 30px;">Contact Us</h1>
+      <h1 style="color: white; margin-bottom: 30px">Contact Us</h1>
 
       <div class="row g-4">
         <!-- Contact Form -->
         <div class="col-lg-8">
           <div class="card-dark shadow-lg">
             <h3 class="text-white mb-4">Send Us a Message</h3>
-            
+
             <form @submit.prevent="handleSubmit">
               <div class="row g-3">
                 <!-- Name -->
                 <div class="col-md-6">
-                  <label class="form-label text-white fw-bold">Your Name <span class="text-orange">*</span></label>
+                  <label class="form-label text-white fw-bold"
+                    >Your Name <span class="text-orange">*</span></label
+                  >
                   <input
                     v-model="form.name"
                     type="text"
@@ -25,7 +27,9 @@
 
                 <!-- Email -->
                 <div class="col-md-6">
-                  <label class="form-label text-white fw-bold">Email Address <span class="text-orange">*</span></label>
+                  <label class="form-label text-white fw-bold"
+                    >Email Address <span class="text-orange">*</span></label
+                  >
                   <input
                     v-model="form.email"
                     type="email"
@@ -61,7 +65,9 @@
 
                 <!-- Message -->
                 <div class="col-12">
-                  <label class="form-label text-white fw-bold">Your Message <span class="text-orange">*</span></label>
+                  <label class="form-label text-white fw-bold"
+                    >Your Message <span class="text-orange">*</span></label
+                  >
                   <textarea
                     v-model="form.message"
                     class="form-control"
@@ -80,7 +86,11 @@
               </div>
             </form>
 
-            <p v-if="submitMessage" :class="submitSuccess ? 'text-success' : 'text-danger'" class="mt-3 mb-0">
+            <p
+              v-if="submitMessage"
+              :class="submitSuccess ? 'text-success' : 'text-danger'"
+              class="mt-3 mb-0"
+            >
               {{ submitMessage }}
             </p>
           </div>
@@ -90,7 +100,7 @@
         <div class="col-lg-4">
           <div class="card-dark shadow-lg mb-4">
             <h4 class="text-white mb-4">Contact Information</h4>
-            
+
             <div class="contact-item mb-4">
               <div class="contact-icon">
                 <i class="fas fa-phone"></i>
@@ -128,7 +138,7 @@
               <div>
                 <h6 class="text-white mb-1">Hours</h6>
                 <p class="text-gray mb-0">
-                  Mon-Fri: 7am - 8pm<br>
+                  Mon-Fri: 7am - 8pm<br />
                   Sat-Sun: 8am - 6pm
                 </p>
               </div>
@@ -142,7 +152,9 @@
                 <i class="fas fa-bolt"></i>
               </div>
               <h5 class="text-white mb-2">Quick Response</h5>
-              <p class="text-gray mb-0">We typically respond within 2-4 hours during business hours</p>
+              <p class="text-gray mb-0">
+                We typically respond within 2-4 hours during business hours
+              </p>
             </div>
           </div>
         </div>
@@ -161,18 +173,18 @@ export default {
         email: '',
         phone: '',
         service: '',
-        message: ''
+        message: '',
       },
       submitMessage: '',
-      submitSuccess: false
+      submitSuccess: false,
     }
   },
   methods: {
     handleSubmit() {
       // Simulate form submission
       this.submitSuccess = true
-      this.submitMessage = 'Thank you for your message! We\'ll get back to you within 24 hours.'
-      
+      this.submitMessage = "Thank you for your message! We'll get back to you within 24 hours."
+
       // Reset form after 3 seconds
       setTimeout(() => {
         this.form = {
@@ -180,15 +192,14 @@ export default {
           email: '',
           phone: '',
           service: '',
-          message: ''
+          message: '',
         }
         this.submitMessage = ''
       }, 3000)
-    }
-  }
+    },
+  },
 }
 </script>
-
 
 <style scoped>
 /* Page Header */
@@ -281,7 +292,8 @@ export default {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -290,7 +302,10 @@ export default {
 }
 
 /* Form Styles */
-h3, h4, h5, h6 {
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
 }
 

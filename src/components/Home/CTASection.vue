@@ -92,7 +92,7 @@ export default {
   left: -10%;
   width: 400px;
   height: 400px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--white-10);
   border-radius: var(--radius-round);
 }
 

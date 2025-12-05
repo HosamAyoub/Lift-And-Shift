@@ -39,10 +39,8 @@ export default {
 }
 
 .benefit-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
-  border-radius: var(--radius-round);
+  font-size: 2.5rem !important;
+  color: var(--accent-orange) !important;
   display: flex;
   align-items: center;
   justify-content: center;

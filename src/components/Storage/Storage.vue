@@ -4,7 +4,9 @@
       <!-- Hero Section -->
       <div class="mb-5 pb-4">
         <h1 class="h2 text-white mb-3">Storage Solutions</h1>
-        <p class="text-gray mb-0">Secure, flexible storage with free pickup and delivery options.</p>
+        <p class="text-gray mb-0">
+          Secure, flexible storage with free pickup and delivery options.
+        </p>
       </div>
 
       <!-- Storage Pricing Cards -->
@@ -96,7 +98,8 @@
                 <div class="step-content">
                   <h5 class="text-white mb-2">Free Boxes & Supplies</h5>
                   <p class="text-gray small mb-0">
-                    Box size 24x18x18 • 9% larger than others • Reusable boxes with no size restrictions
+                    Box size 24x18x18 • 9% larger than others • Reusable boxes with no size
+                    restrictions
                   </p>
                 </div>
               </div>
@@ -139,9 +142,14 @@
               <!-- Selected Size Display -->
               <div class="mb-4" v-if="selectedSize">
                 <label class="text-white fw-bold d-block mb-2">Selected Plan</label>
-                <div class="selected-plan-display p-3 rounded" style="background: var(--orange-10); border: 1px solid var(--accent-orange);">
+                <div
+                  class="selected-plan-display p-3 rounded"
+                  style="background: var(--orange-10); border: 1px solid var(--accent-orange)"
+                >
                   <div class="d-flex justify-content-between align-items-center">
-                    <span class="text-white fw-bold text-capitalize">{{ selectedSize }} Storage</span>
+                    <span class="text-white fw-bold text-capitalize"
+                      >{{ selectedSize }} Storage</span
+                    >
                     <span class="text-orange fw-bold">${{ getPrice(selectedSize) }}/month</span>
                   </div>
                 </div>
@@ -181,12 +189,7 @@
                   placeholder="Pickup Address"
                   required
                 />
-                <input
-                  v-model="form.pickupDate"
-                  type="date"
-                  class="form-control"
-                  required
-                />
+                <input v-model="form.pickupDate" type="date" class="form-control" required />
               </div>
 
               <!-- Drop-off Details -->
@@ -198,11 +201,7 @@
                   class="form-control mb-2"
                   placeholder="Drop-off Address"
                 />
-                <input
-                  v-model="form.dropoffDate"
-                  type="date"
-                  class="form-control"
-                />
+                <input v-model="form.dropoffDate" type="date" class="form-control" />
               </div>
 
               <!-- Storage Duration & Floor -->
@@ -254,7 +253,9 @@
 
               <!-- Submit Button -->
               <button type="submit" class="btn btn-primary w-100" :disabled="!selectedSize">
-                {{ selectedSize ? 'Get Free Storage Estimate' : 'Please Select a Storage Size First' }}
+                {{
+                  selectedSize ? 'Get Free Storage Estimate' : 'Please Select a Storage Size First'
+                }}
               </button>
             </form>
           </div>
@@ -296,7 +297,7 @@ export default {
         duration: '4',
         floor: 'ground',
         referralSource: '',
-        notes: ''
+        notes: '',
       },
       smallItems: [
         'Art portfolio, poster tube',
@@ -305,7 +306,7 @@ export default {
         'Desk lamp, small fan',
         'Guitar, violin, skateboard',
         'Small rug, trash can',
-        'Laundry basket, duffle bag'
+        'Laundry basket, duffle bag',
       ],
       mediumItems: [
         'Storage boxes (24x18x18)',
@@ -314,7 +315,7 @@ export default {
         'Kitchen chair, stool',
         'Computer monitor, TV',
         'Microwave, small printer',
-        'Bicycle, large suitcase'
+        'Bicycle, large suitcase',
       ],
       largeItems: [
         'Mini fridge, water cooler',
@@ -323,7 +324,7 @@ export default {
         'Coffee table, TV stand',
         'Dresser, armchair',
         'Couch, sofa pieces',
-        'Large mirrors, rugs'
+        'Large mirrors, rugs',
       ],
       features: [
         {
@@ -357,7 +358,7 @@ export default {
       const prices = {
         small: 22,
         medium: 44,
-        large: 66
+        large: 66,
       }
       return prices[size]
     },
@@ -367,8 +368,13 @@ export default {
         return
       }
 
-      if (!this.form.organizationType || !this.form.organizationName || !this.form.pickupAddress || 
-          !this.form.pickupDate || !this.form.referralSource) {
+      if (
+        !this.form.organizationType ||
+        !this.form.organizationName ||
+        !this.form.pickupAddress ||
+        !this.form.pickupDate ||
+        !this.form.referralSource
+      ) {
         alert('Please fill in all required fields.')
         return
       }
@@ -377,14 +383,16 @@ export default {
       const formData = {
         ...this.form,
         selectedSize: this.selectedSize,
-        monthlyPrice: this.getPrice(this.selectedSize)
+        monthlyPrice: this.getPrice(this.selectedSize),
       }
 
       console.log('Storage form submitted:', formData)
-      
+
       // Show success message
-      alert(`Thank you! Your ${this.selectedSize} storage estimate request has been submitted. We will contact you shortly with your free estimate.`)
-      
+      alert(
+        `Thank you! Your ${this.selectedSize} storage estimate request has been submitted. We will contact you shortly with your free estimate.`,
+      )
+
       // Reset form
       this.resetForm()
     },
@@ -400,10 +408,10 @@ export default {
         duration: '4',
         floor: 'ground',
         referralSource: '',
-        notes: ''
+        notes: '',
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -456,7 +464,7 @@ export default {
   width: 32px;
   height: 32px;
   background: var(--accent-orange);
-  color: #000000;
+  color: var(--bg-dark);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -492,7 +500,7 @@ export default {
 .btn-primary {
   background: var(--accent-orange) !important;
   border: 1px solid var(--accent-orange) !important;
-  color: #000000 !important;
+  color: var(--bg-dark) !important;
   padding: 12px 30px;
   font-weight: 600;
   border-radius: var(--radius-sm);
@@ -520,7 +528,7 @@ export default {
     margin-left: 0.5rem;
     padding-left: 1rem;
   }
-  
+
   .step-number {
     width: 28px;
     height: 28px;

@@ -195,30 +195,6 @@ export default {
 </script>
 
 <style scoped>
-/* Photo Upload - Compact Version */
-.upload-area-compact {
-  background: var(--primary-dark) !important;
-  border: 2px dashed var(--orange-20);
-  cursor: pointer;
-  transition: var(--transition-base);
-}
-
-.upload-area-compact:hover {
-  border-color: var(--accent-orange);
-  background: var(--orange-10) !important;
-}
-
-.upload-area-compact.dragging {
-  border-color: var(--accent-orange);
-  background: var(--orange-20) !important;
-  transform: scale(1.02);
-}
-
-.upload-area-compact.invalid {
-  border-color: var(--accent-orange) !important;
-  background: var(--orange-10) !important;
-}
-
 /* Uploaded Files List */
 .uploaded-files-list {
   display: flex;
@@ -239,7 +215,7 @@ export default {
 
 .uploaded-file-item:hover {
   border-color: var(--accent-orange);
-  background: rgba(255, 143, 0, 0.05);
+  background: var(--orange-10);
 }
 
 .file-icon {
@@ -297,30 +273,14 @@ export default {
 }
 
 .btn-edit:hover {
-  background: #2196f3;
-  border-color: #2196f3;
-  color: white;
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: var(--text-light);
 }
 
 .btn-delete:hover {
-  background: #f44336;
-  border-color: #f44336;
-  color: white;
-}
-
-.field-error {
-  color: var(--accent-orange);
-  font-size: 12px;
-  margin-top: 6px;
-  text-align: left;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.field-error::before {
-  content: '⚠';
-  font-size: 12px;
+  background: var(--danger-red);
+  border-color: var(--danger-red);
+  color: var(--text-light);
 }
 </style>

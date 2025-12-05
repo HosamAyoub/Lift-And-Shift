@@ -1,17 +1,13 @@
 <template>
-  <Test></Test>
-  <!-- <Pricing></Pricing> -->
-  <!-- <h1>This is the Moving page</h1> -->
+  <moving></moving>
 </template>
 
 <script>
-import Pricing from '../components/Moving/Pricing.vue'
-import Test from '../components/Moving/Test.vue'
+import Moving from '@/components/Moving/Moving.vue'
 
 export default {
   components: {
-    Pricing,
-    Test,
+    Moving,
   },
 }
 </script>
