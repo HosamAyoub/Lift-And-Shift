@@ -1,68 +1,13 @@
 <template>
   <section class="why-choose-section section section-darker">
     <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="section-title">Why Choose <span class="text-orange">Lift & Shift?</span></h2>
-        <p class="section-subtitle">
-          At Lift & Shift, we understand that moving isn't just transporting boxes . it's launching
-          your next step. That's why our team combines efficiency, care, and a forward-looking
-          attitude to make your transition smooth and stress-free.
-        </p>
-      </div>
-
-      <div class="row g-4">
-        <div class="col-lg-3 col-md-6">
-          <div class="benefit-card">
-            <div class="benefit-number">01</div>
-            <div class="benefit-icon">
-              <i class="fas fa-hand-holding-usd"></i>
-            </div>
-            <h4>Living Wage</h4>
-            <p>
-              We pay our team members a true living wage, ensuring dignity and respect for their
-              hard work.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <div class="benefit-card">
-            <div class="benefit-number">02</div>
-            <div class="benefit-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <h4>Integrity First</h4>
-            <p>
-              We choose integrity over short-term gain, building lasting relationships with our
-              clients.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <div class="benefit-card">
-            <div class="benefit-number">03</div>
-            <div class="benefit-icon">
-              <i class="fas fa-dumbbell"></i>
-            </div>
-            <h4>Build Tomorrow</h4>
-            <p>Every shift builds a stronger body and a better future for our team members.</p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <div class="benefit-card">
-            <div class="benefit-number">04</div>
-            <div class="benefit-icon">
-              <i class="fas fa-comments"></i>
-            </div>
-            <h4>Clear Communication</h4>
-            <p>
-              Professional service with transparent communication throughout the entire process.
-            </p>
-          </div>
-        </div>
-      </div>
+      <BenefitCards
+        title="Why Choose <span class='text-orange'>Lift & Shift?</span>"
+        subtitle="At Lift & Shift, we understand that moving isn't just transporting boxes . it's launching your next step. That's why our team combines efficiency, care, and a forward-looking attitude to make your transition smooth and stress-free."
+        :benefits="coreBenefits"
+        :columnSize="3"
+        sectionClass=""
+      />
 
       <!-- Additional Benefits -->
       <div class="row mt-5 g-4">
@@ -119,8 +64,43 @@
 </template>
 
 <script>
+import BenefitCards from '../Shared/BenefitCards.vue'
+
 export default {
   name: 'WhyChooseSection',
+  components: {
+    BenefitCards,
+  },
+  data() {
+    return {
+      coreBenefits: [
+        {
+          icon: 'fas fa-hand-holding-usd',
+          title: 'Living Wage',
+          description:
+            'We pay our team members a true living wage, ensuring dignity and respect for their hard work.',
+        },
+        {
+          icon: 'fas fa-shield-alt',
+          title: 'Integrity First',
+          description:
+            'We choose integrity over short-term gain, building lasting relationships with our clients.',
+        },
+        {
+          icon: 'fas fa-dumbbell',
+          title: 'Build Tomorrow',
+          description:
+            'Every shift builds a stronger body and a better future for our team members.',
+        },
+        {
+          icon: 'fas fa-comments',
+          title: 'Clear Communication',
+          description:
+            'Professional service with transparent communication throughout the entire process.',
+        },
+      ],
+    }
+  },
 }
 </script>
 
@@ -128,105 +108,6 @@ export default {
 .why-choose-section {
   background-color: var(--bg-dark);
   /* background-color: var(--bg-section); */
-}
-
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-}
-
-.section-subtitle {
-  font-size: 1.1rem;
-  color: var(--text-gray);
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.benefit-card {
-  background: var(--secondary-dark);
-  padding: 40px 30px;
-  border-radius: var(--radius-xl);
-  text-align: center;
-  height: 100%;
-  position: relative;
-  transition: var(--transition-base);
-  border: 2px solid transparent;
-  overflow: hidden;
-}
-
-.benefit-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, transparent 0%, var(--orange-10) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.benefit-card:hover {
-  transform: translateY(-10px);
-  border-color: var(--accent-orange);
-  box-shadow: 0 15px 40px var(--orange-20);
-}
-
-.benefit-card:hover::before {
-  opacity: 1;
-}
-
-.benefit-number {
-  position: absolute;
-  top: var(--gap-xl);
-  right: var(--gap-xl);
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--orange-20);
-  line-height: 1;
-  transition: var(--transition-base);
-}
-
-.benefit-card:hover .benefit-number {
-  color: var(--orange-40);
-  transform: scale(1.1);
-}
-
-.benefit-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
-  border-radius: var(--radius-round);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto var(--gap-xxl);
-  font-size: 2rem;
-  color: var(--text-light);
-  transition: var(--transition-base);
-  position: relative;
-  z-index: 1;
-}
-
-.benefit-card:hover .benefit-icon {
-  transform: scale(1.1) rotate(5deg);
-}
-
-.benefit-card h4 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: var(--gap-lg);
-  color: var(--text-light);
-  position: relative;
-  z-index: 1;
-}
-
-.benefit-card p {
-  color: var(--text-gray);
-  line-height: 1.6;
-  margin: 0;
-  position: relative;
-  z-index: 1;
 }
 
 .feature-box {

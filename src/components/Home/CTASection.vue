@@ -61,7 +61,7 @@ export default {
   name: 'CTASection',
   methods: {
     getQuote() {
-      this.$router.push('/demo')
+      this.$router.push('/demolition')
     },
   },
 }

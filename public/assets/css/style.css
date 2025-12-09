@@ -261,10 +261,18 @@ p {
 
 /* ==================== UTILITY CLASSES ==================== */
 .text-orange {
-  color: var(--accent-orange);
+  color: var(--accent-orange) !important;
 }
 
 .text-white {
+  color: var(--text-light) !important;
+}
+
+.text-gray {
+  color: var(--text-gray) !important;
+}
+
+.text-light {
   color: var(--text-light) !important;
 }
 
@@ -359,14 +367,95 @@ p {
 
 /* ==================== COMPONENT-SPECIFIC STYLES ==================== */
 
-/* Form Controls */
+/* Form Controls - Enhanced Dark Background */
+.form-control,
+.form-select,
+input.form-control,
+select.form-control,
+textarea.form-control,
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='number'],
+input[type='date'],
+input[type='time'],
+select,
+textarea {
+  background-color: var(--primary-dark) !important;
+  border: 1px solid var(--orange-10) !important;
+  color: var(--text-light) !important;
+  transition: var(--transition-base);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+}
+
 .form-control:focus,
+.form-select:focus,
+input.form-control:focus,
+select.form-control:focus,
+textarea.form-control:focus,
 input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--accent-orange) !important;
-  box-shadow: 0 0 0 0.25rem var(--orange-25) !important;
+  box-shadow: 0 0 0 0.2rem var(--orange-20) !important;
+  background-color: var(--primary-dark) !important;
   outline: none;
+}
+
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-gray) !important;
+}
+
+.form-control.is-invalid,
+.form-control.invalid,
+input.invalid {
+  border-color: var(--accent-red) !important;
+  box-shadow: 0 0 0 3px var(--red-10) !important;
+}
+
+.invalid-feedback {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: var(--font-sm);
+  color: var(--accent-red);
+}
+
+/* Form Check Inputs (Checkboxes & Radios) */
+.form-check-input {
+  background-color: var(--primary-dark);
+  border: 1px solid var(--orange-10);
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.form-check-input:checked {
+  background-color: var(--accent-orange);
+  border-color: var(--accent-orange);
+}
+
+.form-check-input:focus {
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 0 0.2rem var(--orange-20);
+}
+
+.form-check-label {
+  color: var(--text-light);
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+/* Form Labels */
+.form-label,
+label {
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: inline-block;
 }
 
 .btn:focus,
@@ -383,18 +472,16 @@ button:focus {
 
 .field-error {
   color: var(--accent-red);
-  font-size: 12px;
-  margin-top: 6px;
+  font-size: var(--font-sm);
+  margin-top: 0.25rem;
   text-align: left;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  display: block;
 }
 
 .field-error::before {
-  content: '⚠';
-  font-size: 12px;
+  content: '⚠ ';
+  font-size: var(--font-sm);
 }
 
 /* Checkboxes */
@@ -481,4 +568,31 @@ button:focus {
 
 .transition-slow {
   transition: var(--transition-slow);
+}
+
+/* ==================== TEXT SIZE UTILITIES ==================== */
+.small,
+small {
+  font-size: var(--font-sm);
+  line-height: 1.5;
+}
+
+.text-xs {
+  font-size: var(--font-xs);
+}
+
+.text-sm {
+  font-size: var(--font-sm);
+}
+
+.text-base {
+  font-size: var(--font-base);
+}
+
+.text-lg {
+  font-size: var(--font-lg);
+}
+
+.text-xl {
+  font-size: var(--font-xl);
 }

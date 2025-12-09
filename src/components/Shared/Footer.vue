@@ -106,7 +106,7 @@
                   <a href="tel:+1 (800) 889-9788">+1 (800) 889-9788</a>
                 </li>
               </ul>
-              <router-link to="/demo" class="btn btn-primary mt-3 w-100">
+              <router-link to="/demolition" class="btn btn-primary mt-3 w-100">
                 <i class="fas fa-calculator"></i> Get Free Estimate
               </router-link>
             </div>

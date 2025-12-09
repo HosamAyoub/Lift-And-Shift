@@ -29,13 +29,30 @@
   />
 
   <!-- Services Overview -->
-  <SharedServiceCards
-    title="Our <span class='text-orange'>services:</span>"
+  <!-- <SharedServiceCards
+    title="Our <span class='text-orange'>Services</span>"
     :services="movingServices"
     :columnSize="4"
     sectionClass="section section-dark"
     @service-click="handleServiceClick"
-  />
+  /> -->
+
+  <!-- Benefits Section -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <BenefitCards
+            title="Our <span class='text-orange'>Services</span>"
+            :benefits="movingServices"
+            :columnSize="4"
+            sectionClass=""
+            :showHeader="true"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="section section-dark py-5 moving-form-section">
     <div class="container-lg">
@@ -165,6 +182,7 @@ import AdditionalInfoTab from './AdditionalInfoTab.vue'
 import FeaturesSection from './FeaturesSection.vue'
 import SharedPageHero from '../Shared/SharedPageHero.vue'
 import SharedServiceCards from '../Shared/SharedServiceCards.vue'
+import BenefitCards from '../Shared/BenefitCards.vue'
 import citiesByStateData from '../../../public/assets/JSON/US_CitiesByState.json'
 import { validators } from '../../utils/validators.js'
 
@@ -177,6 +195,7 @@ export default {
     AdditionalInfoTab,
     SharedPageHero,
     SharedServiceCards,
+    BenefitCards,
     FeaturesSection,
   },
   data() {
@@ -198,6 +217,32 @@ export default {
           icon: 'fas fa-warehouse',
           title: 'STORAGE',
           description: 'Need a month of storage while you find a new lease?',
+        },
+      ],
+      movingBenefits: [
+        {
+          icon: 'fas fa-shield-alt',
+          title: 'Licensed & Insured',
+          description:
+            'Fully licensed and insured for your complete peace of mind and protection throughout the entire moving process.',
+        },
+        {
+          icon: 'fas fa-users',
+          title: 'Expert Team',
+          description:
+            'Professional movers with years of experience who treat your belongings with the utmost care and respect.',
+        },
+        {
+          icon: 'fas fa-clock',
+          title: 'On-Time Service',
+          description:
+            'We value your time. Our team arrives on schedule and completes your move efficiently as planned.',
+        },
+        {
+          icon: 'fas fa-dollar-sign',
+          title: 'Fair Pricing',
+          description:
+            'Transparent, competitive pricing with no hidden fees. Get exactly what you pay for, guaranteed.',
         },
       ],
       currentTab: 1,

@@ -42,7 +42,7 @@ export default {
   name: 'HeroSection',
   methods: {
     getQuote() {
-      this.$router.push('/demo')
+      this.$router.push('/demolition')
     },
     learnMore() {
       // Scroll to about section
