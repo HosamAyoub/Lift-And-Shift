@@ -134,12 +134,31 @@
 <script>
 export default {
   name: 'Footer',
+  mounted() {
+    this.setupScrollAnimation()
+  },
   computed: {
     logo() {
       return '/assets/images/logo.png'
     },
     currentYear() {
       return new Date().getFullYear()
+    },
+  },
+  methods: {
+    setupScrollAnimation() {
+      const footer = this.$el
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              footer.classList.add('footer-visible')
+            }
+          })
+        },
+        { threshold: 0.1 },
+      )
+      observer.observe(footer)
     },
   },
 }
@@ -152,6 +171,16 @@ export default {
   padding-top: 60px;
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer.footer-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .footer::before {
@@ -171,6 +200,32 @@ export default {
 
 .footer-widget {
   height: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-visible .footer-widget {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footer-visible .col-lg-4:nth-child(1) .footer-widget {
+  transition-delay: 0.1s;
+}
+.footer-visible .col-lg-2:nth-child(2) .footer-widget,
+.footer-visible .col-md-6:nth-child(2) .footer-widget {
+  transition-delay: 0.2s;
+}
+.footer-visible .col-lg-2:nth-child(3) .footer-widget,
+.footer-visible .col-md-6:nth-child(3) .footer-widget {
+  transition-delay: 0.3s;
+}
+.footer-visible .col-lg-4:nth-child(4) .footer-widget,
+.footer-visible .col-md-6:nth-child(4) .footer-widget {
+  transition-delay: 0.4s;
 }
 
 .footer-logo {
@@ -222,6 +277,17 @@ export default {
   color: var(--text-light);
   transform: translateY(-3px);
   border-color: var(--accent-orange);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--orange-50);
+  }
+  50% {
+    box-shadow: 0 0 0 10px var(--orange-0);
+  }
 }
 
 .footer-title {
@@ -304,6 +370,16 @@ export default {
 .footer-bottom {
   padding: 30px 0;
   margin-top: 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s,
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+}
+
+.footer-visible .footer-bottom {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .footer-bottom p {

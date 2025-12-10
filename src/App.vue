@@ -18,6 +18,79 @@ export default {
     Navbar,
     Footer,
   },
+  data() {
+    return {
+      scrollObserver: null,
+      mutationObserver: null,
+    }
+  },
+  mounted() {
+    // Global scroll animation observer
+    this.initGlobalScrollAnimations()
+  },
+  watch: {
+    // Re-initialize animations when route changes
+    $route() {
+      this.$nextTick(() => {
+        // Reset all scroll-reveal elements
+        const elements = document.querySelectorAll('.scroll-reveal')
+        elements.forEach((el) => {
+          el.classList.remove('revealed')
+        })
+
+        // Scroll to top on route change
+        window.scrollTo({ top: 0, behavior: 'instant' })
+
+        // Re-observe elements after a short delay
+        setTimeout(() => {
+          this.observeScrollElements()
+        }, 100)
+      })
+    },
+  },
+  beforeUnmount() {
+    // Clean up observers
+    if (this.scrollObserver) {
+      this.scrollObserver.disconnect()
+    }
+    if (this.mutationObserver) {
+      this.mutationObserver.disconnect()
+    }
+  },
+  methods: {
+    initGlobalScrollAnimations() {
+      this.scrollObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed')
+            }
+          })
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+        },
+      )
+
+      // Initial observation
+      this.observeScrollElements()
+
+      // Re-observe when new content is added (for dynamic content)
+      this.mutationObserver = new MutationObserver(() => {
+        this.observeScrollElements()
+      })
+
+      this.mutationObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+      })
+    },
+    observeScrollElements() {
+      const elements = document.querySelectorAll('.scroll-reveal:not(.revealed)')
+      elements.forEach((el) => this.scrollObserver.observe(el))
+    },
+  },
 }
 </script>
 

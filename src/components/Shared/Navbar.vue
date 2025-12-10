@@ -105,6 +105,18 @@ export default {
   padding: var(--gap-lg) 0;
   transition: var(--transition-base);
   box-shadow: 0 2px 10px var(--black-30);
+  animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .navbar-brand {
@@ -115,6 +127,18 @@ export default {
   font-size: 1.5rem;
   color: var(--text-light) !important;
   transition: var(--transition-base);
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .navbar-brand:hover {
@@ -142,21 +166,72 @@ export default {
   font-weight: 600;
   padding: 10px var(--gap-xl) !important;
   border-radius: var(--radius-md);
-  transition: var(--transition-base);
+  transition: color 0.3s ease;
   display: flex;
   align-items: center;
   gap: var(--gap-sm);
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--accent-orange);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item:nth-child(1) .nav-link {
+  animation-delay: 0.3s;
+}
+.nav-item:nth-child(2) .nav-link {
+  animation-delay: 0.4s;
+}
+.nav-item:nth-child(3) .nav-link {
+  animation-delay: 0.5s;
+}
+.nav-item:nth-child(4) .nav-link {
+  animation-delay: 0.6s;
+}
+.nav-item:nth-child(5) .nav-link {
+  animation-delay: 0.7s;
+}
+.nav-item:nth-child(6) .nav-link {
+  animation-delay: 0.8s;
 }
 
 .nav-link:hover {
   color: var(--accent-orange) !important;
-  background-color: var(--orange-10);
-  transform: translateY(-2px);
+}
+
+.nav-link:hover::after {
+  width: 80%;
+}
+
+.nav-link:hover i {
+  transform: scale(1.2);
+  color: var(--accent-orange);
+}
+
+.nav-link i {
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .nav-link.active {
   color: var(--accent-orange) !important;
-  background-color: var(--orange-15);
+}
+
+.nav-link.active::after {
+  width: 80%;
+}
+
+.nav-link.dropdown-toggle::after {
+  display: none;
 }
 
 .dropdown-menu {
@@ -166,6 +241,18 @@ export default {
   padding: var(--gap-md);
   margin-top: var(--gap-md);
   box-shadow: 0 10px 30px var(--black-50);
+  animation: dropdownSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .dropdown-item {
@@ -179,7 +266,7 @@ export default {
 }
 
 .dropdown-item:hover {
-  background-color: var(--orange-10);
+  background-color: transparent;
   color: var(--accent-orange);
   transform: translateX(5px);
 }
@@ -195,6 +282,7 @@ export default {
   align-items: center;
   gap: var(--gap-sm);
   white-space: nowrap;
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.9s both;
 }
 
 .navbar-toggler {

@@ -28,15 +28,6 @@
     @secondary-click="callNow"
   />
 
-  <!-- Storage Benefits -->
-  <BenefitCards
-    title="Why Store With <span class='text-orange'>Us?</span>"
-    :benefits="storageBenefits"
-    :columnSize="3"
-    sectionClass="section section-darker"
-    :showHeader="true"
-  />
-
   <!-- Pricing Tiers Section -->
   <section class="pricing-section my-5">
     <PricingTiers

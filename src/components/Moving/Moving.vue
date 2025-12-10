@@ -54,6 +54,22 @@
     </div>
   </section>
 
+  <section>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 text-center">
+          <h2>Enjoy your new <span class="text-orange">home!</span></h2>
+          <div class="body-size text-gray">
+            Unpack and enjoy your new home. If you need to move again, let us know and we will give
+            you 10% off your next move for being a loyal customer. If something did not go to plan
+            you can contact our Customer Success Team who will promptly deal with any claims or
+            feedback.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section section-dark py-5 moving-form-section">
     <div class="container-lg">
       <!-- Moving Form Card -->
@@ -168,6 +184,8 @@
         </div>
       </div>
 
+      <!-- Texas Cities Section -->
+      <TexasCitiesSection />
       <!-- Features Section -->
       <FeaturesSection />
     </div>
@@ -180,6 +198,7 @@ import PersonalInfoTab from './PersonalInfoTab.vue'
 import LocationDetailsTab from './LocationDetailsTab.vue'
 import AdditionalInfoTab from './AdditionalInfoTab.vue'
 import FeaturesSection from './FeaturesSection.vue'
+import TexasCitiesSection from './TexasCitiesSection.vue'
 import SharedPageHero from '../Shared/SharedPageHero.vue'
 import SharedServiceCards from '../Shared/SharedServiceCards.vue'
 import BenefitCards from '../Shared/BenefitCards.vue'
@@ -197,6 +216,7 @@ export default {
     SharedServiceCards,
     BenefitCards,
     FeaturesSection,
+    TexasCitiesSection,
   },
   data() {
     return {
@@ -678,6 +698,10 @@ export default {
 .lead {
   font-size: var(--font-lg);
   line-height: 1.8;
+}
+
+.body-size {
+  font-size: 1.2rem;
 }
 
 @media (max-width: 768px) {

@@ -12,7 +12,7 @@
           :key="benefit.title"
           :class="['col-lg-' + columnSize, 'col-md-6']"
         >
-          <div class="benefit-card" :style="{ animationDelay: `${index * 0.1}s` }">
+          <div class="benefit-card scroll-reveal" :style="{ transitionDelay: `${index * 0.15}s` }">
             <div class="benefit-number">{{ String(index + 1).padStart(2, '0') }}</div>
             <div class="benefit-icon">
               <i :class="benefit.icon"></i>
@@ -29,6 +29,9 @@
 <script>
 export default {
   name: 'BenefitCards',
+  mounted() {
+    this.setupScrollAnimations()
+  },
   props: {
     title: {
       type: String,
@@ -53,6 +56,23 @@ export default {
     showHeader: {
       type: Boolean,
       default: true,
+    },
+  },
+  methods: {
+    setupScrollAnimations() {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed')
+            }
+          })
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+      )
+
+      const elements = this.$el.querySelectorAll('.scroll-reveal')
+      elements.forEach((el) => observer.observe(el))
     },
   },
 }
@@ -84,22 +104,9 @@ export default {
   text-align: center;
   height: 100%;
   position: relative;
-  transition: var(--transition-base);
+  transition: var(--transition-smooth);
   border: 2px solid transparent;
   overflow: hidden;
-  animation: fadeInUp 0.6s ease forwards;
-  opacity: 0;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .benefit-card::before {
@@ -151,13 +158,14 @@ export default {
   margin: 0 auto var(--gap-xxl);
   font-size: 2rem;
   color: var(--text-light);
-  transition: var(--transition-base);
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   position: relative;
   z-index: 1;
 }
 
 .benefit-card:hover .benefit-icon {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.15) rotate(360deg);
+  animation: float 3s ease-in-out infinite;
 }
 
 .benefit-card h4 {
