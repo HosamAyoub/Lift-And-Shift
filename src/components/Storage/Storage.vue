@@ -40,104 +40,6 @@
     />
   </section>
 
-  <!-- Storage Features with Images -->
-  <section class="section section-darker">
-    <div class="container">
-      <div class="row align-items-center g-5 mb-5">
-        <div class="col-lg-6">
-          <div class="feature-image-wrapper">
-            <div class="feature-image-decoration"></div>
-            <i class="fas fa-thermometer-half feature-image-icon"></i>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="feature-content">
-            <span class="feature-badge">
-              <i class="fas fa-snowflake"></i>
-              Climate Control
-            </span>
-            <h2 class="feature-title">
-              Temperature & Humidity <span class="text-orange">Controlled</span>
-            </h2>
-            <p class="feature-description">
-              Our climate-controlled units maintain optimal temperature and humidity levels
-              year-round, protecting your belongings from extreme weather conditions, moisture
-              damage, and mold growth. Perfect for storing furniture, electronics, documents, and
-              sensitive items.
-            </p>
-            <ul class="feature-list">
-              <li><i class="fas fa-check"></i> Temperature maintained 55°-85°F</li>
-              <li><i class="fas fa-check"></i> Humidity controlled 30%-50%</li>
-              <li><i class="fas fa-check"></i> Protection from extreme weather</li>
-              <li><i class="fas fa-check"></i> Ideal for valuables & electronics</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="row align-items-center g-5 mb-5 flex-lg-row-reverse">
-        <div class="col-lg-6">
-          <div class="feature-image-wrapper">
-            <div class="feature-image-decoration"></div>
-            <i class="fas fa-video feature-image-icon"></i>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="feature-content">
-            <span class="feature-badge">
-              <i class="fas fa-shield-alt"></i>
-              Advanced Security
-            </span>
-            <h2 class="feature-title"><span class="text-orange">24/7</span> Monitored Security</h2>
-            <p class="feature-description">
-              Your belongings are protected by state-of-the-art security systems including 24/7
-              video surveillance, individual unit alarms, electronic gate access, and on-site
-              management. Rest easy knowing your items are safe and secure at all times.
-            </p>
-            <ul class="feature-list">
-              <li><i class="fas fa-check"></i> 24/7 HD video surveillance</li>
-              <li><i class="fas fa-check"></i> Electronic gate access codes</li>
-              <li><i class="fas fa-check"></i> Individual unit alarms</li>
-              <li><i class="fas fa-check"></i> Well-lit facilities</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-          <div class="feature-image-wrapper">
-            <div class="feature-image-decoration"></div>
-            <i class="fas fa-truck-loading feature-image-icon"></i>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="feature-content">
-            <span class="feature-badge">
-              <i class="fas fa-dolly"></i>
-              Easy Access
-            </span>
-            <h2 class="feature-title">
-              Convenient <span class="text-orange">Move-In & Access</span>
-            </h2>
-            <p class="feature-description">
-              Wide driveways, ground-level units, loading docks, and complimentary carts make moving
-              in and accessing your storage unit effortless. Choose from 24/7 access or business
-              hours based on your needs. We provide everything you need for a smooth storage
-              experience.
-            </p>
-            <ul class="feature-list">
-              <li><i class="fas fa-check"></i> Ground-level units available</li>
-              <li><i class="fas fa-check"></i> Wide drive-up access</li>
-              <li><i class="fas fa-check"></i> Free moving carts & dollies</li>
-              <li><i class="fas fa-check"></i> Extended access hours</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Storage Form Section -->
   <section class="section section-dark py-5 storage-form-section">
     <div class="container">
@@ -250,6 +152,104 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Storage Features with Images -->
+  <section class="section section-darker">
+    <div class="container">
+      <div class="row align-items-center g-5 mb-5">
+        <div class="col-lg-6">
+          <div class="feature-image-wrapper">
+            <div class="feature-image-decoration"></div>
+            <i class="fas fa-thermometer-half feature-image-icon"></i>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="feature-content">
+            <span class="feature-badge">
+              <i class="fas fa-snowflake"></i>
+              Climate Control
+            </span>
+            <h2 class="feature-title">
+              Temperature & Humidity <span class="text-orange">Controlled</span>
+            </h2>
+            <p class="feature-description">
+              Our climate-controlled units maintain optimal temperature and humidity levels
+              year-round, protecting your belongings from extreme weather conditions, moisture
+              damage, and mold growth. Perfect for storing furniture, electronics, documents, and
+              sensitive items.
+            </p>
+            <ul class="feature-list">
+              <li><i class="fas fa-check"></i> Temperature maintained 55°-85°F</li>
+              <li><i class="fas fa-check"></i> Humidity controlled 30%-50%</li>
+              <li><i class="fas fa-check"></i> Protection from extreme weather</li>
+              <li><i class="fas fa-check"></i> Ideal for valuables & electronics</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-center g-5 mb-5 flex-lg-row-reverse">
+        <div class="col-lg-6">
+          <div class="feature-image-wrapper">
+            <div class="feature-image-decoration"></div>
+            <i class="fas fa-video feature-image-icon"></i>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="feature-content">
+            <span class="feature-badge">
+              <i class="fas fa-shield-alt"></i>
+              Advanced Security
+            </span>
+            <h2 class="feature-title"><span class="text-orange">24/7</span> Monitored Security</h2>
+            <p class="feature-description">
+              Your belongings are protected by state-of-the-art security systems including 24/7
+              video surveillance, individual unit alarms, electronic gate access, and on-site
+              management. Rest easy knowing your items are safe and secure at all times.
+            </p>
+            <ul class="feature-list">
+              <li><i class="fas fa-check"></i> 24/7 HD video surveillance</li>
+              <li><i class="fas fa-check"></i> Electronic gate access codes</li>
+              <li><i class="fas fa-check"></i> Individual unit alarms</li>
+              <li><i class="fas fa-check"></i> Well-lit facilities</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="feature-image-wrapper">
+            <div class="feature-image-decoration"></div>
+            <i class="fas fa-truck-loading feature-image-icon"></i>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="feature-content">
+            <span class="feature-badge">
+              <i class="fas fa-dolly"></i>
+              Easy Access
+            </span>
+            <h2 class="feature-title">
+              Convenient <span class="text-orange">Move-In & Access</span>
+            </h2>
+            <p class="feature-description">
+              Wide driveways, ground-level units, loading docks, and complimentary carts make moving
+              in and accessing your storage unit effortless. Choose from 24/7 access or business
+              hours based on your needs. We provide everything you need for a smooth storage
+              experience.
+            </p>
+            <ul class="feature-list">
+              <li><i class="fas fa-check"></i> Ground-level units available</li>
+              <li><i class="fas fa-check"></i> Wide drive-up access</li>
+              <li><i class="fas fa-check"></i> Free moving carts & dollies</li>
+              <li><i class="fas fa-check"></i> Extended access hours</li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
     </div>
   </section>
 

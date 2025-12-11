@@ -117,7 +117,7 @@
               </div>
               <div>
                 <h6 class="text-white mb-1">Email</h6>
-                <a href="mailto:info@liftandshift.com" class="text-orange">info@liftandshift.com</a>
+                <a href="mailto:contact@liftshiftservices.com" class="text-orange">contact@liftshiftservices.com</a>
               </div>
             </div>
 
@@ -138,8 +138,7 @@
               <div>
                 <h6 class="text-white mb-1">Hours</h6>
                 <p class="text-gray mb-0">
-                  Mon-Fri: 7am - 8pm<br />
-                  Sat-Sun: 8am - 6pm
+                  Mon - Sat: 8am - 6pm<br />
                 </p>
               </div>
             </div>

@@ -7,6 +7,7 @@ import DemolitionView from '@/views/DemolitionView.vue'
 import MovingView from '@/views/MovingView.vue'
 import HaulingView from '@/views/HaulingView.vue'
 import StorageView from '@/views/StorageView.vue'
+import ThankYouView from '@/views/ThankYouView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +51,11 @@ const router = createRouter({
       path: '/storage',
       name: 'storage',
       component: StorageView,
+    },
+    {
+      path: '/thank-you',
+      name: 'thank-you',
+      component: ThankYouView,
     },
   ],
 })
