@@ -1,8 +1,6 @@
 <template>
   <div class="tab-content-wrapper">
-    <h4 class="text-white mb-2">
-      Personal Information
-    </h4>
+    <h4 class="text-white mb-2">Personal Information</h4>
     <p class="text-gray small mb-4">Let us know who you are and how to reach you.</p>
 
     <div class="row g-3">
@@ -65,7 +63,9 @@
 
       <!-- Email -->
       <div class="col-md-6">
-        <label class="text-white fw-bold d-block mb-2">Email</label>
+        <label class="text-white fw-bold d-block mb-2">
+          Email <span class="text-orange">*</span>
+        </label>
         <input
           type="email"
           :value="formData.email"
@@ -73,7 +73,7 @@
           @blur="handleBlur('email')"
           class="form-control"
           :class="{ invalid: fieldTouched.email && fieldErrors.email }"
-          placeholder="john.doe@example.com (optional)"
+          placeholder="john.doe@example.com"
         />
         <div v-if="fieldTouched.email && fieldErrors.email" class="field-error">
           {{ fieldErrors.email }}
@@ -132,19 +132,12 @@ export default {
       type: Object,
       required: true,
     },
+    services: {
+      type: Array,
+      required: true,
+    },
   },
   emits: ['update:formData', 'update:fieldErrors', 'update:fieldTouched'],
-  data() {
-    return {
-      services: [
-        { value: 'packing', label: 'Packing Only', icon: 'fas fa-box' },
-        { value: 'moving', label: 'Moving Only', icon: 'fas fa-truck' },
-        { value: 'storage', label: 'Storage Only', icon: 'fas fa-warehouse' },
-        { value: 'packing-moving', label: 'Packing & Moving', icon: 'fas fa-boxes' },
-        { value: 'full-service', label: 'Full Service (All)', icon: 'fas fa-star' },
-      ],
-    }
-  },
   methods: {
     updateFormField(field, value) {
       const updated = { ...this.formData, [field]: value }
@@ -217,7 +210,7 @@ export default {
 
 .service-icon {
   font-size: 2rem;
-  color: var(--accent-orange);
+  /* color: var(--accent-orange); */
   transition: var(--transition-base);
 }
 

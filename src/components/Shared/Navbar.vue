@@ -77,8 +77,8 @@
         </ul>
 
         <div class="navbar-actions">
-          <router-link to="/demolition" class="btn btn-primary">
-            <i class="fas fa-calculator"></i> Get Quote
+          <router-link to="/moving" class="btn btn-primary">
+            Get A Quote
           </router-link>
         </div>
       </div>

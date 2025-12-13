@@ -38,9 +38,9 @@
             >
               <h4 class="text-orange mb-3">Our Mission</h4>
               <p class="text-white mb-0">
-                "Lift & Shift turns strength into opportunity for people building their futures. We
+                Lift & Shift turns strength into opportunity for people building their futures. We
                 pay a true living wage and choose integrity over short term gain. Every shift builds
-                a stronger body and a better future."
+                a stronger body and a better future.
               </p>
             </div>
 
@@ -118,7 +118,7 @@
             </div>
 
             <!-- Stats -->
-            <div class="mt-4 pt-4" style="border-top: 1px solid var(--orange-25)">
+            <!-- <div class="mt-4 pt-4" style="border-top: 1px solid var(--orange-25)">
               <div class="row text-center">
                 <div class="col-4">
                   <div class="text-orange h4 mb-1">100+</div>
@@ -133,7 +133,7 @@
                   <div class="text-gray small">Support</div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -145,7 +145,7 @@
           <div class="col-md-4" v-for="service in services" :key="service.title">
             <div class="card-dark text-center h-100 p-4">
               <div class="mb-3">
-                <i :class="service.icon" style="font-size: 2.5rem; color: var(--accent-orange)"></i>
+                <i :class="service.icon" style="font-size: 2.5rem; color: var(--white-100)"></i>
               </div>
               <h5 class="text-white mb-3">{{ service.title }}</h5>
               <p class="text-gray small">{{ service.description }}</p>
@@ -162,8 +162,12 @@
         <h3 class="text-white mb-3">Ready to Get Started?</h3>
         <p class="text-gray mb-4">Contact us today for a free, no-obligation quote</p>
         <div class="d-flex gap-3 justify-content-center">
-          <button class="btn btn-primary">Get a Quote</button>
-          <button class="btn btn-outline-primary">View Services</button>
+          <div>
+            <router-link to="/moving" class="btn btn-primary"> Get A Quote </router-link>
+          </div>
+          <div>
+            <router-link to="/" class="btn btn-outline-primary"> View Services </router-link>
+          </div>
         </div>
       </div>
     </div>

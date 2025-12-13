@@ -61,6 +61,7 @@
                 :formData="formData"
                 :fieldErrors="fieldErrors"
                 :fieldTouched="fieldTouched"
+                :services="storageServices"
                 @update:formData="formData = $event"
                 @update:fieldErrors="fieldErrors = $event"
                 @update:fieldTouched="fieldTouched = $event"
@@ -303,6 +304,11 @@ export default {
   data() {
     return {
       citiesByState: citiesByStateData,
+      storageServices: [
+        { value: 'storage', label: 'Storage Only', icon: 'fas fa-warehouse' },
+        { value: 'packing', label: 'Packing Only', icon: 'fas fa-box' },
+        { value: 'packing-storage', label: 'Packing & Storage', icon: 'fas fa-boxes' },
+      ],
       storageBenefits: [
         {
           icon: 'fas fa-lock',
@@ -403,20 +409,23 @@ export default {
         lastName: '',
         phone: '',
         email: '',
+        pickupStreet: '',
         pickupState: '',
         pickupCity: '',
         pickupZip: '',
         pickupBuilding: '',
         pickupFloor: '',
+        dropoffStreet: '',
         dropoffState: '',
         dropoffCity: '',
         dropoffZip: '',
-        unitSize: '',
         moveInDate: '',
         moveInTime: '',
         storageDuration: '',
+        numberOfBoxes: '',
         climateControl: false,
         notes: '',
+        agreeToPolicy: false,
       },
       uploadedFiles: [],
       fieldErrors: {
@@ -424,30 +433,34 @@ export default {
         lastName: '',
         phone: '',
         email: '',
+        pickupStreet: '',
         pickupState: '',
         pickupCity: '',
         pickupZip: '',
+        dropoffStreet: '',
         dropoffState: '',
         dropoffCity: '',
         dropoffZip: '',
-        unitSize: '',
         moveInDate: '',
         storageDuration: '',
+        agreeToPolicy: '',
       },
       fieldTouched: {
         firstName: false,
         lastName: false,
         phone: false,
         email: false,
+        pickupStreet: false,
         pickupState: false,
         pickupCity: false,
         pickupZip: false,
+        dropoffStreet: false,
         dropoffState: false,
         dropoffCity: false,
         dropoffZip: false,
-        unitSize: false,
         moveInDate: false,
         storageDuration: false,
+        agreeToPolicy: false,
       },
       isSubmitting: false,
       submitMessage: '',
@@ -541,15 +554,11 @@ export default {
       errors.phone = phoneResult.error
       if (!phoneResult.valid) isValid = false
 
-      // Validate email (optional)
-      if (this.formData.email) {
-        touched.email = true
-        const emailResult = validators.email.validate(this.formData.email, false)
-        errors.email = emailResult.error
-        if (!emailResult.valid) isValid = false
-      } else {
-        errors.email = ''
-      }
+      // Validate email (required)
+      touched.email = true
+      const emailResult = validators.email.validate(this.formData.email, true)
+      errors.email = emailResult.error
+      if (!emailResult.valid) isValid = false
 
       this.fieldErrors = errors
       this.fieldTouched = touched
@@ -561,6 +570,14 @@ export default {
       const touched = { ...this.fieldTouched }
 
       // Validate pickup location
+      touched.pickupStreet = true
+      if (!this.formData.pickupStreet) {
+        errors.pickupStreet = 'Pickup street address is required'
+        isValid = false
+      } else {
+        errors.pickupStreet = ''
+      }
+
       touched.pickupState = true
       if (!this.formData.pickupState) {
         errors.pickupState = 'Pickup state is required'
@@ -589,6 +606,14 @@ export default {
       }
 
       // Validate dropoff location
+      touched.dropoffStreet = true
+      if (!this.formData.dropoffStreet) {
+        errors.dropoffStreet = 'Dropoff street address is required'
+        isValid = false
+      } else {
+        errors.dropoffStreet = ''
+      }
+
       touched.dropoffState = true
       if (!this.formData.dropoffState) {
         errors.dropoffState = 'Dropoff state is required'
@@ -629,15 +654,6 @@ export default {
         isValid = false
       } else {
         errors.storageDuration = ''
-      }
-
-      // Validate unit size (required field)
-      touched.unitSize = true
-      if (!this.formData.unitSize) {
-        errors.unitSize = 'Please select a unit size'
-        isValid = false
-      } else {
-        errors.unitSize = ''
       }
 
       // Validate move-in date (required field)
@@ -721,16 +737,6 @@ export default {
         return true
       }
 
-      // Unit size validation
-      if (fieldName === 'unitSize') {
-        if (!this.formData.unitSize) {
-          this.fieldErrors.unitSize = 'Please select a unit size'
-          return false
-        }
-        this.fieldErrors.unitSize = ''
-        return true
-      }
-
       // Move-in date validation
       if (fieldName === 'moveInDate') {
         if (!this.formData.moveInDate) {
@@ -780,6 +786,17 @@ export default {
       return true
     },
     async handleSubmit() {
+      // Validate policy agreement first
+      if (!this.formData.agreeToPolicy) {
+        this.submitSuccess = false
+        this.submitMessage = 'You must agree to the Privacy Policy and Terms of Service'
+        this.fieldTouched.agreeToPolicy = true
+        this.fieldErrors.agreeToPolicy = 'You must agree to the Privacy Policy and Terms of Service'
+        this.currentTab = 3
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        return
+      }
+
       if (!this.validateAllFields()) {
         this.submitSuccess = false
         this.submitMessage = 'Please fix the errors before submitting'
@@ -796,10 +813,20 @@ export default {
         formData.append('first_name', this.formData.firstName)
         formData.append('last_name', this.formData.lastName)
         formData.append('phone', this.formData.phone)
-        formData.append('email', this.formData.email || '')
-        formData.append('unit_size', this.formData.unitSize)
+        formData.append('email', this.formData.email)
+        formData.append('pickup_street', this.formData.pickupStreet)
+        formData.append('pickup_city', this.formData.pickupCity)
+        formData.append('pickup_state', this.formData.pickupState)
+        formData.append('pickup_zip', this.formData.pickupZip)
+        formData.append('pickup_building', this.formData.pickupBuilding || '')
+        formData.append('pickup_floor', this.formData.pickupFloor || '')
+        formData.append('dropoff_street', this.formData.dropoffStreet)
+        formData.append('dropoff_city', this.formData.dropoffCity)
+        formData.append('dropoff_state', this.formData.dropoffState)
+        formData.append('dropoff_zip', this.formData.dropoffZip)
         formData.append('move_in_date', this.formData.moveInDate)
         formData.append('move_in_time', this.formData.moveInTime || 'Not specified')
+        formData.append('number_of_boxes', this.formData.numberOfBoxes || '')
         formData.append('storage_duration_months', this.formData.storageDuration)
         formData.append('climate_control', this.formData.climateControl ? 'Yes (+$25/month)' : 'No')
         formData.append('notes', this.formData.notes)
@@ -830,30 +857,57 @@ export default {
               lastName: '',
               phone: '',
               email: '',
-              unitSize: '',
+              pickupStreet: '',
+              pickupState: '',
+              pickupCity: '',
+              pickupZip: '',
+              pickupBuilding: '',
+              pickupFloor: '',
+              dropoffStreet: '',
+              dropoffState: '',
+              dropoffCity: '',
+              dropoffZip: '',
               moveInDate: '',
               moveInTime: '',
               storageDuration: '',
+              numberOfBoxes: '',
               climateControl: false,
               notes: '',
+              agreeToPolicy: false,
             }
             this.fieldErrors = {
               firstName: '',
               lastName: '',
               phone: '',
               email: '',
-              unitSize: '',
+              pickupStreet: '',
+              pickupState: '',
+              pickupCity: '',
+              pickupZip: '',
+              dropoffStreet: '',
+              dropoffState: '',
+              dropoffCity: '',
+              dropoffZip: '',
               moveInDate: '',
               storageDuration: '',
+              agreeToPolicy: '',
             }
             this.fieldTouched = {
               firstName: false,
               lastName: false,
               phone: false,
               email: false,
-              unitSize: false,
+              pickupStreet: false,
+              pickupState: false,
+              pickupCity: false,
+              pickupZip: false,
+              dropoffStreet: false,
+              dropoffState: false,
+              dropoffCity: false,
+              dropoffZip: false,
               moveInDate: false,
               storageDuration: false,
+              agreeToPolicy: false,
             }
             this.submitMessage = ''
             this.submitSuccess = false
@@ -1064,30 +1118,6 @@ export default {
   color: var(--text-light);
   font-weight: 600;
   margin-bottom: 0.5rem;
-}
-
-.form-control {
-  background-color: var(--primary-dark) !important;
-  border: 1px solid var(--orange-10) !important;
-  color: var(--text-light) !important;
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-md);
-  transition: var(--transition-base);
-}
-
-.form-control:focus {
-  border-color: var(--accent-orange) !important;
-  box-shadow: 0 0 0 0.2rem var(--orange-20) !important;
-  background-color: var(--primary-dark) !important;
-}
-
-.form-control::placeholder {
-  color: var(--text-gray) !important;
-}
-
-.form-check-input {
-  background-color: var(--primary-dark);
-  border-color: var(--orange-10);
 }
 
 .form-check-input:checked {

@@ -168,6 +168,28 @@
             placeholder="Tell us why you'd be a great fit for our team..."
           ></textarea>
         </div>
+
+        <!-- Policy Agreement -->
+        <div class="col-12">
+          <div class="policy-agreement">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                :checked="formData.agreeToPolicy"
+                @change="updateFormField('agreeToPolicy', $event.target.checked)"
+                id="agreeToPolicyCareers"
+              />
+              <label class="form-check-label text-white" for="agreeToPolicyCareers">
+                I agree to the Lift & Shift Privacy Policy and Terms of Service
+                <span class="text-orange">*</span>
+              </label>
+            </div>
+            <div v-if="fieldTouched.agreeToPolicy && fieldErrors.agreeToPolicy" class="field-error">
+              {{ fieldErrors.agreeToPolicy }}
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Submit Button -->
@@ -329,6 +351,15 @@ export default {
         errors.resume = ''
       }
 
+      // Validate policy agreement
+      touched.agreeToPolicy = true
+      if (!this.formData.agreeToPolicy) {
+        errors.agreeToPolicy = 'You must agree to the Privacy Policy and Terms of Service'
+        isValid = false
+      } else {
+        errors.agreeToPolicy = ''
+      }
+
       this.$emit('update:fieldErrors', errors)
       this.$emit('update:fieldTouched', touched)
 
@@ -355,6 +386,29 @@ export default {
 <style scoped>
 .careers-form {
   width: 100%;
+}
+
+.policy-agreement {
+  padding: var(--gap-md) 0;
+}
+
+.policy-agreement .form-check {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.policy-agreement .form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.policy-agreement .form-check-label {
+  cursor: pointer;
+  font-weight: 600;
+  margin: 0;
 }
 
 /* Success/Error message styling */
@@ -398,27 +452,7 @@ export default {
   }
 }
 
-/* Form Inputs */
-.form-control,
-.form-select {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid var(--orange-10);
-  color: white;
-  transition: var(--transition-base);
-}
-
-.form-control:focus,
-.form-select:focus {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--accent-orange);
-  box-shadow: 0 0 0 0.2rem rgba(255, 107, 0, 0.15);
-  outline: none;
-  color: white;
-}
-
-.form-control::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
+/* Form Inputs use global styles */
 
 .form-select option {
   background: var(--secondary-dark);

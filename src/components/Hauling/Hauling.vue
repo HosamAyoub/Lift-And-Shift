@@ -184,7 +184,9 @@
               <!-- Email & ZIP -->
               <div class="row g-3 mb-3">
                 <div class="col-md-6">
-                  <label class="text-white fw-bold d-block mb-2">Email</label>
+                  <label class="text-white fw-bold d-block mb-2">
+                    Email <span class="text-orange">*</span>
+                  </label>
                   <input
                     v-model="formData.email"
                     type="email"
@@ -235,6 +237,29 @@
                 @change="handleFilesChange"
                 class="py-3"
               />
+
+              <!-- Policy Agreement -->
+              <div class="policy-agreement mb-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    v-model="formData.agreeToPolicy"
+                    @change="clearFieldError('agreeToPolicy')"
+                    id="agreeToPolicyHauling"
+                  />
+                  <label class="form-check-label text-white" for="agreeToPolicyHauling">
+                    I agree to the Lift & Shift Privacy Policy and Terms of Service
+                    <span class="text-orange">*</span>
+                  </label>
+                </div>
+                <div
+                  v-if="fieldTouched.agreeToPolicy && fieldErrors.agreeToPolicy"
+                  class="field-error"
+                >
+                  {{ fieldErrors.agreeToPolicy }}
+                </div>
+              </div>
 
               <!-- Action Buttons -->
               <div class="d-flex gap-2">
@@ -333,6 +358,7 @@ export default {
         phone: '',
         email: '',
         zip: '',
+        agreeToPolicy: false,
       },
       fieldErrors: {
         name: '',
@@ -340,6 +366,7 @@ export default {
         email: '',
         zip: '',
         files: '',
+        agreeToPolicy: '',
       },
       fieldTouched: {
         name: false,
@@ -347,6 +374,7 @@ export default {
         email: false,
         zip: false,
         files: false,
+        agreeToPolicy: false,
       },
       pricingTiers: [
         {
@@ -487,7 +515,7 @@ export default {
       }
 
       if (fieldName === 'email') {
-        const result = validators.email.validate(this.formData.email, false) // optional
+        const result = validators.email.validate(this.formData.email, true)
         this.fieldErrors.email = result.error
         return result.valid
       }
@@ -513,6 +541,13 @@ export default {
           isValid = false
         }
       })
+
+      // Validate policy agreement
+      if (!this.formData.agreeToPolicy) {
+        this.fieldTouched.agreeToPolicy = true
+        this.fieldErrors.agreeToPolicy = 'You must agree to the Privacy Policy and Terms of Service'
+        isValid = false
+      }
 
       return isValid
     },
@@ -882,22 +917,27 @@ label {
   border-bottom: 1px solid var(--orange-20);
 }
 
-/* Form Controls */
-.form-control {
-  border: 1px solid var(--orange-10) !important;
-  background-color: var(--primary-dark) !important;
-  color: var(--text-light) !important;
-  transition: var(--transition-base);
+.policy-agreement {
+  padding: var(--gap-md) 0;
 }
 
-.form-control:focus {
-  border-color: var(--accent-orange) !important;
-  box-shadow: 0 0 0 0.2rem var(--orange-20) !important;
-  background-color: var(--primary-dark) !important;
+.policy-agreement .form-check {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
 }
 
-.form-control::placeholder {
-  color: var(--text-gray) !important;
+.policy-agreement .form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.policy-agreement .form-check-label {
+  cursor: pointer;
+  font-weight: 600;
+  margin: 0;
 }
 
 /* Responsive */

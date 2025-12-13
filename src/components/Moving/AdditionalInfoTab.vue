@@ -1,8 +1,6 @@
 <template>
   <div class="tab-content-wrapper">
-    <h4 class="text-white mb-2">
-      Additional Information
-    </h4>
+    <h4 class="text-white mb-2">Additional Information</h4>
     <p class="text-gray small mb-4">
       Help us serve you better by providing more details about your move.
     </p>
@@ -57,9 +55,31 @@
       </select>
     </div>
 
+    <!-- Policy Agreement -->
+    <div class="mb-4">
+      <div class="policy-agreement">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            :checked="formData.agreeToPolicy"
+            @change="updateFormField('agreeToPolicy', $event.target.checked)"
+            id="agreeToPolicyMoving"
+          />
+          <label class="form-check-label text-white" for="agreeToPolicyMoving">
+            I agree to the Lift & Shift Privacy Policy and Terms of Service
+            <span class="text-orange">*</span>
+          </label>
+        </div>
+        <div v-if="fieldTouched.agreeToPolicy && fieldErrors.agreeToPolicy" class="field-error">
+          {{ fieldErrors.agreeToPolicy }}
+        </div>
+      </div>
+    </div>
+
     <!-- Summary Card -->
     <div class="summary-card">
-      <h5 class="text-white mb-3">
+      <h5 class="text-white mb-2">
         <i class="fas fa-file-alt text-orange me-2"></i>Request Summary
       </h5>
       <div class="summary-grid">
@@ -203,6 +223,29 @@ textarea.form-control {
   min-height: 120px;
 }
 
+.policy-agreement {
+  padding: var(--gap-md) 0;
+}
+
+.policy-agreement .form-check {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.policy-agreement .form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.policy-agreement .form-check-label {
+  cursor: pointer;
+  font-weight: 600;
+  margin: 0;
+}
+
 .summary-card {
   background: var(--primary-dark);
   border: 2px solid var(--orange-10);
@@ -218,7 +261,7 @@ textarea.form-control {
 }
 
 .summary-item {
-  padding: var(--gap-sm);
+  padding: var(--gap-ssm);
 }
 
 .summary-label {

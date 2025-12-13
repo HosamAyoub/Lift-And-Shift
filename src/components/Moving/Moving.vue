@@ -92,6 +92,7 @@
                 :formData="formData"
                 :fieldErrors="fieldErrors"
                 :fieldTouched="fieldTouched"
+                :services="movingServices"
                 @update:formData="formData = $event"
                 @update:fieldErrors="fieldErrors = $event"
                 @update:fieldTouched="fieldTouched = $event"
@@ -222,22 +223,11 @@ export default {
     return {
       citiesByState: citiesByStateData,
       movingServices: [
-        {
-          icon: 'fas fa-box-open',
-          title: 'PACKING',
-          description: 'Experience our White Glove Professional Packing or DIY Pack and Save.',
-        },
-        {
-          icon: 'fas fa-truck-moving',
-          title: 'MOVING',
-          description:
-            "Whether it's across town, or across the country, we'll get it safely to your new home.",
-        },
-        {
-          icon: 'fas fa-warehouse',
-          title: 'STORAGE',
-          description: 'Need a month of storage while you find a new lease?',
-        },
+        { value: 'packing', label: 'Packing Only', icon: 'fas fa-box' },
+        { value: 'moving', label: 'Moving Only', icon: 'fas fa-truck' },
+        { value: 'storage', label: 'Storage Only', icon: 'fas fa-warehouse' },
+        { value: 'packing-moving', label: 'Packing & Moving', icon: 'fas fa-boxes' },
+        { value: 'full-service', label: 'Full Service (All)', icon: 'fas fa-star' },
       ],
       movingBenefits: [
         {
@@ -375,15 +365,11 @@ export default {
       errors.phone = phoneResult.error
       if (!phoneResult.valid) isValid = false
 
-      // Validate email (optional)
-      if (this.formData.email) {
-        touched.email = true
-        const emailResult = validators.email.validate(this.formData.email, false)
-        errors.email = emailResult.error
-        if (!emailResult.valid) isValid = false
-      } else {
-        errors.email = ''
-      }
+      // Validate email (required)
+      touched.email = true
+      const emailResult = validators.email.validate(this.formData.email, true)
+      errors.email = emailResult.error
+      if (!emailResult.valid) isValid = false
 
       // Validate service type
       touched.helpType = true
@@ -515,6 +501,17 @@ export default {
       // Validate all tabs
       const tab1Valid = this.validateTab1()
       const tab2Valid = this.validateTab2()
+
+      // Validate policy agreement
+      if (!this.formData.agreeToPolicy) {
+        this.submitSuccess = false
+        this.submitMessage = 'You must agree to the Privacy Policy and Terms of Service'
+        this.fieldTouched.agreeToPolicy = true
+        this.fieldErrors.agreeToPolicy = 'You must agree to the Privacy Policy and Terms of Service'
+        this.currentTab = 3
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        return
+      }
 
       if (!tab1Valid || !tab2Valid) {
         this.submitSuccess = false

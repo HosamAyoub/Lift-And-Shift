@@ -10,6 +10,7 @@
   --accent-blue: #2196f3;
   --danger-red: #f44336;
   --text-light: #ffffff;
+  --text-off-white: #f2f0ef;
   --text-gray: #b0b0b0;
   --bg-dark: #0f0f0f;
   --bg-section: #1f1f1f;
@@ -19,6 +20,8 @@
   --white-15: rgba(255, 255, 255, 0.15);
   --white-20: rgba(255, 255, 255, 0.2);
   --white-25: rgba(255, 255, 255, 0.25);
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-70: rgba(255, 255, 255, 0.7);
   --white-90: rgba(255, 255, 255, 0.9);
 
   --black-20: rgba(0, 0, 0, 0.2);
@@ -44,6 +47,7 @@
   --radius-round: 50%;
 
   /* Spacing */
+  --gap-ssm: 4px;
   --gap-sm: 8px;
   --gap-md: 12px;
   --gap-lg: 15px;
@@ -636,7 +640,7 @@ p {
 
 /* ==================== COMPONENT-SPECIFIC STYLES ==================== */
 
-/* Form Controls - Enhanced Dark Background */
+/* Form Controls - Global Styles */
 .form-control,
 .form-select,
 input.form-control,
@@ -650,9 +654,9 @@ input[type='date'],
 input[type='time'],
 select,
 textarea {
-  background-color: var(--primary-dark) !important;
+  background-color: #f2f0ef !important;
   border: 1px solid var(--orange-10) !important;
-  color: var(--text-light) !important;
+  color: #2d3748 !important;
   transition: var(--transition-base);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
@@ -668,14 +672,15 @@ textarea:focus,
 select:focus {
   border-color: var(--accent-orange) !important;
   box-shadow: 0 0 0 0.2rem var(--orange-20) !important;
-  background-color: var(--primary-dark) !important;
+  background-color: #f2f0ef !important;
   outline: none;
 }
 
 .form-control::placeholder,
 input::placeholder,
-textarea::placeholder {
-  color: var(--text-gray) !important;
+textarea::placeholder,
+select::placeholder {
+  color: #718096 !important;
 }
 
 .form-control.is-invalid,
@@ -693,29 +698,54 @@ input.invalid {
 }
 
 /* Form Check Inputs (Checkboxes & Radios) */
-.form-check-input {
-  background-color: var(--primary-dark);
-  border: 1px solid var(--orange-10);
+.form-check-input,
+input[type='checkbox'],
+input[type='radio'] {
+  background-color: #f2f0ef !important;
+  border: 1px solid var(--orange-10) !important;
   width: 1.25rem;
   height: 1.25rem;
   cursor: pointer;
-  transition: var(--transition-base);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  flex-shrink: 0;
+  margin-top: 0;
 }
 
-.form-check-input:checked {
-  background-color: var(--accent-orange);
-  border-color: var(--accent-orange);
+.form-check-input:checked,
+input[type='checkbox']:checked,
+input[type='radio']:checked {
+  background-color: var(--accent-orange) !important;
+  border-color: var(--accent-orange) !important;
 }
 
-.form-check-input:focus {
-  border-color: var(--accent-orange);
-  box-shadow: 0 0 0 0.2rem var(--orange-20);
+.form-check-input:focus,
+input[type='checkbox']:focus,
+input[type='radio']:focus {
+  border-color: var(--accent-orange) !important;
+  box-shadow: 0 0 0 0.2rem var(--orange-20) !important;
+  background-color: #f2f0ef !important;
+}
+
+.form-check-input:focus:checked,
+input[type='checkbox']:focus:checked,
+input[type='radio']:focus:checked {
+  background-color: var(--accent-orange) !important;
+}
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
 }
 
 .form-check-label {
   color: var(--text-light);
   cursor: pointer;
-  margin-left: 0.5rem;
+  margin: 0;
+  line-height: 1.5;
+  padding-top: 0.1rem;
 }
 
 /* Form Labels */
@@ -725,6 +755,16 @@ label {
   font-weight: 600;
   margin-bottom: 0.5rem;
   display: inline-block;
+}
+
+/* Make all icons in forms white */
+.form-control i,
+.form-label i,
+label i,
+h5 i,
+h4 i,
+.tab-content-wrapper i {
+  color: var(--text-light) !important;
 }
 
 .btn:focus,

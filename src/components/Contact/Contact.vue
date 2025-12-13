@@ -77,6 +77,25 @@
                   ></textarea>
                 </div>
 
+                <!-- Policy Agreement -->
+                <div class="col-12">
+                  <div class="policy-agreement">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        v-model="form.agreeToPolicy"
+                        id="agreeToPolicyContact"
+                        required
+                      />
+                      <label class="form-check-label text-white" for="agreeToPolicyContact">
+                        I agree to the Lift & Shift Privacy Policy and Terms of Service
+                        <span class="text-orange">*</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Submit Button -->
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary btn-lg w-100">
@@ -117,7 +136,9 @@
               </div>
               <div>
                 <h6 class="text-white mb-1">Email</h6>
-                <a href="mailto:contact@liftshiftservices.com" class="text-orange">contact@liftshiftservices.com</a>
+                <a href="mailto:contact@liftshiftservices.com" class="text-orange"
+                  >contact@liftshiftservices.com</a
+                >
               </div>
             </div>
 
@@ -137,9 +158,7 @@
               </div>
               <div>
                 <h6 class="text-white mb-1">Hours</h6>
-                <p class="text-gray mb-0">
-                  Mon - Sat: 8am - 6pm<br />
-                </p>
+                <p class="text-gray mb-0">Mon - Sat: 8am - 6pm<br /></p>
               </div>
             </div>
           </div>
@@ -173,6 +192,7 @@ export default {
         phone: '',
         service: '',
         message: '',
+        agreeToPolicy: false,
       },
       submitMessage: '',
       submitSuccess: false,
@@ -313,26 +333,6 @@ h6 {
   margin-bottom: 0.5rem;
 }
 
-.form-control,
-.form-select {
-  border: 1px solid var(--orange-10) !important;
-  background-color: var(--primary-dark) !important;
-  color: var(--text-light) !important;
-  padding: 0.75rem 1rem;
-  transition: var(--transition-base);
-}
-
-.form-control:focus,
-.form-select:focus {
-  border-color: var(--accent-orange) !important;
-  box-shadow: 0 0 0 0.2rem var(--orange-20) !important;
-  background-color: var(--primary-dark) !important;
-}
-
-.form-control::placeholder {
-  color: var(--text-gray) !important;
-}
-
 textarea.form-control {
   resize: vertical;
 }
@@ -344,6 +344,11 @@ textarea.form-control {
   align-items: flex-start;
 }
 
+.policy-agreement .form-check-label {
+  cursor: pointer;
+  font-weight: 600;
+  margin: 0;
+}
 .contact-icon {
   width: 50px;
   height: 50px;

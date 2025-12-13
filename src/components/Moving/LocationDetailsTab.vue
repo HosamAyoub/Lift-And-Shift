@@ -1,8 +1,6 @@
 <template>
   <div class="tab-content-wrapper">
-    <h4 class="text-white mb-2">
-      Location Details
-    </h4>
+    <h4 class="text-white mb-2">Location Details</h4>
     <p class="text-gray small mb-4">Tell us where we're picking up and dropping off your items.</p>
 
     <div class="row g-4">
@@ -12,6 +10,53 @@
           <i class="fas fa-arrow-up text-orange me-2"></i>Pickup Location
         </h5>
         <div class="row g-3">
+          <div class="col-md-8">
+            <label class="text-white fw-bold d-block mb-2">
+              Street Address <span class="text-orange">*</span>
+            </label>
+            <input
+              type="text"
+              :value="formData.pickupStreet"
+              @input="updateFormField('pickupStreet', $event.target.value)"
+              @blur="handleBlur('pickupStreet')"
+              class="form-control"
+              :class="{ invalid: fieldTouched.pickupStreet && fieldErrors.pickupStreet }"
+              placeholder="Enter street address"
+            />
+            <div v-if="fieldTouched.pickupStreet && fieldErrors.pickupStreet" class="field-error">
+              {{ fieldErrors.pickupStreet }}
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="text-white fw-bold d-block mb-2">Unit</label>
+            <input
+              type="text"
+              :value="formData.pickupFloor"
+              @input="updateFormField('pickupFloor', $event.target.value)"
+              class="form-control"
+              placeholder="Unit # (optional)"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label class="text-white fw-bold d-block mb-2">
+              City <span class="text-orange">*</span>
+            </label>
+            <input
+              type="text"
+              :value="formData.pickupCity"
+              @input="updateFormField('pickupCity', $event.target.value)"
+              @blur="handleBlur('pickupCity')"
+              class="form-control"
+              :class="{ invalid: fieldTouched.pickupCity && fieldErrors.pickupCity }"
+              placeholder="Enter city"
+            />
+            <div v-if="fieldTouched.pickupCity && fieldErrors.pickupCity" class="field-error">
+              {{ fieldErrors.pickupCity }}
+            </div>
+          </div>
+
           <div class="col-md-5">
             <label class="text-white fw-bold d-block mb-2">
               State <span class="text-orange">*</span>
@@ -37,30 +82,6 @@
             </div>
           </div>
 
-          <div class="col-md-4">
-            <label class="text-white fw-bold d-block mb-2">
-              City <span class="text-orange">*</span>
-            </label>
-            <select
-              :value="formData.pickupCity"
-              @change="updateFormField('pickupCity', $event.target.value)"
-              @blur="handleBlur('pickupCity')"
-              class="form-control form-select"
-              :class="{ invalid: fieldTouched.pickupCity && fieldErrors.pickupCity }"
-              :disabled="!formData.pickupState || !pickupCities.length"
-            >
-              <option value="">
-                {{ formData.pickupState ? 'Select City' : 'Select state first' }}
-              </option>
-              <option v-for="city in pickupCities" :key="city" :value="city">
-                {{ city }}
-              </option>
-            </select>
-            <div v-if="fieldTouched.pickupCity && fieldErrors.pickupCity" class="field-error">
-              {{ fieldErrors.pickupCity }}
-            </div>
-          </div>
-
           <div class="col-md-3">
             <label class="text-white fw-bold d-block mb-2">
               ZIP Code <span class="text-orange">*</span>
@@ -80,7 +101,7 @@
             </div>
           </div>
 
-          <div class="col-md-8">
+          <div class="col-md-12">
             <label class="text-white fw-bold d-block mb-2">Organization / Building</label>
             <input
               type="text"
@@ -88,17 +109,6 @@
               @input="updateFormField('pickupBuilding', $event.target.value)"
               class="form-control"
               placeholder="Building name or organization (optional)"
-            />
-          </div>
-
-          <div class="col-md-4">
-            <label class="text-white fw-bold d-block mb-2">Floor/Unit</label>
-            <input
-              type="text"
-              :value="formData.pickupFloor"
-              @input="updateFormField('pickupFloor', $event.target.value)"
-              class="form-control"
-              placeholder="Floor # (optional)"
             />
           </div>
         </div>
@@ -110,6 +120,53 @@
           <i class="fas fa-arrow-down text-orange me-2"></i>Dropoff Location
         </h5>
         <div class="row g-3">
+          <div class="col-md-8">
+            <label class="text-white fw-bold d-block mb-2">
+              Street Address <span class="text-orange">*</span>
+            </label>
+            <input
+              type="text"
+              :value="formData.dropoffStreet"
+              @input="updateFormField('dropoffStreet', $event.target.value)"
+              @blur="handleBlur('dropoffStreet')"
+              class="form-control"
+              :class="{ invalid: fieldTouched.dropoffStreet && fieldErrors.dropoffStreet }"
+              placeholder="Enter street address"
+            />
+            <div v-if="fieldTouched.dropoffStreet && fieldErrors.dropoffStreet" class="field-error">
+              {{ fieldErrors.dropoffStreet }}
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="text-white fw-bold d-block mb-2">Unit</label>
+            <input
+              type="text"
+              :value="formData.dropoffFloor"
+              @input="updateFormField('dropoffFloor', $event.target.value)"
+              class="form-control"
+              placeholder="Unit # (optional)"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label class="text-white fw-bold d-block mb-2">
+              City <span class="text-orange">*</span>
+            </label>
+            <input
+              type="text"
+              :value="formData.dropoffCity"
+              @input="updateFormField('dropoffCity', $event.target.value)"
+              @blur="handleBlur('dropoffCity')"
+              class="form-control"
+              :class="{ invalid: fieldTouched.dropoffCity && fieldErrors.dropoffCity }"
+              placeholder="Enter city"
+            />
+            <div v-if="fieldTouched.dropoffCity && fieldErrors.dropoffCity" class="field-error">
+              {{ fieldErrors.dropoffCity }}
+            </div>
+          </div>
+
           <div class="col-md-5">
             <label class="text-white fw-bold d-block mb-2">
               State <span class="text-orange">*</span>
@@ -135,34 +192,6 @@
             </div>
           </div>
 
-          <div class="col-md-4">
-            <label class="text-white fw-bold d-block mb-2">
-              City <span class="text-orange">*</span>
-            </label>
-            <select
-              :value="formData.dropoffCity"
-              @change="updateFormField('dropoffCity', $event.target.value)"
-              @blur="handleBlur('dropoffCity')"
-              class="form-control form-select"
-              :class="{ invalid: fieldTouched.dropoffCity && fieldErrors.dropoffCity }"
-              :disabled="!formData.dropoffState || !dropoffCities.length"
-            >
-              <option value="">
-                {{ formData.dropoffState ? 'Select City' : 'Select state first' }}
-              </option>
-              <option
-                v-for="(city, index) in dropoffCities"
-                :key="'dropoff-city-' + index"
-                :value="city"
-              >
-                {{ city }}
-              </option>
-            </select>
-            <div v-if="fieldTouched.dropoffCity && fieldErrors.dropoffCity" class="field-error">
-              {{ fieldErrors.dropoffCity }}
-            </div>
-          </div>
-
           <div class="col-md-3">
             <label class="text-white fw-bold d-block mb-2">
               ZIP Code <span class="text-orange">*</span>
@@ -181,7 +210,8 @@
               {{ fieldErrors.dropoffZip }}
             </div>
           </div>
-          <div class="col-md-6">
+
+          <div class="col-md-12">
             <label class="text-white fw-bold d-block mb-2">Building/Complex</label>
             <input
               type="text"
@@ -189,16 +219,6 @@
               @input="updateFormField('dropoffBuilding', $event.target.value)"
               class="form-control"
               placeholder="Enter building name (optional)"
-            />
-          </div>
-          <div class="col-md-6">
-            <label class="text-white fw-bold d-block mb-2">Floor/Unit</label>
-            <input
-              type="text"
-              :value="formData.dropoffFloor"
-              @input="updateFormField('dropoffFloor', $event.target.value)"
-              class="form-control"
-              placeholder="Enter floor/unit (optional)"
             />
           </div>
         </div>
@@ -351,7 +371,8 @@ export default {
 }
 
 .time-card {
-  background: var(--primary-dark);
+  background: #f2f0ef;
+  color: #2d3748;
   border: 2px solid var(--orange-10);
   border-radius: var(--radius-lg);
   padding: var(--gap-md);
@@ -363,23 +384,25 @@ export default {
 }
 
 .time-option:hover .time-card {
-  background: var(--orange-10);
+  /* background: var(--orange-10); */
+  color: var(--accent-orange);
   border-color: var(--accent-orange);
 }
 
 .time-option.selected .time-card {
-  background: var(--orange-20);
+  /* background: var(--orange-20); */
+  color: var(--accent-orange);
   border-color: var(--accent-orange);
   box-shadow: 0 0 20px var(--orange-20);
 }
 
 .time-icon {
   font-size: var(--font-2xl);
-  color: var(--accent-orange);
+  color: #2d3748;
 }
 
 .time-label {
-  color: var(--text-light);
+  color: #2d3748;
   font-weight: 500;
   font-size: var(--font-sm);
 }

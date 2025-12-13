@@ -229,7 +229,9 @@
               <!-- Email & ZIP -->
               <div class="row g-3 mb-3">
                 <div class="col-md-6">
-                  <label class="text-white fw-bold d-block mb-2">Email</label>
+                  <label class="text-white fw-bold d-block mb-2">
+                    Email <span class="text-orange">*</span>
+                  </label>
                   <input
                     type="email"
                     v-model="formData.email"
@@ -237,7 +239,7 @@
                     @blur="validateField('email')"
                     class="form-control"
                     :class="{ invalid: fieldTouched.email && fieldErrors.email }"
-                    placeholder="your@email.com (optional)"
+                    placeholder="your@email.com"
                   />
                   <div v-if="fieldTouched.email && fieldErrors.email" class="field-error">
                     {{ fieldErrors.email }}
@@ -278,6 +280,29 @@
                 @change="handleFilesChange"
                 class="mb-4"
               />
+
+              <!-- Policy Agreement -->
+              <div class="policy-agreement mb-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    v-model="formData.agreeToPolicy"
+                    @change="clearFieldError('agreeToPolicy')"
+                    id="agreeToPolicyDemolition"
+                  />
+                  <label class="form-check-label text-white" for="agreeToPolicyDemolition">
+                    I agree to the Lift & Shift Privacy Policy and Terms of Service
+                    <span class="text-orange">*</span>
+                  </label>
+                </div>
+                <div
+                  v-if="fieldTouched.agreeToPolicy && fieldErrors.agreeToPolicy"
+                  class="field-error"
+                >
+                  {{ fieldErrors.agreeToPolicy }}
+                </div>
+              </div>
 
               <!-- Submit Button -->
               <button type="submit" class="btn btn-primary w-100" :disabled="isSubmitting">
@@ -363,6 +388,7 @@ export default {
         phone: '',
         email: '',
         zip: '',
+        agreeToPolicy: false,
       },
       fieldErrors: {
         name: '',
@@ -370,6 +396,7 @@ export default {
         email: '',
         zip: '',
         files: '',
+        agreeToPolicy: '',
       },
       fieldTouched: {
         name: false,
@@ -377,6 +404,7 @@ export default {
         email: false,
         zip: false,
         files: false,
+        agreeToPolicy: false,
       },
       config: {
         bathroom: {
@@ -649,7 +677,7 @@ export default {
       }
 
       if (fieldName === 'email') {
-        const result = validators.email.validate(this.formData.email, false)
+        const result = validators.email.validate(this.formData.email, true)
         this.fieldErrors.email = result.error
         return result.valid
       }
@@ -674,6 +702,13 @@ export default {
           isValid = false
         }
       })
+
+      // Validate policy agreement
+      if (!this.formData.agreeToPolicy) {
+        this.fieldTouched.agreeToPolicy = true
+        this.fieldErrors.agreeToPolicy = 'You must agree to the Privacy Policy and Terms of Service'
+        isValid = false
+      }
 
       return isValid
     },
@@ -843,24 +878,30 @@ export default {
   box-shadow: 0 0 15px var(--orange-20);
 }
 
+.policy-agreement {
+  padding: var(--gap-md) 0;
+}
+
+.policy-agreement .form-check {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.policy-agreement .form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.policy-agreement .form-check-label {
+  cursor: pointer;
+  font-weight: 600;
+  margin: 0;
+}
+
 /* Component-specific styles use global variables from style.css */
-
-.form-control {
-  border: 1px solid var(--orange-10) !important;
-  background-color: var(--primary-dark) !important;
-  color: var(--text-light) !important;
-  transition: var(--transition-base);
-}
-
-.form-control:focus {
-  border-color: var(--accent-orange) !important;
-  box-shadow: 0 0 0 0.2rem var(--orange-20) !important;
-  background-color: var(--primary-dark) !important;
-}
-
-.form-control::placeholder {
-  color: var(--text-gray) !important;
-}
 
 .project-details {
   background: var(--primary-dark);

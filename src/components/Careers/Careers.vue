@@ -92,10 +92,10 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-10">
-          <BenefitCards
+          <FeatureCards
             title="Why Work <span class='text-orange'>With Us?</span>"
             subtitle="Join a company that values its employees and invests in their success"
-            :benefits="benefits"
+            :features="benefits"
             :columnSize="4"
             sectionClass=""
             :showHeader="true"
@@ -184,13 +184,13 @@
 </template>
 
 <script>
-import BenefitCards from '../Shared/BenefitCards.vue'
+import FeatureCards from '../Shared/FeatureCards.vue'
 import Form from './Form.vue'
 
 export default {
   name: 'Careers',
   components: {
-    BenefitCards,
+    FeatureCards,
     Form,
   },
   data() {

@@ -24,9 +24,9 @@
         @change="handleFileSelect"
         style="display: none"
       />
-      <div class="text-center py-5">
+      <div class="upload-file-are text-center py-5 rounded-1">
         <i class="fas fa-cloud-upload text-orange" style="font-size: 2rem"></i>
-        <p class="text-gray mt-2 mb-0">{{ placeholder }}</p>
+        <p class="mt-2 mb-0" style="color: var(--secondary-dark) !important">{{ placeholder }}</p>
       </div>
     </div>
 
@@ -39,8 +39,8 @@
           <i class="fas fa-file-pdf" v-else></i>
         </div>
         <div class="file-info">
-          <div class="file-name">{{ file.name }}</div>
-          <div class="file-size">{{ (file.size / 1024).toFixed(2) }} KB</div>
+          <div class="file-name text-dark">{{ file.name }}</div>
+          <div class="file-size text-gray">{{ (file.size / 1024).toFixed(2) }} KB</div>
         </div>
         <div class="file-actions">
           <button
@@ -207,15 +207,14 @@ export default {
   align-items: center;
   gap: 12px;
   padding: 12px 16px;
-  background: var(--secondary-dark);
+  background: var(--text-off-white);
   border: 1px solid var(--orange-10);
   border-radius: 8px;
   transition: var(--transition-base);
 }
 
-.uploaded-file-item:hover {
-  border-color: var(--accent-orange);
-  background: var(--orange-10);
+.upload-file-are {
+  background-color: var(--text-off-white);
 }
 
 .file-icon {
@@ -258,29 +257,19 @@ export default {
   justify-content: center;
   border: 1px solid var(--orange-20);
   border-radius: 6px;
-  background: var(--primary-dark);
+  background: transparent;
+  background: var(--white-70);
   color: var(--accent-orange);
   cursor: pointer;
   transition: var(--transition-base);
   font-size: 14px;
 }
 
-.btn-file-action:hover {
-  background: var(--accent-orange);
-  color: var(--primary-dark);
-  border-color: var(--accent-orange);
-  transform: scale(1.05);
-}
-
 .btn-edit:hover {
-  background: var(--accent-blue);
-  border-color: var(--accent-blue);
-  color: var(--text-light);
+  border-color: var(--accent-orange);
 }
 
 .btn-delete:hover {
-  background: var(--danger-red);
-  border-color: var(--danger-red);
-  color: var(--text-light);
+  border-color: var(--accent-orange);
 }
 </style>
