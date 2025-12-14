@@ -80,8 +80,9 @@ export default {
 
 <style scoped>
 .benefit-cards-section {
-  background-color: var(--bg-dark);
+  background-color: transparent;
   padding: var(--gap-4xl) 0;
+  padding: 2rem 0rem;
 }
 
 .section-title {

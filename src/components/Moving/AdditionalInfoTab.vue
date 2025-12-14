@@ -88,23 +88,31 @@
           <div class="summary-value">{{ fullName || 'Not provided' }}</div>
         </div>
         <div class="summary-item">
+          <div class="summary-label">Phone</div>
+          <div class="summary-value">{{ formData.phone || 'Not provided' }}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Email</div>
+          <div class="summary-value">{{ formData.email || 'Not provided' }}</div>
+        </div>
+        <div class="summary-item">
           <div class="summary-label">Service Type</div>
           <div class="summary-value">{{ serviceLabel || 'Not selected' }}</div>
         </div>
         <div class="summary-item">
-          <div class="summary-label">From</div>
+          <div class="summary-label">Pickup Location</div>
           <div class="summary-value">{{ pickupAddress || 'Not provided' }}</div>
         </div>
         <div class="summary-item">
-          <div class="summary-label">To</div>
+          <div class="summary-label">Delivery Location</div>
           <div class="summary-value">{{ dropoffAddress || 'Not provided' }}</div>
         </div>
         <div class="summary-item">
-          <div class="summary-label">Date</div>
+          <div class="summary-label">Pickup Date</div>
           <div class="summary-value">{{ formattedDate || 'Not selected' }}</div>
         </div>
         <div class="summary-item">
-          <div class="summary-label">Time</div>
+          <div class="summary-label">Pickup Time</div>
           <div class="summary-value">{{ timeLabel || 'Not selected' }}</div>
         </div>
       </div>
@@ -147,7 +155,6 @@ export default {
         'Friend or Family',
         'Previous Customer',
         'Advertisement',
-        'Real Estate Agent',
         'Other',
       ],
     }
@@ -195,8 +202,9 @@ export default {
     },
     timeLabel() {
       const timeMap = {
-        morning: 'Morning',
-        afternoon: 'Afternoon',
+        morning: 'Morning (8AM-12PM)',
+        midday: 'Mid-day (12PM-3PM)',
+        afternoon: 'Afternoon (3PM-6PM)',
       }
       return timeMap[this.formData.pickupTime] || ''
     },

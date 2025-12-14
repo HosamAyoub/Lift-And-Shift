@@ -4,11 +4,10 @@
       <div class="row justify-content-center mb-5">
         <div class="col-lg-10 text-center">
           <h2 class="section-title mb-3 scroll-reveal" ref="title">
-            <span class="text-orange">Dallas</span> moving services for all of its neighborhoods.
+            <span class="text-orange">Dallas</span> Moving Services for Every Neighborhood
           </h2>
           <p class="section-subtitle text-gray scroll-reveal" ref="subtitle">
-            Lift & Shift Moving & Storage is a local expert in moving you to and from all Dallas
-            neighborhoods, including
+            Lift & Shift proudly serves Dallas and surrounding DFW communities, including:
           </p>
         </div>
       </div>
@@ -41,54 +40,56 @@ export default {
   data() {
     return {
       texasCities: [
-        'Addison',
-        'Arlington',
-        'Balch Springs',
-        'Bear Creek Ranch',
-        'Carrollton',
-        'Cedar Hill',
-        'Cockrell Hill',
-        'Combine',
-        'Coppell',
-        'DeSoto',
-        'Duncanville',
-        'Farmers Branch',
-        'Ferris',
-        'Flower Mound',
+        'Dallas',
         'Fort Worth',
-        'Garland',
-        'Glenn Heights',
-        'Grand Prairie',
-        'Grapevine',
-        'Hebron',
-        'Highland Park',
-        'Hutchins',
-        'Irving',
-        'Lake Wylie',
-        'Lancaster',
-        'Lewisville',
-        'Lucas',
-        'Mansfield',
-        'Mesquite',
-        'Midlothian',
-        'Murphy',
-        'Oak Leaf',
-        'Ovilla',
-        'Parker',
-        'Pecan Hill',
         'Plano',
-        'Red Oak',
+        'Frisco',
+        'McKinney',
+        'Allen',
+        'Irving',
+        'Garland',
+        'Arlington',
+        'Grand Prairie',
+        'Mesquite',
+        'Carrollton',
         'Richardson',
-        'Rowlett',
-        'Sachse',
-        'Seagoville',
-        'Seis Lagos',
+        'Lewisville',
+        'Flower Mound',
+        'Coppell',
+        'Grapevine',
         'Southlake',
-        'St. Paul',
-        'Sunnyvale',
+        'The Colony',
+        'Prosper',
+        'Celina',
+        'Wylie',
+        'Rowlett',
+        'Forney',
+        'Princeton',
+        'Little Elm',
+        'Anna',
+        'Melissa',
+        'Farmers Branch',
+        'Addison',
+        'Highland Park',
         'University Park',
+        'DeSoto',
+        'Cedar Hill',
+        'Duncanville',
+        'Lancaster',
         'Waxahachie',
-        'Wilmer',
+        'Mansfield',
+        'Midlothian',
+        'Red Oak',
+        'North Richland Hills',
+        'Sunnyvale',
+        'Sachse',
+        'Murphy',
+        'Seagoville',
+        'Oak Cliff',
+        'Bishop Arts District',
+        'Uptown Dallas',
+        'Lake Highlands',
+        'Las Colinas',
       ],
     }
   },
@@ -136,7 +137,7 @@ export default {
 
 .cities-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem;
   padding: 2rem 0;
 }

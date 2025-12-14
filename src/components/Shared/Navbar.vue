@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container">
+    <div class="container-fluid px-4">
       <router-link class="navbar-brand" to="/">
         <img :src="logo" alt="Lift & Shift" class="navbar-logo" />
         <!-- <span class="brand-text">Lift & Shift</span> -->
@@ -27,7 +27,7 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/moving" active-class="active">
-              <i class="fas fa-truck-moving"></i> Moving
+              <i class="fas fa-truck-fast"></i> Moving
             </router-link>
           </li>
           <li class="nav-item">
@@ -54,12 +54,13 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
+              <i class="fas fa-chevron-down"></i>
               About
             </a>
             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
               <li>
-                <router-link class="dropdown-item" to="/aboutUs">
-                  <i class="fas fa-building"></i> About Us
+                <router-link class="dropdown-item" to="/contact">
+                  <i class="fas fa-envelope"></i> Contact
                 </router-link>
               </li>
               <li>
@@ -68,18 +69,28 @@
                 </router-link>
               </li>
               <li>
-                <router-link class="dropdown-item" to="/contact">
-                  <i class="fas fa-envelope"></i> Contact
+                <a
+                class="dropdown-item"
+                href="https://square.link/u/zjA6nWu9"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                <i class="fas fa-credit-card"></i> Payment
+              </a>
+              <li>
+                <router-link class="dropdown-item" to="/aboutUs">
+                  <i class="fas fa-building"></i> About Us
                 </router-link>
+              </li>
               </li>
             </ul>
           </li>
         </ul>
 
         <div class="navbar-actions">
-          <router-link to="/moving" class="btn btn-primary">
-            Get A Quote
-          </router-link>
+          <a class="btn btn-primary btn me-3" href="tel:+18008899788"
+            ><i class="fas fa-phone"></i> +1 (800) 889-9788</a
+          >
         </div>
       </div>
     </div>
@@ -219,7 +230,9 @@ export default {
 }
 
 .nav-link i {
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
 }
 
 .nav-link.active {
@@ -236,7 +249,7 @@ export default {
 
 .dropdown-menu {
   background-color: var(--secondary-dark);
-  border: 2px solid var(--accent-orange);
+  /* border: 2px solid var(--accent-orange); */
   border-radius: var(--radius-lg);
   padding: var(--gap-md);
   margin-top: var(--gap-md);

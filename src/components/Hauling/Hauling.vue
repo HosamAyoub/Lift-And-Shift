@@ -1,13 +1,13 @@
 <template>
-  <section class="section section-dark py-5">
+  <section id="form" class="section section-dark py-5">
     <div class="container-lg">
       <!-- Hero Section -->
       <PageHeader>
         <template #title>Hauling</template>
         <template #subtitle
-          >Fast, affordable, and eco-friendly junk removal services. From single items to full
-          truckloads—get your instant quote in seconds.</template
-        >
+          >Fast, reliable hauling services with transparent pricing. From single items to full
+          loads, receive an instant estimate in seconds by sliding on the truck.
+        </template>
       </PageHeader>
 
       <!-- Main Instant Estimate Section -->
@@ -300,7 +300,7 @@
       <!-- Pricing Tiers Section -->
       <div class="mt-5 pt-5" id="pricingTiers">
         <h2 class="text-white mb-4 text-center">Our Pricing Tiers</h2>
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
           <div class="col-md-6 col-lg-4" v-for="(tier, index) in pricingTiers" :key="tier.id">
             <PricingCard
               :title="tier.name"
@@ -316,7 +316,7 @@
 
       <!-- Why Choose Us Section -->
       <div class="mt-5 pt-5" style="border-top: 1px solid var(--orange-10)">
-        <h2 class="text-white mb-4">Why Choose <span class="text-orange">Us</span></h2>
+        <h2 class="text-white mb-4 text-center">Why Choose <span class="text-orange">Us</span></h2>
         <div class="row g-4">
           <div class="col-md-6 col-lg-3" v-for="benefit in benefits" :key="benefit.title">
             <BenefitCard
@@ -383,10 +383,10 @@ export default {
           description: 'Perfect for small cleanups—a few items or bags',
           price: 125,
           features: [
-            'Pickup truck bed capacity',
-            'Ideal for 1-3 small items',
-            'Same-day service available',
-            'Eco-friendly disposal included',
+            'Suitable for light loads that fit within a standard pickup bed',
+            'Ideal for small furniture, appliances, and box items',
+            'Completed efficiently in a single visit',
+            'Items handled and disposed of per local requirements',
           ],
         },
         {
@@ -395,10 +395,11 @@ export default {
           description: 'Great for minor cleanouts and small furniture',
           price: 200,
           features: [
-            '1/4 of a full truck load',
-            'Perfect for appliance removal',
-            'Fast scheduling',
-            'Responsible recycling & donation',
+            'Suitable for modest cleanups requiring slightly more space',
+            'Provides capacity beyond a pickup bed',
+            'Ideal for chairs, small furniture groupings, or mixed items',
+            'Cost-efficient use of truck space',
+            'Prevents paying for unused capacity',
           ],
         },
         {
@@ -407,10 +408,11 @@ export default {
           description: 'Ideal for room cleanouts and medium projects',
           price: 400,
           features: [
-            '1/2 of a full truck load',
-            'Garage or basement cleanouts',
-            'Furniture & mattress removal',
-            'Sorting and recycling included',
+            'Designed for medium-sized removals or partial cleanouts',
+            'Balanced option without requiring a full load',
+            'Handles multiple furniture pieces and loose items',
+            'Ensures safe, efficient handling',
+            'Includes sorting and recycling',
           ],
         },
         {
@@ -419,10 +421,10 @@ export default {
           description: 'Best for multi-room cleanouts and large items',
           price: 600,
           features: [
-            '3/4 of a full truck load',
-            'Multiple large furniture pieces',
-            'Professional 2-person crew',
-            'Same-day pickup available',
+            'Built for larger cleanouts with higher volume needs',
+            'Ideal for furniture, appliances, and bulk items',
+            'Reduces extra trips and delays',
+            'Offers large capacity at a lower cost than a full load',
           ],
         },
         {
@@ -431,10 +433,11 @@ export default {
           description: 'Complete estate or property cleanouts',
           price: 800,
           features: [
-            'Entire truck bed capacity',
-            'Full home or office cleanouts',
-            'Multiple trips if needed',
-            'Premium white-glove service',
+            'Best for complete cleanouts or large-scale hauling',
+            'Maximum capacity for homes, and commercial spaces',
+            'Designed for large, complex jobs',
+            'Dedicated crew for efficient, complete removal',
+            'Enables full removal in a single coordinated service',
           ],
         },
       ],
@@ -442,22 +445,24 @@ export default {
         {
           icon: 'fas fa-bolt',
           title: 'Same-Day Service',
-          description: 'Quick turnaround with same-day pickup available. Fast space clearing.',
+          description:
+            'We offer same-day hauling when available without overbooking or rushing jobs.',
         },
         {
           icon: 'fas fa-hand-holding-heart',
-          title: 'Co-Conscious',
-          description: 'We donate usable items to local charities before recycling or disposal.',
+          title: 'Purpose Driven',
+          description:
+            'We don\'t treat your belongings as "junk" - we handle removals with intention and responsibility.',
         },
         {
           icon: 'fas fa-tag',
-          title: 'Transparent Pricing',
-          description: 'No hidden fees or surprises. What you see is what you pay—guaranteed.',
+          title: 'Transparent, Structured Pricing ',
+          description: 'No hidden fees, no last-minute surprises, what you\'re quoted is what you pay!',
         },
         {
           icon: 'fas fa-users',
-          title: 'Expert Crew',
-          description: 'Licensed, insured professionals who treat your property with care.',
+          title: 'Professional Trained Crew',
+          description: 'Our crews are trained to work efficiently while protecting your property, floors, and surroundings.',
         },
       ],
     }

@@ -20,9 +20,13 @@
                     v-model="form.name"
                     type="text"
                     class="form-control"
+                    :class="{ invalid: fieldTouched.name && fieldErrors.name }"
                     placeholder="John Doe"
-                    required
+                    @blur="validateField('name')"
                   />
+                  <div v-if="fieldTouched.name && fieldErrors.name" class="field-error">
+                    {{ fieldErrors.name }}
+                  </div>
                 </div>
 
                 <!-- Email -->
@@ -34,31 +38,46 @@
                     v-model="form.email"
                     type="email"
                     class="form-control"
+                    :class="{ invalid: fieldTouched.email && fieldErrors.email }"
                     placeholder="john@example.com"
-                    required
+                    @blur="validateField('email')"
                   />
+                  <div v-if="fieldTouched.email && fieldErrors.email" class="field-error">
+                    {{ fieldErrors.email }}
+                  </div>
                 </div>
 
                 <!-- Phone -->
                 <div class="col-md-6">
-                  <label class="form-label text-white fw-bold">Phone Number</label>
+                  <label class="form-label text-white fw-bold"
+                    >Phone Number <span class="text-orange">*</span></label
+                  >
                   <input
                     v-model="form.phone"
                     type="tel"
                     class="form-control"
+                    :class="{ invalid: fieldTouched.phone && fieldErrors.phone }"
                     placeholder="(555) 123-4567"
+                    @input="handlePhoneInput"
+                    @blur="validateField('phone')"
                   />
+                  <div v-if="fieldTouched.phone && fieldErrors.phone" class="field-error">
+                    {{ fieldErrors.phone }}
+                  </div>
                 </div>
 
                 <!-- Service Type -->
                 <div class="col-md-6">
-                  <label class="form-label text-white fw-bold">Service Interested In</label>
+                  <label class="form-label text-white fw-bold"
+                    >Reason for contact <span class="text-orange">*</span></label
+                  >
                   <select v-model="form.service" class="form-control">
-                    <option value="">Select a service</option>
+                    <option value="">Select reason</option>
                     <option value="moving">Moving</option>
                     <option value="hauling">Hauling Removal</option>
                     <option value="storage">Storage</option>
                     <option value="demolition">Demolition</option>
+                    <option value="damage claim">Damage claim</option>
                     <option value="other">Other</option>
                   </select>
                 </div>
@@ -71,10 +90,14 @@
                   <textarea
                     v-model="form.message"
                     class="form-control"
+                    :class="{ invalid: fieldTouched.message && fieldErrors.message }"
                     rows="6"
                     placeholder="Tell us about your project or question..."
-                    required
+                    @blur="validateField('message')"
                   ></textarea>
+                  <div v-if="fieldTouched.message && fieldErrors.message" class="field-error">
+                    {{ fieldErrors.message }}
+                  </div>
                 </div>
 
                 <!-- Policy Agreement -->
@@ -86,32 +109,53 @@
                         type="checkbox"
                         v-model="form.agreeToPolicy"
                         id="agreeToPolicyContact"
-                        required
+                        @change="clearFieldError('agreeToPolicy')"
                       />
                       <label class="form-check-label text-white" for="agreeToPolicyContact">
                         I agree to the Lift & Shift Privacy Policy and Terms of Service
                         <span class="text-orange">*</span>
                       </label>
                     </div>
+                    <div
+                      v-if="fieldTouched.agreeToPolicy && fieldErrors.agreeToPolicy"
+                      class="field-error"
+                    >
+                      {{ fieldErrors.agreeToPolicy }}
+                    </div>
                   </div>
                 </div>
 
                 <!-- Submit Button -->
                 <div class="col-12">
-                  <button type="submit" class="btn btn-primary btn-lg w-100">
-                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-lg w-100"
+                    :disabled="isSubmitting"
+                  >
+                    <span v-if="!isSubmitting">
+                      <i class="fas fa-paper-plane me-2"></i>Send Message
+                    </span>
+                    <span v-else> <i class="fas fa-spinner fa-spin me-2"></i>Sending... </span>
                   </button>
                 </div>
               </div>
             </form>
 
-            <p
+            <!-- Success/Error Messages -->
+            <div
               v-if="submitMessage"
-              :class="submitSuccess ? 'text-success' : 'text-danger'"
-              class="mt-3 mb-0"
+              class="mt-4 p-3 rounded"
+              :class="
+                submitSuccess
+                  ? 'bg-success bg-opacity-10 border border-success'
+                  : 'bg-danger bg-opacity-10 border border-danger'
+              "
             >
-              {{ submitMessage }}
-            </p>
+              <p class="mb-0" :class="submitSuccess ? 'text-success' : 'text-danger'">
+                <i :class="submitSuccess ? 'fas fa-check-circle' : 'fas fa-exclamation-circle'"></i>
+                {{ submitMessage }}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -182,6 +226,8 @@
 </template>
 
 <script>
+import { validators } from '../../utils/validators.js'
+
 export default {
   name: 'Contact',
   data() {
@@ -194,27 +240,187 @@ export default {
         message: '',
         agreeToPolicy: false,
       },
+      fieldErrors: {
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: '',
+        agreeToPolicy: '',
+      },
+      fieldTouched: {
+        name: false,
+        email: false,
+        phone: false,
+        service: false,
+        message: false,
+        agreeToPolicy: false,
+      },
+      isSubmitting: false,
       submitMessage: '',
       submitSuccess: false,
     }
   },
   methods: {
-    handleSubmit() {
-      // Simulate form submission
-      this.submitSuccess = true
-      this.submitMessage = "Thank you for your message! We'll get back to you within 24 hours."
+    validateField(field) {
+      this.fieldTouched[field] = true
 
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        this.form = {
-          name: '',
-          email: '',
-          phone: '',
-          service: '',
-          message: '',
+      switch (field) {
+        case 'name':
+          if (!this.form.name || this.form.name.trim().length < 2) {
+            this.fieldErrors.name = 'Please enter your full name'
+          } else {
+            this.fieldErrors.name = ''
+          }
+          break
+        case 'email':
+          const emailResult = validators.email.validate(this.form.email, true)
+          this.fieldErrors.email = emailResult.error
+          break
+        case 'phone':
+          const phoneResult = validators.phone.validate(this.form.phone, true)
+          this.fieldErrors.phone = phoneResult.error
+          break
+        case 'service':
+          if (!this.form.service) {
+            this.fieldErrors.service = 'Please select a service'
+          } else {
+            this.fieldErrors.service = ''
+          }
+          break
+        case 'message':
+          if (!this.form.message || this.form.message.trim().length < 10) {
+            this.fieldErrors.message = 'Please enter a message (at least 10 characters)'
+          } else {
+            this.fieldErrors.message = ''
+          }
+          break
+      }
+    },
+    clearFieldError(field) {
+      this.fieldErrors[field] = ''
+    },
+    handlePhoneInput() {
+      this.form.phone = validators.phone.format(this.form.phone)
+      this.clearFieldError('phone')
+    },
+    validateAllFields() {
+      let isValid = true
+
+      // Validate name
+      this.fieldTouched.name = true
+      if (!this.form.name || this.form.name.trim().length < 2) {
+        this.fieldErrors.name = 'Please enter your full name'
+        isValid = false
+      }
+
+      // Validate email
+      this.fieldTouched.email = true
+      const emailResult = validators.email.validate(this.form.email, true)
+      this.fieldErrors.email = emailResult.error
+      if (!emailResult.valid) isValid = false
+
+      // Validate phone (required)
+      this.fieldTouched.phone = true
+      const phoneResult = validators.phone.validate(this.form.phone, true)
+      this.fieldErrors.phone = phoneResult.error
+      if (!phoneResult.valid) isValid = false
+
+      // Validate service (required)
+      this.fieldTouched.service = true
+      if (!this.form.service) {
+        this.fieldErrors.service = 'Please select a service'
+        isValid = false
+      }
+
+      // Validate message
+      this.fieldTouched.message = true
+      if (!this.form.message || this.form.message.trim().length < 10) {
+        this.fieldErrors.message = 'Please enter a message (at least 10 characters)'
+        isValid = false
+      }
+
+      // Validate policy agreement
+      this.fieldTouched.agreeToPolicy = true
+      if (!this.form.agreeToPolicy) {
+        this.fieldErrors.agreeToPolicy = 'You must agree to the Privacy Policy and Terms of Service'
+        isValid = false
+      }
+
+      return isValid
+    },
+    async handleSubmit() {
+      if (!this.validateAllFields()) {
+        this.submitSuccess = false
+        this.submitMessage = 'Please fix the errors before submitting'
+        return
+      }
+
+      if (this.isSubmitting) return
+
+      this.isSubmitting = true
+      this.submitMessage = ''
+
+      try {
+        const formData = new FormData()
+        formData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY)
+        formData.append('form', 'Contact Us')
+        formData.append('name', this.form.name)
+        formData.append('email', this.form.email)
+        formData.append('phone', this.form.phone)
+        formData.append('service', this.form.service)
+        formData.append('message', this.form.message)
+
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData,
+        })
+
+        const data = await response.json()
+
+        if (data.success) {
+          this.submitSuccess = true
+          this.submitMessage = "Thank you for your message! We'll get back to you within 24 hours."
+
+          setTimeout(() => {
+            this.form = {
+              name: '',
+              email: '',
+              phone: '',
+              service: '',
+              message: '',
+              agreeToPolicy: false,
+            }
+            this.fieldErrors = {
+              name: '',
+              email: '',
+              phone: '',
+              service: '',
+              message: '',
+              agreeToPolicy: '',
+            }
+            this.fieldTouched = {
+              name: false,
+              email: false,
+              phone: false,
+              service: false,
+              message: false,
+              agreeToPolicy: false,
+            }
+            this.submitMessage = ''
+            this.submitSuccess = false
+          }, 5000)
+        } else {
+          this.submitSuccess = false
+          this.submitMessage =
+            'Something went wrong. Please try again or call us at (800) 889-9788.'
         }
-        this.submitMessage = ''
-      }, 3000)
+      } catch (error) {
+        this.submitSuccess = false
+        this.submitMessage = 'Network error. Please check your connection and try again.'
+      } finally {
+        this.isSubmitting = false
+      }
     },
   },
 }
@@ -229,7 +435,111 @@ export default {
 }
 
 .page-header::before {
-  content: '';
+} /*cPolicy Agreement */
+.policy-agreement {
+  padding: var(--gap-md) 0;
+}
+
+.policy-agreement .form-check {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.policy-agreement .form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+.policy-agreement .form-check-label {
+  cursor: pointer;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.25rem;
+}
+
+/* Field Errors */
+.field-error {
+  color: var(--accent-red);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  animation: fadeInUp 0.3s ease;
+}
+
+.field-error::before {
+  content: '⚠';
+  font-size: 1rem;
+}
+
+.form-control.invalid,
+.form-select.invalid {
+  border-color: var(--accent-red);
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Success/Error Messages */
+.bg-success {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+}
+
+.bg-danger {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+}
+
+.border-success {
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+.border-danger {
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+.text-success {
+  color: #10b981 !important;
+}
+
+.text-danger {
+  color: var(--accent-red) !important;
+}
+
+/* ontent: '';
   position: absolute;
   top: 50%;
   left: 0;

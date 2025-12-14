@@ -35,7 +35,7 @@
               :value="formData.pickupFloor"
               @input="updateFormField('pickupFloor', $event.target.value)"
               class="form-control"
-              placeholder="Unit # (optional)"
+              placeholder="Unit (optional)"
             />
           </div>
 
@@ -145,7 +145,7 @@
               :value="formData.dropoffFloor"
               @input="updateFormField('dropoffFloor', $event.target.value)"
               class="form-control"
-              placeholder="Unit # (optional)"
+              placeholder="Unit (optional)"
             />
           </div>
 
@@ -212,7 +212,7 @@
           </div>
 
           <div class="col-md-12">
-            <label class="text-white fw-bold d-block mb-2">Building/Complex</label>
+            <label class="text-white fw-bold d-block mb-2">Building / Organization</label>
             <input
               type="text"
               :value="formData.dropoffBuilding"
@@ -398,7 +398,7 @@ export default {
 
 .time-icon {
   font-size: var(--font-2xl);
-  color: #2d3748;
+  color: var(--accent-orange);
 }
 
 .time-label {

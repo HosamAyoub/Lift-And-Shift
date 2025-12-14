@@ -1,10 +1,14 @@
 <template>
-  <section class="section section-dark py-5">
+  <section id="form" class="section section-dark py-5">
     <div class="container-lg">
       <!-- Hero Section -->
       <div class="mb-5 pb-4">
         <h2 class="mb-3">Demolition</h2>
-        <p class="text-gray mb-0">Plan your demolition with an instant scope + price ballpark.</p>
+        <p class="text-gray mb-0">
+          Every demolition project begins with a clear plan. We define the scope, assess
+          materials,and define a clear removal plan that keeps the project organized and on
+          schedule. Use the form below to receive an instant estimated quote.
+        </p>
       </div>
 
       <!-- Main Instant Estimate Section -->
@@ -40,7 +44,7 @@
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <label class="text-white fw-bold">{{ scopeLabels[selectedScope] }} Size</label>
                 <div class="load-tier-display bg-secondary-dark px-3 py-2 rounded">
-                  <span class="text-orange fw-bold">{{ area }} {{ currentUnit }}</span>
+                  <span class="fw-bold">{{ area }} {{ currentUnit }}</span>
                 </div>
               </div>
 
@@ -89,25 +93,27 @@
 
             <!-- Checkbox Options -->
             <div class="mb-4">
-              <div class="checkbox-group">
-                <label class="checkbox-label">
-                  <input
-                    type="checkbox"
-                    v-model="includesConcrete"
-                    @change="updateConcrete"
-                    class="checkbox-input"
-                  />
-                  <span class="checkmark"></span>
+              <div class="form-check mb-2">
+                <input
+                  type="checkbox"
+                  v-model="includesConcrete"
+                  @change="updateConcrete"
+                  class="form-check-input"
+                  id="includesConcrete"
+                />
+                <label class="form-check-label" for="includesConcrete">
                   Includes concrete/footings
                 </label>
-                <label class="checkbox-label">
-                  <input
-                    type="checkbox"
-                    v-model="upstairsAccess"
-                    @change="updateUpstairs"
-                    class="checkbox-input"
-                  />
-                  <span class="checkmark"></span>
+              </div>
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  v-model="upstairsAccess"
+                  @change="updateUpstairs"
+                  class="form-check-input"
+                  id="upstairsAccess"
+                />
+                <label class="form-check-label" for="upstairsAccess">
                   Upstairs / tight access
                 </label>
               </div>
@@ -336,7 +342,7 @@
 
       <!-- Features Section -->
       <div class="mt-5 pt-5" style="border-top: 1px solid var(--orange-10); padding-top: 3rem">
-        <h2 class="text-white mb-4">Why Choose <span class="text-orange">Us</span></h2>
+        <h2 class="text-white mb-4 text-center">Why Choose <span class="text-orange">Us</span></h2>
         <div class="row g-4">
           <div class="col-md-6 col-lg-3" v-for="feature in features" :key="feature.title">
             <div class="text-center">
@@ -507,23 +513,25 @@ export default {
       features: [
         {
           icon: 'fas fa-shield-alt',
-          title: 'Licensed & Insured',
-          description: 'Fully licensed and insured for your peace of mind and protection.',
+          title: 'Fully Licensed & Insured',
+          description:
+            'All work is performed with proper licensing and insurance to protect your property.',
         },
         {
           icon: 'fas fa-truck-loading',
-          title: 'Debris Haul-off',
-          description: 'Complete debris removal and eco-friendly disposal included.',
+          title: 'Debris Management',
+          description: 'Complete tear-out, load-out, and debris removal for a clean, ready site.',
         },
         {
           icon: 'fas fa-wind',
-          title: 'Dust Control',
-          description: 'Professional dust control and site protection measures.',
+          title: 'Dust & Site Protection',
+          description:
+            'Controlled dust and protection of surrounding areas to maintain a clean work environment.',
         },
         {
           icon: 'fas fa-file-alt',
-          title: 'Permit Guidance',
-          description: 'Expert assistance with permits and local regulations.',
+          title: 'Permit & Compliance Support',
+          description: 'Assistance with permits, inspections, and local compliance requirements.',
         },
       ],
     }
@@ -845,6 +853,10 @@ export default {
   transition: var(--transition-base);
 }
 
+.slider:focus {
+  background-color: var(--secondary-color) !important;
+}
+
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -899,6 +911,26 @@ export default {
   cursor: pointer;
   font-weight: 600;
   margin: 0;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+.form-check-label {
+  cursor: pointer;
+  margin: 0;
+  line-height: 1.25rem;
 }
 
 /* Component-specific styles use global variables from style.css */

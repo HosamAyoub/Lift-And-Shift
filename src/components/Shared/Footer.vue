@@ -7,13 +7,12 @@
           <div class="col-lg-4 col-md-6">
             <div class="footer-widget">
               <div class="footer-logo mb-3">
-                <img :src="logo" alt="Lift & Shift" />
+                <img :src="logo" alt="Lift & Shift"/>
                 <!-- <span class="footer-brand">Lift & Shift</span> -->
               </div>
-              <p class="footer-description">
-                Move Today. Build Tomorrow. Professional moving, packing, and storage services with
-                integrity and care.
-              </p>
+              <h5 class="footer-description">
+                Residential • Commercial • Campuses
+              </h5>
               <div class="social-links mt-4">
                 <a href="#" class="social-link" aria-label="Facebook">
                   <i class="fab fa-facebook-f"></i>
@@ -249,7 +248,7 @@ export default {
 }
 
 .footer-description {
-  color: var(--text-gray);
+  color: var(--text-light-gray);
   line-height: 1.8;
   margin-bottom: 0;
 }
@@ -320,7 +319,7 @@ export default {
 }
 
 .footer-links a {
-  color: var(--text-gray);
+  color: var(--text-light-gray);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -348,7 +347,7 @@ export default {
   align-items: start;
   gap: var(--gap-md);
   margin-bottom: var(--gap-lg);
-  color: var(--text-gray);
+  color: var(--text-light-gray);
 }
 
 .footer-contact i {
@@ -358,7 +357,7 @@ export default {
 }
 
 .footer-contact a {
-  color: var(--text-gray);
+  color: var(--text-light-gray);
   text-decoration: none;
   transition: var(--transition-base);
 }
@@ -383,7 +382,7 @@ export default {
 }
 
 .footer-bottom p {
-  color: var(--text-gray);
+  color: var(--text-light-gray);
   margin: 0;
 }
 
@@ -401,7 +400,7 @@ export default {
 }
 
 .footer-bottom-links a {
-  color: var(--text-gray);
+  color: var(--text-light-gray);
   text-decoration: none;
   transition: var(--transition-base);
 }

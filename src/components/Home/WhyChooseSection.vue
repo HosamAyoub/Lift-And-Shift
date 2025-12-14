@@ -1,12 +1,13 @@
 <template>
   <section class="why-choose-section section section-darker">
     <div class="container">
-      <BenefitCards
+      <FeatureCards
         title="Why Choose <span class='text-orange'>Lift & Shift?</span>"
-        subtitle="At Lift & Shift, we understand that moving isn't just transporting boxes . it's launching your next step. That's why our team combines efficiency, care, and a forward-looking attitude to make your transition smooth and stress-free."
-        :benefits="coreBenefits"
+        subtitle="At Lift & Shift, we understand that moving isn't just transporting boxes. It's launching your next step. That's why our team combines efficiency, attention to detail, and professionalism to ensure every move is handled with care."
+        :features="coreBenefits"
         :columnSize="3"
         sectionClass=""
+        :showHeader="true"
       />
 
       <!-- Additional Benefits -->
@@ -18,7 +19,11 @@
             </div>
             <div class="feature-box-content">
               <h5>Photo Documentation</h5>
-              <p>We document your belongings with photos for transparency and peace of mind.</p>
+              <p>
+                We document your belongings with detailed photos before and during the move,
+                creating transparency, accountability, and added peace of mind throughout the entire
+                process.
+              </p>
             </div>
           </div>
         </div>
@@ -30,7 +35,10 @@
             </div>
             <div class="feature-box-content">
               <h5>Professional Equipment</h5>
-              <p>Modern trucks and equipment to handle your move safely and efficiently.</p>
+              <p>
+                We invest in modern trucks and professional moving equipment to ensure secure
+                transport, controlled handling, and a smoother moving experience for our clients .
+              </p>
             </div>
           </div>
         </div>
@@ -42,7 +50,11 @@
             </div>
             <div class="feature-box-content">
               <h5>Flexible Scheduling</h5>
-              <p>24/7 availability to accommodate your schedule and urgent moving needs.</p>
+              <p>
+                Our services are available Monday through Saturday from 8:00 AM to 6:00 PM,
+                providing consistent, dependable scheduling designed to accommodate all of our
+                clients moving needs.
+              </p>
             </div>
           </div>
         </div>
@@ -54,7 +66,10 @@
             </div>
             <div class="feature-box-content">
               <h5>Transparent Pricing</h5>
-              <p>No hidden fees. Clear, upfront pricing with free estimates.</p>
+              <p>
+                Packing - Upfront, clearly explained pricing with no hidden fees, supported by
+                detailed estimates so you know exactly what to expect before your move begins.
+              </p>
             </div>
           </div>
         </div>
@@ -64,39 +79,39 @@
 </template>
 
 <script>
-import BenefitCards from '../Shared/BenefitCards.vue'
+import FeatureCards from '../Shared/FeatureCards.vue'
 
 export default {
   name: 'WhyChooseSection',
   components: {
-    BenefitCards,
+    FeatureCards,
   },
   data() {
     return {
       coreBenefits: [
         {
           icon: 'fas fa-hand-holding-usd',
-          title: 'Living Wage',
+          title: 'Fair Pricing',
           description:
-            'We pay our team members a true living wage, ensuring dignity and respect for their hard work.',
+            'You receive clear upfront pricing with no hidden fees so you can plan your move with confidence.',
         },
         {
           icon: 'fas fa-shield-alt',
-          title: 'Integrity First',
+          title: 'Integrity You Can Trust',
           description:
-            'We choose integrity over short-term gain, building lasting relationships with our clients.',
+            'We put your trust first by doing the right thing and delivering dependable service every time.',
         },
         {
           icon: 'fas fa-dumbbell',
-          title: 'Build Tomorrow',
+          title: 'Built for Peace of Mind',
           description:
-            'Every shift builds a stronger body and a better future for our team members.',
+            'Your move is handled with care efficiency and professionalism to ensure a smooth stress free experience.',
         },
         {
           icon: 'fas fa-comments',
           title: 'Clear Communication',
           description:
-            'Professional service with transparent communication throughout the entire process.',
+            'From booking to completion you are always informed and know exactly what to expect.',
         },
       ],
     }

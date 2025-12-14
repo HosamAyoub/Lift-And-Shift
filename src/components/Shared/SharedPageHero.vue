@@ -7,7 +7,7 @@
           <i class="fa-solid fa-box-open"></i>
         </div>
         <div class="shape shape-2">
-          <i class="fa-solid fa-truck-moving"></i>
+          <i class="fa-solid fa-truck-fast"></i>
         </div>
         <div class="shape shape-3">
           <i class="fa-solid fa-box"></i>

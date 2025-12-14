@@ -1,6 +1,6 @@
 <template>
   <!-- Hero Landing Section -->
-  <SharedPageHero
+  <!-- <SharedPageHero
     title="Professional <span class='text-orange'>Moving</span> Services"
     subtitle="From residential relocations to commercial moves, we deliver excellence with every move. Experience stress-free moving with our expert team."
     badge="Door-to-Door Service"
@@ -26,7 +26,41 @@
       { number: '98%', label: 'Satisfaction Rate' },
     ]"
     @secondary-click="callNow"
-  />
+  /> -->
+
+  <!-- <BackgroundSection>
+  </BackgroundSection> -->
+  <!-- Benefits Section -->
+  <div class="container py-3">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <BenefitCard
+          :icon="movingBenefits.icon"
+          :title="movingBenefits.title"
+          :description="movingBenefits.description"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="mt-3 mb-5 pb-3">
+      <h2 class="text-white mb-4 text-center">Our <span class="text-orange">Services</span></h2>
+      <div class="row g-4 justify-content-center">
+        <div
+          class="col-md-6 col-lg-4"
+          v-for="movingBenefit in movingBenefits"
+          :key="movingBenefit.title"
+        >
+          <BenefitCard
+            :icon="movingBenefit.icon"
+            :title="movingBenefit.title"
+            :description="movingBenefit.description"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Services Overview -->
   <!-- <SharedServiceCards
@@ -37,40 +71,23 @@
     @service-click="handleServiceClick"
   /> -->
 
-  <!-- Benefits Section -->
-  <section class="section section-dark">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-10">
-          <BenefitCards
-            title="Our <span class='text-orange'>Services</span>"
-            :benefits="movingServices"
-            :columnSize="4"
-            sectionClass=""
-            :showHeader="true"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-10 text-center">
           <h2>Enjoy your new <span class="text-orange">home!</span></h2>
           <div class="body-size text-gray">
-            Unpack and enjoy your new home. If you need to move again, let us know and we will give
-            you 10% off your next move for being a loyal customer. If something did not go to plan
-            you can contact our Customer Success Team who will promptly deal with any claims or
-            feedback.
+            Settle in and enjoy your new home. Should you need to move again, we’re happy to offer a
+            10% loyalty discount on your next move. And if anything doesn’t go as planned, our
+            dedicated Customer Success Team is available to promptly address any questions,
+            feedback, or claims.
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section-dark py-5 moving-form-section">
+  <section id="form" class="section section-dark py-5 moving-form-section">
     <div class="container-lg">
       <!-- Moving Form Card -->
       <div class="row justify-content-center">
@@ -202,7 +219,7 @@ import FeaturesSection from './FeaturesSection.vue'
 import TexasCitiesSection from './TexasCitiesSection.vue'
 import SharedPageHero from '../Shared/SharedPageHero.vue'
 import SharedServiceCards from '../Shared/SharedServiceCards.vue'
-import BenefitCards from '../Shared/BenefitCards.vue'
+import BenefitCard from '../Shared/BenefitCards.vue'
 import citiesByStateData from '../../../public/assets/JSON/US_CitiesByState.json'
 import { validators } from '../../utils/validators.js'
 
@@ -215,7 +232,7 @@ export default {
     AdditionalInfoTab,
     SharedPageHero,
     SharedServiceCards,
-    BenefitCards,
+    BenefitCard,
     FeaturesSection,
     TexasCitiesSection,
   },
@@ -224,35 +241,29 @@ export default {
       citiesByState: citiesByStateData,
       movingServices: [
         { value: 'packing', label: 'Packing Only', icon: 'fas fa-box' },
-        { value: 'moving', label: 'Moving Only', icon: 'fas fa-truck' },
-        { value: 'storage', label: 'Storage Only', icon: 'fas fa-warehouse' },
+        { value: 'moving', label: 'Moving Only', icon: 'fas fa-truck-fast' },
+        // { value: 'storage', label: 'Storage Only', icon: 'fas fa-warehouse' },
         { value: 'packing-moving', label: 'Packing & Moving', icon: 'fas fa-boxes' },
-        { value: 'full-service', label: 'Full Service (All)', icon: 'fas fa-star' },
+        // { value: 'full-service', label: 'Full Service (All)', icon: 'fas fa-star' },
       ],
       movingBenefits: [
         {
-          icon: 'fas fa-shield-alt',
-          title: 'Licensed & Insured',
+          icon: 'fas fa-box',
+          title: 'Packing',
           description:
-            'Fully licensed and insured for your complete peace of mind and protection throughout the entire moving process.',
+            "Whether we pack it all or just the essentials, we'll make sure everything is protected and ready to move.",
         },
         {
-          icon: 'fas fa-users',
-          title: 'Expert Team',
+          icon: 'fas fa-truck-fast',
+          title: 'Moving',
           description:
-            'Professional movers with years of experience who treat your belongings with the utmost care and respect.',
+            "Whether it's across town, or across the country, we'll get it safely to your new home.",
         },
         {
-          icon: 'fas fa-clock',
-          title: 'On-Time Service',
+          icon: 'fas fa-warehouse',
+          title: 'Storage',
           description:
-            'We value your time. Our team arrives on schedule and completes your move efficiently as planned.',
-        },
-        {
-          icon: 'fas fa-dollar-sign',
-          title: 'Fair Pricing',
-          description:
-            'Transparent, competitive pricing with no hidden fees. Get exactly what you pay for, guaranteed.',
+            "Whether you need storage for a few months or longer, we'll keep your belongings safe and secure until you're ready.",
         },
       ],
       currentTab: 1,
@@ -264,7 +275,7 @@ export default {
       ],
       services: [
         { value: 'packing', label: 'Packing Only', icon: 'fas fa-box' },
-        { value: 'moving', label: 'Moving Only', icon: 'fas fa-truck' },
+        { value: 'moving', label: 'Moving Only', icon: 'fas fa-truck-fast' },
         { value: 'storage', label: 'Storage Only', icon: 'fas fa-warehouse' },
         { value: 'packing-moving', label: 'Packing & Moving', icon: 'fas fa-boxes' },
         { value: 'full-service', label: 'Full Service (All)', icon: 'fas fa-star' },
@@ -540,20 +551,20 @@ export default {
         formDataToSend.append('email', this.formData.email)
         formDataToSend.append('phone', this.formData.phone)
         formDataToSend.append('service_type', this.formData.helpType)
-        formDataToSend.append('pickup_state', this.formData.pickupState)
         formDataToSend.append('pickup_city', this.formData.pickupCity)
+        formDataToSend.append('pickup_state', this.formData.pickupState)
         formDataToSend.append('pickup_zip', this.formData.pickupZip)
-        formDataToSend.append('pickup_building', this.formData.pickupBuilding)
-        formDataToSend.append('pickup_floor', this.formData.pickupFloor)
-        formDataToSend.append('pickup_date', this.formData.pickupDate || '')
+        formDataToSend.append('pickup_building', this.formData.pickupBuilding || 'N/A')
+        formDataToSend.append('pickup_floor', this.formData.pickupFloor || 'N/A')
+        formDataToSend.append('pickup_date', this.formData.pickupDate)
         formDataToSend.append('pickup_time', this.formData.pickupTime)
-        formDataToSend.append('dropoff_state', this.formData.dropoffState)
         formDataToSend.append('dropoff_city', this.formData.dropoffCity)
+        formDataToSend.append('dropoff_state', this.formData.dropoffState)
         formDataToSend.append('dropoff_zip', this.formData.dropoffZip)
-        formDataToSend.append('dropoff_building', this.formData.dropoffBuilding)
-        formDataToSend.append('dropoff_floor', this.formData.dropoffFloor)
-        formDataToSend.append('description', this.formData.description)
-        formDataToSend.append('hear_about_us', this.formData.hearAboutUs)
+        formDataToSend.append('dropoff_building', this.formData.dropoffBuilding || 'N/A')
+        formDataToSend.append('dropoff_floor', this.formData.dropoffFloor || 'N/A')
+        formDataToSend.append('description', this.formData.description || 'N/A')
+        formDataToSend.append('hear_about_us', this.formData.hearAboutUs || 'N/A')
 
         this.uploadedFiles.forEach((file, index) => {
           formDataToSend.append(`file_${index}`, file)

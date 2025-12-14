@@ -37,7 +37,7 @@
               :value="formData.pickupFloor"
               @input="updateFormField('pickupFloor', $event.target.value)"
               class="form-control"
-              placeholder="Unit # (optional)"
+              placeholder="Unit (optional)"
             />
           </div>
 
@@ -147,7 +147,7 @@
               :value="formData.dropoffFloor"
               @input="updateFormField('dropoffFloor', $event.target.value)"
               class="form-control"
-              placeholder="Unit # (optional)"
+              placeholder="Unit (optional)"
             />
           </div>
 
@@ -215,6 +215,17 @@
         </div>
       </div>
 
+      <div class="col-md-12">
+        <label class="text-white fw-bold d-block mb-2">Organization / Building</label>
+        <input
+          type="text"
+          :value="formData.dropoffBuilding"
+          @input="updateFormField('dropoffBuilding', $event.target.value)"
+          class="form-control"
+          placeholder="Building name or organization (optional)"
+        />
+      </div>
+
       <!-- Storage Duration & Unit Details -->
       <div class="col-12">
         <h5 class="text-white mb-3">
@@ -280,8 +291,10 @@
           </div>
 
           <!-- Move-In Time -->
-        <div class="col-9">
-            <label class="text-white fw-bold d-block mb-2">Preferred Time</label>
+          <div class="col-9">
+            <label class="text-white fw-bold d-block mb-2">
+              Preferred Time <span class="text-orange">*</span>
+            </label>
             <div class="time-options">
               <label
                 v-for="time in timeOptions"
@@ -478,7 +491,7 @@ export default {
 
 .time-icon {
   font-size: var(--font-2xl);
-  color: #2d3748;
+  color: var(--accent-orange);
 }
 
 .time-label {

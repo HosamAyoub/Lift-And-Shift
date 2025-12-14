@@ -1,7 +1,7 @@
 <template>
   <section class="about-section section section-dark" id="about">
     <div class="container">
-      <div class="row align-items-center">
+      <div class="row">
         <div class="col-lg-6 mb-4 mb-lg-0">
           <div class="about-content">
             <h2 class="section-title mb-4">About <span class="text-orange">Lift & Shift</span></h2>
@@ -9,24 +9,40 @@
             <div class="mission-statement mb-4">
               <h4 class="mb-3">Our Mission</h4>
               <p>
-                We're more than just a moving company. Lift & Shift is built on a mission to empower
-                individuals by providing meaningful work opportunities while delivering exceptional
-                service to our customers.
+                Our mission is to provide dependable moving and storage services grounded in
+                personal connection, fair pricing, and clear communication. At Lift & Shift, we
+                measure success by the trust we build with our clients and the care we provide
+                before, during, and after every move.
               </p>
             </div>
 
-            <div class="row mt-4">
+            <!-- <div class="row mt-4">
               <div class="col-6 mb-3">
                 <div class="stat-box">
-                  <h3 class="mb-0">24/7</h3>
-                  <p class="mb-0">Available Service</p>
+                  <h3 class="mb-0">DFW Based</h3>
+                  <p class="mb-0">Text</p>
                 </div>
               </div>
               <div class="col-6 mb-3">
                 <div class="stat-box">
-                  <h3 class="mb-0">100%</h3>
-                  <p class="mb-0">Satisfaction</p>
+                  <h3 class="mb-0">10% Discount</h3>
+                  <p class="mb-0">For returning customers</p>
                 </div>
+              </div>
+            </div> -->
+
+            <div class="feature-item align-items-center">
+              <div class="feature-icon">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <div class="feature-content">
+                <h4>Out of state moving</h4>
+                <p>
+                  Lift & Shift offers out-of-state moving with competitive price matching and full
+                  move ownership from pickup through settling in. With planned routes, consistent
+                  communication, and continued support beyond delivery, we provide the control and
+                  reliability most long-distance movers do not.
+                </p>
               </div>
             </div>
 
@@ -39,45 +55,50 @@
 
         <div class="col-lg-6">
           <div class="about-features">
-            <div class="feature-item">
+            <div class="feature-item align-items-center">
               <div class="feature-icon">
                 <i class="fas fa-home"></i>
               </div>
               <div class="feature-content">
                 <h4>Residential</h4>
-                <p>Professional movers with clear communication for your home relocation needs.</p>
+                <p>
+                  Lift & Shift provides residential moving service from pickup to final placement,
+                  with careful wrapping, organized loading, and safety driven execution designed to
+                  protect your home and belongings throughout the move.
+                </p>
               </div>
             </div>
 
-            <div class="feature-item">
+            <div class="feature-item align-items-center">
               <div class="feature-icon">
                 <i class="fas fa-building"></i>
               </div>
               <div class="feature-content">
                 <h4>Commercial</h4>
-                <p>Efficient office and business moving solutions with minimal downtime.</p>
+                <p>
+                  Our commercial moving services are structured to keep operations running smoothly,
+                  through detailed strategic planning, clear labeling protocols, optimized routing,
+                  and experienced professionals who understand the demands of commercial
+                  relocations.
+                </p>
               </div>
             </div>
 
-            <div class="feature-item">
+            <div class="feature-item align-items-center">
               <div class="feature-icon">
                 <i class="fas fa-graduation-cap"></i>
               </div>
               <div class="feature-content">
                 <h4>Campuses</h4>
-                <p>Specialized student moving services for dormitories and campus housing.</p>
+                <p>
+                  Lift & Shift offers campus moving services for student housing, supported by
+                  campus trained crew that are familiar with school layouts, access points, and
+                  moving in requirements. We handle packing and transport so students stay focused
+                  on academics and parents can feel confident every detail is managed
+                  professionally.
+                </p>
               </div>
             </div>
-
-            <!-- <div class="feature-item">
-              <div class="feature-icon">
-                <i class="fas fa-shield-alt"></i>
-              </div>
-              <div class="feature-content">
-                <h4>Integrity First</h4>
-                <p>We choose integrity over short-term gain, ensuring trust and reliability.</p>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>

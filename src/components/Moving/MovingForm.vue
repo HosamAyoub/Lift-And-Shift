@@ -162,7 +162,7 @@
                     type="text"
                     v-model="formData.pickupFloor"
                     class="form-control"
-                    placeholder="Floor # (optional)"
+                    placeholder="Floor (optional)"
                   />
                 </div>
                 <div class="mb-3">
@@ -256,7 +256,7 @@
                     type="text"
                     v-model="formData.dropoffFloor"
                     class="form-control"
-                    placeholder="Floor # (optional)"
+                    placeholder="Floor (optional)"
                   />
                 </div>
               </div>

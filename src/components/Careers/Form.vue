@@ -63,7 +63,7 @@
           <input
             type="tel"
             :value="formData.phone"
-            @input="updateFormField('phone', $event.target.value)"
+            @input="handlePhoneInput($event.target.value)"
             @blur="handleBlur('phone')"
             class="form-control"
             :class="{ invalid: fieldTouched.phone && fieldErrors.phone }"
@@ -137,14 +137,14 @@
         <!-- Resume Upload -->
         <div class="col-12">
           <FileUpload
-            :model-value="uploadedFiles"
+            :modelValue="uploadedFiles"
             label="Upload Resume/CV"
             name="resume"
             placeholder="Drag & drop your resume or click to browse"
             accept="application/pdf"
             :required="true"
-            :max-size="10 * 1024 * 1024"
-            :max-files="1"
+            :maxSize="10 * 1024 * 1024"
+            :maxFiles="1"
             :multiple="false"
             @change="handleFilesChange"
           />
@@ -203,7 +203,7 @@
 
       <!-- Success/Error Messages -->
       <div
-        v-show="submitMessage"
+        v-if="submitMessage"
         class="mt-4 p-3 rounded"
         :class="
           submitSuccess
@@ -265,11 +265,17 @@ export default {
     'update:fieldTouched',
     'update:uploadedFiles',
     'submit',
+    'validation-failed',
   ],
   methods: {
     updateFormField(field, value) {
       this.$emit('update:formData', { ...this.formData, [field]: value })
       this.clearFieldError(field)
+    },
+    handlePhoneInput(value) {
+      const formatted = validators.phone.format(value)
+      this.$emit('update:formData', { ...this.formData, phone: formatted })
+      this.clearFieldError('phone')
     },
     handleBlur(field) {
       const touched = { ...this.fieldTouched, [field]: true }
@@ -295,7 +301,7 @@ export default {
           errors[field] = emailResult.error
           break
         case 'phone':
-          const phoneResult = validators.phone.validate(this.formData[field])
+          const phoneResult = validators.phone.validate(this.formData[field], true)
           errors[field] = phoneResult.error
           break
         case 'position':
@@ -330,7 +336,7 @@ export default {
 
       // Validate phone
       touched.phone = true
-      const phoneResult = validators.phone.validate(this.formData.phone)
+      const phoneResult = validators.phone.validate(this.formData.phone, true)
       errors.phone = phoneResult.error
       if (!phoneResult.valid) isValid = false
 
@@ -369,15 +375,21 @@ export default {
       if (this.validateForm()) {
         this.$emit('submit')
       } else {
-        // Scroll to the form section instead of top of page
-        const formSection = document.querySelector('.careers-form-section')
-        if (formSection) {
-          formSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        // Emit validation failed event
+        this.$emit('validation-failed')
+        // Only scroll when validation fails to show errors
+        const firstError = document.querySelector('.field-error')
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
         }
       }
     },
     handleFilesChange(files) {
       this.$emit('update:uploadedFiles', files)
+      // Clear resume error when files are uploaded
+      if (files.length > 0) {
+        this.clearFieldError('resume')
+      }
     },
   },
 }

@@ -170,11 +170,12 @@
               :isSubmitting="isSubmitting"
               :submitMessage="submitMessage"
               :submitSuccess="submitSuccess"
-              @update:formData="formData = $event"
-              @update:fieldErrors="fieldErrors = $event"
-              @update:fieldTouched="fieldTouched = $event"
-              @update:uploadedFiles="uploadedFiles = $event"
+              @update:formData="updateFormData"
+              @update:fieldErrors="updateFieldErrors"
+              @update:fieldTouched="updateFieldTouched"
+              @update:uploadedFiles="updateUploadedFiles"
               @submit="handleSubmit"
+              @validation-failed="handleValidationFailed"
             />
           </div>
         </div>
@@ -184,6 +185,7 @@
 </template>
 
 <script>
+import { nextTick } from 'vue'
 import FeatureCards from '../Shared/FeatureCards.vue'
 import Form from './Form.vue'
 
@@ -195,8 +197,9 @@ export default {
   },
   data() {
     return {
-      heroImage: '../../../public/assets/images/Hero.png',
-      careerImage: '../../../public/assets/images/Content.png',
+      heroImage: '/assets/images/Hero.png',
+      careerImage: '/assets/images/Content.png',
+      resetTimeout: null,
       benefits: [
         // {
         //   icon: 'fas fa-dollar-sign',
@@ -219,17 +222,19 @@ export default {
         {
           icon: 'fas fa-calendar-check',
           title: 'Flexible Schedule',
-          description: 'Work-life balance with flexible scheduling options and paid time off.',
+          description: 'Enjoy real work-life balance with flexible scheduling options.',
         },
         {
           icon: 'fas fa-users',
           title: 'Great Team',
-          description: 'Join a supportive, collaborative team that values respect and teamwork.',
+          description:
+            'Work alongside a supportive, respectful team that values collaboration and teamwork.',
         },
         {
-          icon: 'fas fa-award',
+          icon: 'fas fa-coins',
           title: 'Tips & Bonuses',
-          description: 'Employee recognition programs and rewards for outstanding performance.',
+          description:
+            'Earn additional income through tips, performance bonuses, and recognition programs.',
         },
       ],
       formData: {
@@ -241,6 +246,7 @@ export default {
         experience: '',
         availability: '',
         message: '',
+        agreeToPolicy: false,
       },
       uploadedFiles: [],
       fieldErrors: {
@@ -250,6 +256,7 @@ export default {
         phone: '',
         position: '',
         resume: '',
+        agreeToPolicy: '',
       },
       fieldTouched: {
         firstName: false,
@@ -257,6 +264,7 @@ export default {
         email: false,
         phone: false,
         position: false,
+        agreeToPolicy: false,
       },
       isSubmitting: false,
       submitMessage: '',
@@ -272,6 +280,33 @@ export default {
       if (formSection) {
         formSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
+    },
+    updateFormData(data) {
+      this.formData = data
+    },
+    updateFieldErrors(errors) {
+      this.fieldErrors = errors
+    },
+    updateFieldTouched(touched) {
+      this.fieldTouched = touched
+    },
+    updateUploadedFiles(files) {
+      this.uploadedFiles = files
+    },
+    handleValidationFailed() {
+      this.submitSuccess = false
+      this.submitMessage = 'Please fix the errors before submitting'
+
+      // Clear any existing timeout
+      if (this.resetTimeout) {
+        clearTimeout(this.resetTimeout)
+      }
+
+      // Clear message after 5 seconds
+      this.resetTimeout = setTimeout(() => {
+        this.submitMessage = ''
+        this.resetTimeout = null
+      }, 5000)
     },
     async handleSubmit() {
       if (this.isSubmitting) return
@@ -307,7 +342,13 @@ export default {
           this.submitSuccess = true
           this.submitMessage =
             'Thank you for your application! We will review it and get back to you within 48 hours.'
-          setTimeout(() => {
+
+          // Clear any existing timeout
+          if (this.resetTimeout) {
+            clearTimeout(this.resetTimeout)
+          }
+
+          this.resetTimeout = setTimeout(() => {
             this.formData = {
               firstName: '',
               lastName: '',
@@ -317,6 +358,7 @@ export default {
               experience: '',
               availability: '',
               message: '',
+              agreeToPolicy: false,
             }
             this.uploadedFiles = []
             this.fieldErrors = {
@@ -325,6 +367,8 @@ export default {
               email: '',
               phone: '',
               position: '',
+              resume: '',
+              agreeToPolicy: '',
             }
             this.fieldTouched = {
               firstName: false,
@@ -332,9 +376,11 @@ export default {
               email: false,
               phone: false,
               position: false,
+              agreeToPolicy: false,
             }
             this.submitMessage = ''
             this.submitSuccess = false
+            this.resetTimeout = null
           }, 5000)
         } else {
           this.submitSuccess = false
@@ -348,6 +394,13 @@ export default {
         this.isSubmitting = false
       }
     },
+  },
+  beforeUnmount() {
+    // Clear timeout when component is destroyed
+    if (this.resetTimeout) {
+      clearTimeout(this.resetTimeout)
+      this.resetTimeout = null
+    }
   },
 }
 </script>
@@ -448,7 +501,7 @@ export default {
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: 3.3rem;
   font-weight: 900;
   color: white;
   line-height: 1.2;

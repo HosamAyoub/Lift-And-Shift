@@ -2,11 +2,11 @@
   <section class="section section-dark py-5">
     <div class="container-lg">
       <!-- Hero Section -->
-      <div class="mb-5 pb-4">
-        <h1 class="h2 text-white mb-3">AboutUs</h1>
-        <p class="text-gray mb-0">
+      <div class="mb-2 pb-4">
+        <h1 class="h2 text-white">About Us</h1>
+        <!-- <p class="text-gray mb-0">
           Turning strength into opportunity for people building their futures.
-        </p>
+        </p> -->
       </div>
 
       <!-- Main Content Section -->
@@ -18,16 +18,19 @@
 
             <div class="mb-4">
               <p class="text-gray">
-                Lift & Shift was founded on a simple but powerful idea: why work out for free when
-                you can get paid for it? We saw an opportunity to connect physical strength with
-                meaningful work, creating a business that benefits both our customers and our team
-                members.
+                Lift & Shift was founded with a clear purpose: to deliver fast, efficient, and
+                professional service without compromising care or integrity. From the beginning, our
+                focus has been on creating a seamless experience for our customers, built on trust,
+                clear communication, and consistent results.
               </p>
 
               <p class="text-gray">
-                Based in Plano and serving North Dallas, we've built a reputation for reliability,
-                transparency, and treating both our customers and employees with the respect they
-                deserve.
+                Based in the DFW area and serving clients everywhere, we combine speed and
+                efficiency with attention to detail and respect for every space we enter. At the
+                same time, we believe great service starts with strong people and strong
+                relationships. By investing in our team and our community, we are building more than
+                a service company. We are building a lasting brand designed to grow, serve, and
+                create value for years to come.
               </p>
             </div>
 
@@ -38,23 +41,11 @@
             >
               <h4 class="text-orange mb-3">Our Mission</h4>
               <p class="text-white mb-0">
-                Lift & Shift turns strength into opportunity for people building their futures. We
-                pay a true living wage and choose integrity over short term gain. Every shift builds
-                a stronger body and a better future.
+                Our mission is to provide dependable moving and storage services grounded in
+                personal connection, fair pricing, and clear communication. At Lift & Shift, we
+                measure success by the trust we build with our clients and the care we provide
+                before, during, and after every move.
               </p>
-            </div>
-
-            <!-- Service Areas -->
-            <div class="mb-4">
-              <h4 class="text-white mb-3">Areas We Serve</h4>
-              <div class="service-areas">
-                <span class="service-area-tag">Plano</span>
-                <span class="service-area-tag">Frisco</span>
-                <span class="service-area-tag">McKinney</span>
-                <span class="service-area-tag">Allen</span>
-                <span class="service-area-tag">North Dallas</span>
-                <span class="service-area-tag">DFW Metroplex</span>
-              </div>
             </div>
           </div>
         </div>
@@ -140,17 +131,19 @@
 
       <!-- Services Overview Section -->
       <div class="mt-5 pt-5" style="border-top: 1px solid var(--orange-10); padding-top: 3rem">
-        <h2 class="text-white mb-4">What We Do</h2>
+        <h2 class="text-white mb-4 text-center">What <span class="text-orange">We</span> Do</h2>
         <div class="row g-4">
           <div class="col-md-4" v-for="service in services" :key="service.title">
             <div class="card-dark text-center h-100 p-4">
               <div class="mb-3">
-                <i :class="service.icon" style="font-size: 2.5rem; color: var(--white-100)"></i>
+                <i :class="service.icon" style="font-size: 2.5rem" class="text-orange"></i>
               </div>
               <h5 class="text-white mb-3">{{ service.title }}</h5>
-              <p class="text-gray small">{{ service.description }}</p>
-              <ul class="text-gray small text-start mt-3">
-                <li v-for="feature in service.features" :key="feature">{{ feature }}</li>
+              <!-- <p class="text-gray small">{{ service.description }}</p> -->
+              <ul class="text-gray small text-start mt-3 list-style">
+                <li v-for="feature in service.features" :key="feature" class="my-3">
+                  <i class="fas fa-check-circle me-2 text-orange"></i>{{ feature }}
+                </li>
               </ul>
             </div>
           </div>
@@ -161,13 +154,13 @@
       <div class="mt-5 pt-5 text-center">
         <h3 class="text-white mb-3">Ready to Get Started?</h3>
         <p class="text-gray mb-4">Contact us today for a free, no-obligation quote</p>
-        <div class="d-flex gap-3 justify-content-center">
+        <div class="d-flex gap-3 justify-content-center px-5">
           <div>
-            <router-link to="/moving" class="btn btn-primary"> Get A Quote </router-link>
+            <QuoteDropdown />
           </div>
-          <div>
+          <!-- <div>
             <router-link to="/" class="btn btn-outline-primary"> View Services </router-link>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -175,11 +168,26 @@
 </template>
 
 <script>
+import QuoteDropdown from '../Shared/QuoteDropdown.vue'
+
 export default {
   name: 'AboutUs',
+  components: {
+    QuoteDropdown,
+  },
   data() {
     return {
       services: [
+        {
+          icon: 'fas fa-truck-fast',
+          title: 'Moving & Storage',
+          description: 'Professional moving services with optional short-term storage.',
+          features: [
+            '2 movers + truck standard',
+            'Local residential & office moves',
+            'Month-to-month storage options',
+          ],
+        },
         {
           icon: 'fas fa-trash-alt',
           title: 'Hauling',
@@ -188,16 +196,6 @@ export default {
             '1/4, 1/2, 3/4 & Full load options',
             'Same/next-day pickup available',
             'Furniture, appliances, construction debris',
-          ],
-        },
-        {
-          icon: 'fas fa-truck-moving',
-          title: 'Moving & Storage',
-          description: 'Professional moving services with optional short-term storage.',
-          features: [
-            '2 movers + truck standard',
-            'Local residential & office moves',
-            'Month-to-month storage options',
           ],
         },
         {
@@ -323,6 +321,10 @@ export default {
   background: var(--accent-orange);
   color: var(--text-light);
   transform: translateY(-2px);
+}
+
+.list-style {
+  list-style: none;
 }
 
 @media (max-width: 768px) {

@@ -1,6 +1,6 @@
 <template>
   <div class="features-section mt-5 pt-5" style="border-top: 1px solid var(--orange-10)">
-    <h2 class="text-white mb-4">Why Choose <span class="text-orange">Us</span></h2>
+    <h2 class="text-white mb-4 text-center">Why Choose <span class="text-orange">Us</span></h2>
     <div class="row g-4">
       <div class="col-md-6 col-lg-3" v-for="feature in features" :key="feature.title">
         <div class="text-center">
@@ -26,23 +26,27 @@ export default {
       features: [
         {
           icon: 'fas fa-shield-alt',
-          title: 'Licensed & Insured',
-          description: 'Fully licensed and insured for your peace of mind and protection.',
+          title: 'Safety First Moving',
+          description:
+            'Every item is handled using safe lifting standards and the appropriate number of movers to protect your belongings and our crews.',
         },
         {
           icon: 'fas fa-users',
-          title: 'Professional Crew',
-          description: 'Expert movers who treat your belongings with care and respect.',
+          title: 'Professional Moving Crews',
+          description:
+            'Our movers are trained, experienced, and focused on careful handling, efficient loading, and on time service.',
         },
         {
-          icon: 'fas fa-warehouse',
-          title: 'Storage Units',
-          description: 'Flexible storage units that grow with your needs, perfect for managing inventory.',
+          icon: 'fas fa-code-branch',
+          title: 'Organized and Planned Moves',
+          description:
+            'We use clear planning, labeling, and routing to keep moves organized and reduce delays or downtime.',
         },
         {
           icon: 'fas fa-dollar-sign',
-          title: 'Flexible Payment Options',
-          description: 'Multiple Payment Methods & Customized payment plans to fit your budget.',
+          title: 'Clear and Honest Pricing',
+          description:
+            'Item based pricing built around labor requirements so you know what to expect without hidden fees.',
         },
       ],
     }

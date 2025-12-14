@@ -4,39 +4,15 @@
       <div class="text-center mb-5">
         <h2 class="section-title">Our <span class="text-orange">Services</span></h2>
         <p class="section-subtitle">
-          Professional moving, packing, and storage solutions for residential, commercial, and
+          Professional packing, moving, and storage solutions for residential, commercial, and
           campus needs
         </p>
       </div>
 
       <div class="row g-4">
-        <!-- Moving Service -->
-        <div class="col-lg-4 col-md-6">
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-truck-moving"></i>
-            </div>
-            <h3 class="service-title">Moving</h3>
-            <p class="service-description">
-              Professional moving services with transparent pricing. Photo documentation, secure
-              pick-up & drop-off.
-            </p>
-            <ul class="service-features">
-              <li><i class="fas fa-check-circle text-orange"></i> Simple Count</li>
-              <li><i class="fas fa-check-circle text-orange"></i> Photo Documentation</li>
-              <li><i class="fas fa-check-circle text-orange"></i> Secure Transport</li>
-              <li><i class="fas fa-check-circle text-orange"></i> Starting at $125</li>
-            </ul>
-            <button class="btn btn-outline-primary w-100 mt-3" @click="goToMoving">
-              Learn More
-            </button>
-          </div>
-        </div>
-
         <!-- Packing Service -->
         <div class="col-lg-4 col-md-6">
-          <div class="service-card featured">
-            <div class="featured-badge">Most Popular</div>
+          <div class="service-card">
             <div class="service-icon">
               <i class="fas fa-box-open"></i>
             </div>
@@ -45,10 +21,34 @@
               Expert packing services with quality supplies. We handle your belongings with care.
             </p>
             <ul class="service-features">
-              <li><i class="fas fa-check-circle text-orange"></i> Professional Team</li>
-              <li><i class="fas fa-check-circle text-orange"></i> Quality Materials</li>
-              <li><i class="fas fa-check-circle text-orange"></i> Careful Handling</li>
-              <li><i class="fas fa-check-circle text-orange"></i> Flexible Scheduling</li>
+              <li><i class="fas fa-check-circle text-orange"></i> Scalable packing team</li>
+              <li><i class="fas fa-check-circle text-orange"></i> Item specific packing methods</li>
+              <li><i class="fas fa-check-circle text-orange"></i> Protective handling service</li>
+              <li><i class="fas fa-check-circle text-orange"></i> Convenient scheduling options</li>
+            </ul>
+            <button class="btn btn-outline-primary w-100 mt-3" @click="goToMoving">
+              Learn More
+            </button>
+          </div>
+        </div>
+
+        <!-- Moving Service -->
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card featured">
+            <div class="featured-badge">Most Popular</div>
+            <div class="service-icon">
+              <i class="fas fa-truck-fast"></i>
+            </div>
+            <h3 class="service-title">Moving</h3>
+            <p class="service-description">
+              Professional moving services with transparent pricing. Photo documentation, secure
+              pick-up & drop-off.
+            </p>
+            <ul class="service-features">
+              <li><i class="fas fa-check-circle text-orange"></i> Competitive price matching</li>
+              <li><i class="fas fa-check-circle text-orange"></i> Secure, monitored transport</li>
+              <li><i class="fas fa-check-circle text-orange"></i> Professionally managed team</li>
+              <li><i class="fas fa-check-circle text-orange"></i> Time controlled moves</li>
             </ul>
             <button class="btn btn-primary w-100 mt-3" @click="goToMoving">Get Started</button>
           </div>
@@ -66,10 +66,13 @@
               options.
             </p>
             <ul class="service-features">
-              <li><i class="fas fa-check-circle text-orange"></i> Free Boxes & Supplies</li>
-              <li><i class="fas fa-check-circle text-orange"></i> Pick-up & Delivery</li>
-              <li><i class="fas fa-check-circle text-orange"></i> Flexible Pricing</li>
-              <li><i class="fas fa-check-circle text-orange"></i> 4 Months Minimum</li>
+              <li>
+                <i class="fas fa-check-circle text-orange"></i> Free high durability, double walled
+                boxes
+              </li>
+              <li><i class="fas fa-check-circle text-orange"></i> Efficient pickup and delivery</li>
+              <li><i class="fas fa-check-circle text-orange"></i> Client specific pricing</li>
+              <li><i class="fas fa-check-circle text-orange"></i> Four month minimum term</li>
             </ul>
             <button class="btn btn-outline-primary w-100 mt-3" @click="goToStorage">
               View Details
@@ -98,6 +101,7 @@ export default {
 <style scoped>
 .services-section {
   background-color: var(--bg-dark);
+  padding-top: 0 !important;
   /* background-color: var(--bg-section); */
 }
 

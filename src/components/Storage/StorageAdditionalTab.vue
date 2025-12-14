@@ -81,8 +81,17 @@
           <div class="summary-value">{{ formData.email || 'Not provided' }}</div>
         </div>
         <div class="summary-item">
-          <div class="summary-label">Unit Size</div>
-          <div class="summary-value">{{ unitSizeLabel || 'Not selected' }}</div>
+          <div class="summary-label">Pickup Location</div>
+          <div class="summary-value">{{ pickupAddress || 'Not provided' }}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Delivery Location</div>
+          <div class="summary-value">{{ dropoffAddress || 'Not provided' }}</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">Move-In Time</div>
+          <div class="summary-value">{{ timeLabel }}</div>
+          <div class="summary-value">{{ formattedDate || 'Not selected' }}</div>
         </div>
         <div class="summary-item">
           <div class="summary-label">Duration</div>
@@ -91,18 +100,8 @@
           </div>
         </div>
         <div class="summary-item">
-          <div class="summary-label">Move-In Date</div>
-          <div class="summary-value">{{ formattedDate || 'Not selected' }}</div>
-        </div>
-        <div class="summary-item">
-          <div class="summary-label">Climate Control</div>
-          <div class="summary-value">
-            {{ formData.climateControl ? 'Yes (+$25/month)' : 'No' }}
-          </div>
-        </div>
-        <div class="summary-item">
-          <div class="summary-label">Move-In Time</div>
-          <div class="summary-value">{{ timeLabel || 'Flexible' }}</div>
+          <div class="summary-label">Number Of Boxes</div>
+          <div class="summary-value">{{ numberOfBoxes || '' }}</div>
         </div>
       </div>
     </div>
@@ -143,14 +142,21 @@ export default {
       }
       return ''
     },
-    unitSizeLabel() {
-      const sizeMap = {
-        small: 'Small (5x5 - 5x10)',
-        medium: 'Medium (10x10 - 10x15)',
-        large: 'Large (10x20 - 10x30)',
-        'extra-large': 'Extra Large (20x20+)',
-      }
-      return sizeMap[this.formData.unitSize] || ''
+    pickupAddress() {
+      const parts = []
+      if (this.formData.pickupStreet) parts.push(this.formData.pickupStreet)
+      if (this.formData.pickupCity) parts.push(this.formData.pickupCity)
+      if (this.formData.pickupState) parts.push(this.formData.pickupState)
+      if (this.formData.pickupZip) parts.push(this.formData.pickupZip)
+      return parts.join(', ')
+    },
+    dropoffAddress() {
+      const parts = []
+      if (this.formData.dropoffStreet) parts.push(this.formData.dropoffStreet)
+      if (this.formData.dropoffCity) parts.push(this.formData.dropoffCity)
+      if (this.formData.dropoffState) parts.push(this.formData.dropoffState)
+      if (this.formData.dropoffZip) parts.push(this.formData.dropoffZip)
+      return parts.join(', ')
     },
     formattedDate() {
       if (this.formData.moveInDate) {
@@ -171,6 +177,11 @@ export default {
         evening: 'Evening (5PM-8PM)',
       }
       return timeMap[this.formData.moveInTime] || ''
+    },
+    numberOfBoxes() {
+      let number
+      if (this.formData.numberOfBoxes) number = this.formData.numberOfBoxes
+      return number
     },
   },
   methods: {

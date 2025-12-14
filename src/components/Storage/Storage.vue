@@ -1,47 +1,9 @@
 <template>
-  <!-- Hero Landing Section -->
-  <SharedPageHero
-    title="Secure <span class='text-orange'>Storage</span> Solutions"
-    subtitle="Climate-controlled, secure storage facilities for your belongings. Short-term or long-term, we've got the perfect space for you."
-    badge="24/7 Security"
-    badgeIcon="fas fa-shield-alt"
-    :features="[
-      'Climate Controlled',
-      '24/7 Access Available',
-      'Video Surveillance',
-      'Month-to-Month Plans',
-    ]"
-    :primaryButton="{
-      text: 'View Pricing',
-      icon: 'fas fa-arrow-down',
-      scrollTo: '.pricing-section',
-    }"
-    :secondaryButton="{
-      text: 'Call Us Now',
-      icon: 'fas fa-phone',
-    }"
-    :stats="[
-      { number: '5K+', label: 'Units Rented' },
-      { number: '99.9%', label: 'Security Rate' },
-      { number: '24/7', label: 'Surveillance' },
-    ]"
-    @secondary-click="callNow"
-  />
-
-  <!-- Pricing Tiers Section -->
-  <section class="pricing-section my-5">
-    <PricingTiers
-      title="Storage <span class='text-orange'>Pricing Plans</span>"
-      subtitle="Flexible month-to-month storage solutions with no long-term commitment required"
-      :tiers="pricingTiers"
-      :columnSize="4"
-      sectionClass="section section-dark"
-      @tier-select="handleTierSelect"
-    />
-  </section>
+  <!-- 3 Steps Section -->
+  <HowItWorksSection />
 
   <!-- Storage Form Section -->
-  <section class="section section-dark py-5 storage-form-section">
+  <section id="form" class="section section-dark py-5 storage-form-section">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -156,9 +118,242 @@
     </div>
   </section>
 
-  <!-- Storage Features with Images -->
-  <section class="section section-darker">
+  <!-- Pricing Tiers Section -->
+  <section class="section section-dark py-5">
     <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">Moving <span class="text-orange">Pricing</span></h2>
+        <p class="section-subtitle">No measuring, No hassle.</p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- 1-Mover Items -->
+        <div class="col-lg-12">
+          <div
+            class="pricing-card"
+            :class="{ active: expandedPricing.includes('1-mover') }"
+            @click="togglePricing('1-mover')"
+          >
+            <div class="pricing-header">
+              <div class="pricing-icon">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="pricing-info">
+                <h3 class="pricing-title">One Mover Item</h3>
+                <p class="pricing-description">
+                  Items that can be safely and efficiently handled by one trained mover.
+                </p>
+              </div>
+              <div class="pricing-price">
+                <span class="price">$22</span>
+                <span class="price-label">Monthly per item</span>
+              </div>
+              <i class="fas fa-chevron-down pricing-toggle"></i>
+            </div>
+            <div class="pricing-body" v-show="expandedPricing.includes('1-mover')">
+              <div class="pricing-items">
+                <div class="item-category">
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Art portfolio, poster tube, picture frame, whiteboard, basket, pillow
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Shoe rack, folding chair, step stool, drying rack, ironing board, broom/Swiffer
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Desk lamp, desk fan, standing fan, small stereo, printer, microwave
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Lacrosse/hockey stick, skateboard, snowboard, violin, guitar
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Dorm/small mirror, small rug, trash can/garbage can
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Laundry basket (empty or full), supply kit box, plastic bin &lt;4 cu ft, box
+                    &lt;4 cu ft
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Carry-on suitcase, duffle, camp/IKEA bag
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Nightstand/end table, ottoman, floor lamp, kitchen chair
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Keyboard (music), cooler, golf bag, step ladder
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Mattress pad, desk/task chair, trunk (light), cart, TV (small), computer monitor
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Bicycle, large suitcase, trash bag
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 2-Mover Items -->
+        <div class="col-lg-12">
+          <div
+            class="pricing-card"
+            :class="{ active: expandedPricing.includes('2-mover') }"
+            @click="togglePricing('2-mover')"
+          >
+            <div class="pricing-header">
+              <div class="pricing-icon">
+                <i class="fas fa-user-group"></i>
+              </div>
+              <div class="pricing-info">
+                <h3 class="pricing-title">Two Mover Items</h3>
+                <p class="pricing-description">
+                  Items that require two trained movers for proper handling and control.
+                </p>
+              </div>
+              <div class="pricing-price">
+                <span class="price">$44</span>
+                <span class="price-label">Monthly per item</span>
+              </div>
+              <i class="fas fa-chevron-down pricing-toggle"></i>
+            </div>
+            <div class="pricing-body" v-show="expandedPricing.includes('2-mover')">
+              <div class="pricing-items">
+                <div class="item-category">
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Mini fridge, water cooler
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Student desk, desk hutch, chest, file cabinet (empty), bookcase, cabinet
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Bed frame (disassembled), queen/full/twin headboard & footboard, box spring (any
+                    size), mattress (any size), futon
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Coffee table, end table (heavy), TV stand, large mirror
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Box 4-6 cu ft, box &gt;6 cu ft, large plastic bin &gt;4 cu ft, shelf &gt;4 cu ft
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Kitchen table, non-folding table, reclining chair, armchair
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Couch/sofa, sectional piece (each)
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Dresser (empty)
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Surfboard
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Guitar amp (large/heavy), clothing rack (wide), large rug
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 3-Mover Items -->
+        <div class="col-lg-12">
+          <div
+            class="pricing-card"
+            :class="{ active: expandedPricing.includes('3-mover') }"
+            @click="togglePricing('3-mover')"
+          >
+            <div class="pricing-header">
+              <div class="pricing-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="pricing-info">
+                <h3 class="pricing-title">Three Mover Items</h3>
+                <p class="pricing-description">
+                  Items that require three trained movers to move safely and smoothly.
+                </p>
+              </div>
+              <div class="pricing-price">
+                <span class="price">$66</span>
+                <span class="price-label">Monthly per item</span>
+              </div>
+              <i class="fas fa-chevron-down pricing-toggle"></i>
+            </div>
+            <div class="pricing-body" v-show="expandedPricing.includes('3-mover')">
+              <div class="pricing-items">
+                <div class="item-category">
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Sectional pieces that are wide/deep, chaise modules, or any sleeper-sofa section
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Couch/sofa with recliners, sleeper mechanism, or solid wood frame
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Large armoire/wardrobe, tall solid-wood bookcase/cabinet (72"+ or very dense)
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Stone/glass tops (dining table, coffee table, desk) when top stays on or is
+                    oversized
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    L-shaped / executive desks, solid-wood student desk with hutch attached
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Dresser that's long/tall solid wood (even empty)
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Large mirror with heavy frame (oversized, fragile)
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Television ~65"+ (especially with narrow stairs or long carry)
+                  </p>
+                  <p>
+                    <i class="fas fa-check text-orange me-2"></i>
+                    Kitchen table non-folding, solid wood (6–8 person)
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 section-subtitle mt-5 text-center text-white">
+          <span class="text-orange">Disclaimer:</span> Final mover requirements may vary based on
+          weight, stairs, access, and safety considerations.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Storage Features with Images -->
+  <!-- <section class="section section-darker"> -->
+  <!-- <div class="container">
       <div class="row align-items-center g-5 mb-5">
         <div class="col-lg-6">
           <div class="feature-image-wrapper">
@@ -218,9 +413,9 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <!-- <div class="row align-items-center g-5">
+  <!-- <div class="row align-items-center g-5">
         <div class="col-lg-6">
           <div class="feature-image-wrapper">
             <div class="feature-image-decoration"></div>
@@ -250,9 +445,24 @@
             </ul>
           </div>
         </div>
-      </div> -->
+      </div>
+    </div> -->
+  <!-- </section> -->
+
+  <div class="container">
+    <div class="py-5">
+      <!-- <h2 class="text-white mb-4 text-center">Our <span class="text-orange">Services</span></h2> -->
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-6 col-lg-4" v-for="benefit in benefits" :key="benefit.title">
+          <BenefitCard
+            :icon="benefit.icon"
+            :title="benefit.title"
+            :description="benefit.description"
+          />
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 
   <!-- FAQ Section -->
   <section class="section section-darker">
@@ -280,25 +490,31 @@
 </template>
 
 <script>
-import SharedPageHero from '../Shared/SharedPageHero.vue'
-import BenefitCards from '../Shared/BenefitCards.vue'
 import PricingTiers from './PricingTiers.vue'
-import TabNavigation from '../Moving/TabNavigation.vue'
-import PersonalInfoTab from '../Moving/PersonalInfoTab.vue'
-import StorageLocationTab from './StorageLocationTab.vue'
-import StorageAdditionalTab from './StorageAdditionalTab.vue'
-import citiesByStateData from '../../../public/assets/JSON/US_CitiesByState.json'
+import BenefitCard from '../Shared/BenefitCards.vue'
+import BenefitCards from '../Shared/BenefitCards.vue'
 import { validators } from '../../utils/validators.js'
+import TabNavigation from '../Moving/TabNavigation.vue'
+import StorageLocationTab from './StorageLocationTab.vue'
+import SharedPageHero from '../Shared/SharedPageHero.vue'
+import PersonalInfoTab from '../Moving/PersonalInfoTab.vue'
+import HowItWorksSection from './HowItWorksSection.vue'
+import StorageAdditionalTab from './StorageAdditionalTab.vue'
+import BackgroundSection from '../Shared/BackgroundSection.vue'
+import citiesByStateData from '../../../public/assets/JSON/US_CitiesByState.json'
 
 export default {
   name: 'Storage',
   components: {
-    SharedPageHero,
-    BenefitCards,
+    BenefitCard,
     PricingTiers,
+    BenefitCards,
     TabNavigation,
+    SharedPageHero,
     PersonalInfoTab,
+    BackgroundSection,
     StorageLocationTab,
+    HowItWorksSection,
     StorageAdditionalTab,
   },
   data() {
@@ -423,7 +639,6 @@ export default {
         moveInTime: '',
         storageDuration: '',
         numberOfBoxes: '',
-        climateControl: false,
         notes: '',
         agreeToPolicy: false,
       },
@@ -442,6 +657,7 @@ export default {
         dropoffCity: '',
         dropoffZip: '',
         moveInDate: '',
+        moveInTime: '',
         storageDuration: '',
         agreeToPolicy: '',
       },
@@ -459,43 +675,66 @@ export default {
         dropoffCity: false,
         dropoffZip: false,
         moveInDate: false,
+        moveInTime: false,
         storageDuration: false,
         agreeToPolicy: false,
       },
       isSubmitting: false,
       submitMessage: '',
       submitSuccess: false,
+      expandedPricing: [],
       activeFaq: null,
       faqs: [
         {
-          question: 'What sizes of storage units do you offer?',
+          question: 'How much does it cost?',
           answer:
-            'We offer units ranging from 5x5 (small closet size) up to 20x20+ (large garage size). Our most popular sizes are 5x10, 10x10, and 10x20. Contact us for a consultation to determine the best size for your needs.',
+            'Pricing is calculated per item, per month and is based on the number of movers required to safely lift and transport each item. Items that can be handled by one mover are priced accordingly, while heavier items that require two or more movers are priced at higher tiers to ensure safe handling for both your belongings and our crews. All items are subject to a minimum four-month storage term. For an estimate of your total cost, please contact our customer service team for assistance.',
         },
         {
-          question: 'Can I access my storage unit anytime?',
+          question: 'Can I use Lift & Shift if I am transferring schools?',
           answer:
-            'Yes! We offer 24/7 access to your storage unit with your personal electronic gate code. Some facilities have specific access hours, but most provide round-the-clock access for your convenience.',
+            'Yes. We can pick up your boxes, store them securely over the summer, and deliver them to your new institution within Texas or Oklahoma when you transfer. Please note that this service is available for boxed items only.',
         },
         {
-          question: 'What is climate-controlled storage?',
+          question:
+            'Will the crew take additional items for storage that were not listed in my order?',
           answer:
-            'Climate-controlled storage maintains a consistent temperature (55-85°F) and humidity level (30-50%) year-round. This protects sensitive items like electronics, furniture, documents, and artwork from extreme temperatures, moisture, and mold.',
+            'Yes. Additional items may be accepted for storage if space and crew capacity allow. If you have last-minute items you would like stored, please contact our customer service team with your reference number so your order can be updated. Items not included in the original order are subject to a twenty dollar per item intake fee and must be communicated before the arrival of your moving crew. This allows us to properly plan labor, inventory tracking, and storage allocation.',
         },
         {
-          question: 'Do you require a long-term contract?',
+          question: 'What should I do if an item is damaged during my move or storage?',
           answer:
-            'No, we offer flexible month-to-month leases with no long-term commitment. You can rent for as long as you need and cancel with just 30 days notice. Perfect for short-term or long-term storage needs.',
+            'If you believe an item was damaged, please submit a claim form through the Message Us section on our Contact Us page. A claim must be submitted before calling so our team can review the details and assist you efficiently. Once your claim has been submitted, you may contact Lift and Shift at 1-800-889-9788 for further assistance. Our customer success team will follow up with you to review your claim and discuss next steps. We also reach out after every move to check on your experience and address any additional concerns.',
         },
         {
-          question: 'Is insurance required for stored items?',
+          question: 'What items cannot be stored?',
           answer:
-            'While not required, we strongly recommend insurance for your stored belongings. We can help you arrange affordable storage insurance, or you can check if your homeowners or renters insurance covers stored items.',
+            'For safety reasons, we cannot store hazardous materials, perishable goods, firearms, ammunition, or illegal items. Please contact us if you are unsure whether an item is eligible for storage.',
         },
         {
-          question: 'What security measures are in place?',
+          question: 'How far in advance do I need to schedule pickup or delivery?',
           answer:
-            'Our facilities feature 24/7 HD video surveillance, electronic gate access codes, individual unit alarms, well-lit premises, and on-site management. Your belongings are monitored and protected around the clock.',
+            'We recommend scheduling pickup and delivery as early as possible to ensure availability. While we do our best to accommodate short-notice requests, scheduling is subject to crew and capacity availability.',
+        },
+      ],
+      benefits: [
+        // {
+        //   icon: 'fas fa-bolt',
+        //   title: 'Emergency Storage',
+        //   description:
+        //     "Need to store your items for a few days or for 2 weeks, we're here for you.",
+        // },
+        {
+          // icon: 'fas fa-hand-holding-heart',
+          title: 'Short Term Storage',
+          description:
+            'Our short-term storage option is designed for temporary needs and requires a minimum 4 months storage term.',
+        },
+        {
+          // icon: 'fas fa-tag',
+          title: 'Long Term Storage',
+          description:
+            'Store your items for as long as needed, from six months to multiple years, in our secure climate-controlled facility.',
         },
       ],
     }
@@ -674,6 +913,15 @@ export default {
         }
       }
 
+      // Validate move-in time (required field)
+      touched.moveInTime = true
+      if (!this.formData.moveInTime) {
+        errors.moveInTime = 'Preferred time is required'
+        isValid = false
+      } else {
+        errors.moveInTime = ''
+      }
+
       this.fieldErrors = errors
       this.fieldTouched = touched
       return isValid
@@ -706,6 +954,14 @@ export default {
     previousTab() {
       if (this.currentTab > 1) {
         this.currentTab--
+      }
+    },
+    togglePricing(tier) {
+      const index = this.expandedPricing.indexOf(tier)
+      if (index > -1) {
+        this.expandedPricing.splice(index, 1)
+      } else {
+        this.expandedPricing.push(tier)
       }
     },
     toggleFaq(index) {
@@ -809,7 +1065,7 @@ export default {
       try {
         const formData = new FormData()
         formData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY)
-        formData.append('form', 'Storage')
+        formData.append('form', 'Storage Reservation')
         formData.append('first_name', this.formData.firstName)
         formData.append('last_name', this.formData.lastName)
         formData.append('phone', this.formData.phone)
@@ -818,18 +1074,17 @@ export default {
         formData.append('pickup_city', this.formData.pickupCity)
         formData.append('pickup_state', this.formData.pickupState)
         formData.append('pickup_zip', this.formData.pickupZip)
-        formData.append('pickup_building', this.formData.pickupBuilding || '')
-        formData.append('pickup_floor', this.formData.pickupFloor || '')
+        formData.append('pickup_building', this.formData.pickupBuilding || 'N/A')
+        formData.append('pickup_floor', this.formData.pickupFloor || 'N/A')
         formData.append('dropoff_street', this.formData.dropoffStreet)
         formData.append('dropoff_city', this.formData.dropoffCity)
         formData.append('dropoff_state', this.formData.dropoffState)
         formData.append('dropoff_zip', this.formData.dropoffZip)
         formData.append('move_in_date', this.formData.moveInDate)
         formData.append('move_in_time', this.formData.moveInTime || 'Not specified')
-        formData.append('number_of_boxes', this.formData.numberOfBoxes || '')
+        formData.append('number_of_boxes', this.formData.numberOfBoxes || 'Not specified')
         formData.append('storage_duration_months', this.formData.storageDuration)
-        formData.append('climate_control', this.formData.climateControl ? 'Yes (+$25/month)' : 'No')
-        formData.append('notes', this.formData.notes)
+        formData.append('notes', this.formData.notes || 'N/A')
 
         // Append uploaded files
         this.uploadedFiles.forEach((file, index) => {
@@ -871,7 +1126,6 @@ export default {
               moveInTime: '',
               storageDuration: '',
               numberOfBoxes: '',
-              climateControl: false,
               notes: '',
               agreeToPolicy: false,
             }
@@ -889,6 +1143,7 @@ export default {
               dropoffCity: '',
               dropoffZip: '',
               moveInDate: '',
+              moveInTime: '',
               storageDuration: '',
               agreeToPolicy: '',
             }
@@ -906,6 +1161,7 @@ export default {
               dropoffCity: false,
               dropoffZip: false,
               moveInDate: false,
+              moveInTime: false,
               storageDuration: false,
               agreeToPolicy: false,
             }
@@ -1041,7 +1297,155 @@ export default {
 
 .feature-list li i {
   color: var(--accent-orange);
-  font-size: 1.2rem;
+}
+/*Pricing Cards */
+.pricing-card {
+  background: var(--secondary-dark);
+  border: 2px solid var(--orange-10);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.pricing-card:hover,
+.pricing-card.active {
+  border-color: var(--accent-orange);
+  box-shadow: 0 10px 30px var(--orange-20);
+}
+
+.pricing-header {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.pricing-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--orange-10);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: var(--accent-orange);
+}
+
+.pricing-info {
+  flex: 1;
+}
+
+.pricing-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-light);
+  margin: 0 0 0.5rem 0;
+}
+
+.pricing-description {
+  color: var(--text-gray);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.pricing-price {
+  text-align: right;
+}
+
+.pricing-price .price {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 900;
+  /* color: var(--accent-orange); */
+  line-height: 1;
+}
+
+.pricing-price .price-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  margin-top: 0.25rem;
+}
+
+.pricing-toggle {
+  color: var(--accent-orange);
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.pricing-card.active .pricing-toggle {
+  transform: rotate(180deg);
+}
+
+.pricing-body {
+  padding: 0 2rem 2rem;
+  animation: slideDown 0.3s ease;
+  border-top: 1px solid var(--orange-10);
+  margin: 0 2rem;
+  padding-top: 1.5rem;
+}
+
+.pricing-items p {
+  color: var(--text-gray);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+}
+
+.pricing-items p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 992px) {
+  .pricing-header {
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+  }
+
+  .pricing-price {
+    grid-column: 1 / 2;
+    grid-row: 2;
+    text-align: left;
+    margin-left: 76px;
+  }
+
+  .pricing-toggle {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    justify-self: end;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-header {
+    padding: 1.5rem;
+  }
+
+  .pricing-body {
+    padding: 0 1.5rem 1.5rem;
+    margin: 0 1.5rem;
+  }
+
+  .pricing-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .pricing-title {
+    font-size: 1.25rem;
+  }
+
+  .pricing-price .price {
+    font-size: 2rem;
+  }
+}
+
+/* ont-size: 1.2rem;
 }
 
 /* FAQ Accordion */
@@ -1152,6 +1556,54 @@ export default {
 
   .feature-title {
     font-size: 1.75rem;
+  }
+}
+
+/* 3 Steps Section */
+.step-card {
+  background: var(--secondary-dark);
+  border: 2px solid var(--orange-10);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.step-card:hover {
+  border-color: var(--accent-orange);
+  box-shadow: 0 10px 30px var(--orange-20);
+  transform: translateY(-5px);
+}
+
+.step-label {
+  color: var(--accent-orange);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.step-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.step-description {
+  color: var(--text-gray);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .step-card {
+    padding: 1.5rem;
+  }
+
+  .step-title {
+    font-size: 1.25rem;
   }
 }
 </style>

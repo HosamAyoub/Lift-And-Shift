@@ -2,25 +2,40 @@
   <section class="hero-section">
     <div class="container">
       <div class="row align-items-center min-vh-100">
-        <div class="col-lg-6 hero-content">
-          <h1 class="hero-title mb-4 fade-in-up">
-            Move Today.
-            <p class="text-orange">Build Tomorrow.</p>
-          </h1>
-          <h4>Residential • Commercial • Campuses</h4>
-          <p class="hero-subtitle my-4">
-            A fast, reliable moving and logistics company based in DFW. We get you settled today, so
-            you can start building your next chapter tomorrow.
-          </p>
-          <div class="hero-buttons">
-            <button class="btn btn-primary btn-lg me-3" @click="getQuote">Get A Quote</button>
-            <a class="btn btn-outline-primary btn-lg" href="tel:+18008899788">Get Contact</a>
+        <div class="col-lg-5 hero-content">
+          <div>
+            <h1 class="hero-title mb-4 fade-in-up">
+              LIFT. SHIFT.
+              <span class="text-orange">Done right.</span>
+            </h1>
+            <h4>Residential • Commercial • Campuses</h4>
+            <p class="hero-subtitle my-4">
+              DFW's reliable moving & storage company, delivering consistent, high quality service
+              through every stage of your move.
+            </p>
+            <div class="hero-buttons mb-3">
+              <QuoteDropdown button-class="btn-lg me-3" />
+              <a class="btn btn-outline-primary btn-lg" href="tel:+18008899788">Get Contact</a>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <h5 class="d-flex align-items-center">
+              <i class="fas fa-check-circle text-orange my-2 me-2"></i>Licensed & Insured
+            </h5>
+            <h5 class="d-flex align-items-center">
+              <i class="fas fa-check-circle text-orange my-2 me-2"></i>Same-Day & Next-Day
+              Availability
+            </h5>
+            <h5 class="d-flex align-items-center">
+              <i class="fas fa-check-circle text-orange my-2 me-2"></i>Local & Interstate Moves
+            </h5>
           </div>
         </div>
-        <div class="col-lg-6 hero-image-wrapper">
+        <div class="col-lg-7 hero-image-wrapper">
           <div class="hero-image">
             <img
-              src="../../../public/assets/images/HeroPhoto.jpg"
+              src="../../../public/assets/images/HeroPhoto.png"
               alt="Lift & Shift Services"
               class="img-fluid"
             />
@@ -38,8 +53,13 @@
 </template>
 
 <script>
+import QuoteDropdown from '../Shared/QuoteDropdown.vue'
+
 export default {
   name: 'HeroSection',
+  components: {
+    QuoteDropdown,
+  },
   methods: {
     getQuote() {
       this.$router.push('/demolition')
@@ -81,14 +101,14 @@ export default {
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 1.5rem;
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: var(--text-gray);
   line-height: 1.8;
 }
@@ -111,7 +131,7 @@ export default {
 
 .hero-image {
   position: relative;
-  animation: float 6s ease-in-out infinite;
+  /* animation: float 6s ease-in-out infinite; */
 }
 
 .hero-image img {
