@@ -454,11 +454,7 @@
       <!-- <h2 class="text-white mb-4 text-center">Our <span class="text-orange">Services</span></h2> -->
       <div class="row g-4 justify-content-center">
         <div class="col-md-6 col-lg-4" v-for="benefit in benefits" :key="benefit.title">
-          <BenefitCard
-            :icon="benefit.icon"
-            :title="benefit.title"
-            :description="benefit.description"
-          />
+          <InfoCard :title="benefit.title" :description="benefit.description" />
         </div>
       </div>
     </div>
@@ -491,8 +487,7 @@
 
 <script>
 import PricingTiers from './PricingTiers.vue'
-import BenefitCard from '../Shared/BenefitCards.vue'
-import BenefitCards from '../Shared/BenefitCards.vue'
+import InfoCard from '../Shared/InfoCard.vue'
 import { validators } from '../../utils/validators.js'
 import TabNavigation from '../Moving/TabNavigation.vue'
 import StorageLocationTab from './StorageLocationTab.vue'
@@ -506,9 +501,8 @@ import citiesByStateData from '../../../public/assets/JSON/US_CitiesByState.json
 export default {
   name: 'Storage',
   components: {
-    BenefitCard,
+    InfoCard,
     PricingTiers,
-    BenefitCards,
     TabNavigation,
     SharedPageHero,
     PersonalInfoTab,
