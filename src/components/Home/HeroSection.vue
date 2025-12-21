@@ -1,51 +1,81 @@
 <template>
-  <section class="hero-section">
+  <section class="hero-section" ref="heroSection">
     <div class="container">
       <div class="row align-items-center min-vh-100">
         <div class="col-lg-5 hero-content">
           <div>
-            <h1 class="hero-title mb-4 fade-in-up">
-              LIFT. SHIFT.
-              <span class="text-orange">Done right.</span>
-            </h1>
-            <h4>Residential • Commercial • Campuses</h4>
-            <p class="hero-subtitle my-4">
-              DFW's reliable moving & storage company, delivering consistent, high quality service
-              through every stage of your move.
-            </p>
-            <div class="hero-buttons mb-3">
-              <QuoteDropdown button-class="btn-lg me-3" />
-              <a class="btn btn-outline-primary btn-lg" href="tel:+18008899788">Get Contact</a>
-            </div>
+            <transition name="fade-up" appear>
+              <h1 class="hero-title mb-4" v-if="show">
+                LIFT. SHIFT.
+                <span class="text-orange">Done right.</span>
+              </h1>
+            </transition>
+            <transition name="fade-up" appear>
+              <h4 v-if="show" :style="{ transitionDelay: '0.1s' }">
+                Residential • Commercial • Campuses
+              </h4>
+            </transition>
+            <transition name="fade-up" appear>
+              <p class="hero-subtitle my-4" v-if="show" :style="{ transitionDelay: '0.2s' }">
+                DFW's reliable moving & storage company, delivering consistent, high quality service
+                through every stage of your move.
+              </p>
+            </transition>
+            <transition name="fade-up" appear>
+              <div class="hero-buttons mb-3" v-if="show" :style="{ transitionDelay: '0.3s' }">
+                <QuoteDropdown button-class="btn-lg me-3" />
+                <a class="btn btn-outline-primary btn-lg" href="tel:+18008899788">Get Contact</a>
+              </div>
+            </transition>
           </div>
 
-          <div class="mt-4">
-            <h5 class="d-flex align-items-center">
-              <i class="fas fa-check-circle text-orange my-2 me-2"></i>Licensed & Insured
-            </h5>
-            <h5 class="d-flex align-items-center">
-              <i class="fas fa-check-circle text-orange my-2 me-2"></i>Same-Day & Next-Day
-              Availability
-            </h5>
-            <h5 class="d-flex align-items-center">
-              <i class="fas fa-check-circle text-orange my-2 me-2"></i>Local & Interstate Moves
-            </h5>
+          <div class="mt-4 features-list">
+            <transition name="fade-up" appear>
+              <h5
+                class="d-flex align-items-center"
+                v-if="show"
+                :style="{ transitionDelay: '0.4s' }"
+              >
+                <i class="fas fa-check-circle text-orange my-2 me-2"></i>Licensed & Insured
+              </h5>
+            </transition>
+            <transition name="fade-up" appear>
+              <h5
+                class="d-flex align-items-center"
+                v-if="show"
+                :style="{ transitionDelay: '0.5s' }"
+              >
+                <i class="fas fa-check-circle text-orange my-2 me-2"></i>Same-Day & Next-Day
+                Availability
+              </h5>
+            </transition>
+            <transition name="fade-up" appear>
+              <h5
+                class="d-flex align-items-center"
+                v-if="show"
+                :style="{ transitionDelay: '0.6s' }"
+              >
+                <i class="fas fa-check-circle text-orange my-2 me-2"></i>Local & Interstate Moves
+              </h5>
+            </transition>
           </div>
         </div>
         <div class="col-lg-7 hero-image-wrapper">
-          <div class="hero-image">
-            <img
-              src="../../../public/assets/images/HeroPhoto.png"
-              alt="Lift & Shift Services"
-              class="img-fluid"
-            />
-            <!-- <div class="hero-badge">
+          <transition name="fade-slide" appear>
+            <div class="hero-image" v-if="show" :style="{ transitionDelay: '0.3s' }">
+              <img
+                src="../../../public/assets/images/HeroPhoto.png"
+                alt="Lift & Shift Services"
+                class="img-fluid"
+              />
+              <!-- <div class="hero-badge">
               <div class="badge-content">
                 <span class="badge-number">24/7</span>
                 <span class="badge-text">Available</span>
               </div>
             </div> -->
-          </div>
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -59,6 +89,17 @@ export default {
   name: 'HeroSection',
   components: {
     QuoteDropdown,
+  },
+  data() {
+    return {
+      show: false,
+    }
+  },
+  mounted() {
+    // Trigger animations on mount
+    setTimeout(() => {
+      this.show = true
+    }, 100)
   },
   methods: {
     getQuote() {
@@ -138,6 +179,11 @@ export default {
   border-radius: var(--radius-xl);
   width: 100%;
   height: auto;
+  transition: transform 0.3s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.02);
 }
 
 .hero-badge {
@@ -172,6 +218,51 @@ export default {
   text-transform: uppercase;
 }
 
+/* Transition Animations */
+.fade-up-enter-active {
+  transition: all 0.8s ease-out;
+}
+
+.fade-up-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.fade-up-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-slide-enter-active {
+  transition: all 1s ease-out;
+}
+
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateX(50px) scale(0.95);
+}
+
+.fade-slide-enter-to {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.features-list h5 {
+  transition: all 0.3s ease;
+}
+
+.features-list h5:hover {
+  transform: translateX(5px);
+}
+
+.features-list h5:hover i {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.features-list i {
+  transition: transform 0.3s ease;
+}
+
 /* Responsive Design */
 @media (max-width: 991px) {
   .hero-title {
@@ -186,6 +277,10 @@ export default {
     bottom: var(--gap-xl);
     right: var(--gap-xl);
     padding: var(--gap-lg);
+  }
+
+  .fade-slide-enter-from {
+    transform: translateY(50px) scale(0.95);
   }
 }
 

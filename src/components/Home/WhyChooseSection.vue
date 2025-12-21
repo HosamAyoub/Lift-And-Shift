@@ -102,7 +102,7 @@ export default {
             'We put your trust first by doing the right thing and delivering dependable service every time.',
         },
         {
-          icon: 'fas fa-dumbbell',
+          icon: 'fas fa-brain',
           title: 'Built for Peace of Mind',
           description:
             'Your move is handled with care efficiency and professionalism to ensure a smooth stress free experience.',

@@ -27,10 +27,9 @@
               <p class="text-gray">
                 Based in the DFW area and serving clients everywhere, we combine speed and
                 efficiency with attention to detail and respect for every space we enter. At the
-                same time, we believe great service starts with strong people and strong
-                relationships. By investing in our team and our community, we are building more than
-                a service company. We are building a lasting brand designed to grow, serve, and
-                create value for years to come.
+                same time, we believe great service starts strong relationships. By investing in our
+                team and our community, we are building more than a service company. We are building
+                a lasting brand designed to grow, serve, and create value for years to come.
               </p>
             </div>
 

@@ -98,7 +98,7 @@
                 </li>
                 <li class="align-items-center">
                   <i class="fas fa-clock"></i>
-                  <span>24/7 Available Service</span>
+                  <span>Mon - Sat: 8am - 6pm</span>
                 </li>
                 <li class="align-items-center">
                   <i class="fas fa-phone"></i>

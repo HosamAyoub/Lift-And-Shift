@@ -87,14 +87,18 @@
             @blur="validateField('position')"
           >
             <option value="">Select a position...</option>
-            <option value="mover">Mover</option>
-            <option value="driver">Driver</option>
-            <option value="packer">Packer</option>
-            <option value="warehouse">Warehouse Associate</option>
-            <option value="supervisor">Team Supervisor</option>
-            <option value="customer-service">Customer Service</option>
-            <option value="office">Office Administrator</option>
-            <option value="other">Other</option>
+            <option value="Mover / Hauler / Driver">Mover / Hauler / Driver</option>
+            <option value="Mover with Truck">Mover with Truck</option>
+            <option value="Lead Mover / Crew Lead">Lead Mover / Crew Lead</option>
+            <option value="Dispatcher / Scheduler">Dispatcher / Scheduler</option>
+            <option value="Operations Manager">Operations Manager</option>
+            <option value="Demolition Technician">Demolition Technician</option>
+            <option value="Customer Service Representative">Customer Service Representative</option>
+            <option value="Sales Representative">Sales Representative</option>
+            <option value="Regional On-Site Moving Manager">Regional On-Site Moving Manager</option>
+            <option value="Marketing Manager">Marketing Manager</option>
+            <option value="Digital Marketing Specialist">Digital Marketing Specialist</option>
+            <option value="Internship (Summer)">Internship (Summer)</option>
           </select>
           <div v-if="fieldTouched.position && fieldErrors.position" class="field-error">
             {{ fieldErrors.position }}

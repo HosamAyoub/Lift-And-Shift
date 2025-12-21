@@ -344,8 +344,9 @@
           </div>
         </div>
         <div class="col-lg-12 section-subtitle mt-5 text-center text-white">
-          <span class="text-orange">Disclaimer:</span> Final mover requirements may vary based on
-          weight, stairs, access, and safety considerations.
+          <span class="text-orange">Disclaimer:</span> Mover requirements are subject to change
+          based on item weight, stair access, site conditions, and safety factors. A maximum of 50
+          lbs per mover applies per item.
         </div>
       </div>
     </div>

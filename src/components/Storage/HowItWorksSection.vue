@@ -24,7 +24,8 @@
             <h3 class="step-title">Pickup & Secure Storage</h3>
             <p class="step-description">
               Our team picks up your items from your location and stores them safely in our
-              <b class="text-orange">climate controlled facility</b>. Minimum 4-month storage term
+              <b class="text-orange">climate controlled facility</b>. Free delivery applies to
+              scheduled pick-up dates within the service area. A minimum 4-month storage term
               applies.
             </p>
           </div>
@@ -35,9 +36,9 @@
             <div class="step-label rounded-pill text-center">Step 3</div>
             <h3 class="step-title">Deliver Anywhere</h3>
             <p class="step-description">
-              When you're ready, we deliver your belongings to your new location.
+              When you're ready, your belongings are delivered to your new location.
               <b class="text-orange">Free delivery</b>
-              within the service area.
+              applies to scheduled drop-off dates within the service area.
             </p>
           </div>
         </div>
