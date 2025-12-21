@@ -162,21 +162,7 @@
               </p>
             </div>
 
-            <Form
-              :formData="formData"
-              :fieldErrors="fieldErrors"
-              :fieldTouched="fieldTouched"
-              :uploadedFiles="uploadedFiles"
-              :isSubmitting="isSubmitting"
-              :submitMessage="submitMessage"
-              :submitSuccess="submitSuccess"
-              @update:formData="updateFormData"
-              @update:fieldErrors="updateFieldErrors"
-              @update:fieldTouched="updateFieldTouched"
-              @update:uploadedFiles="updateUploadedFiles"
-              @submit="handleSubmit"
-              @validation-failed="handleValidationFailed"
-            />
+            <Form />
           </div>
         </div>
       </div>
@@ -185,7 +171,6 @@
 </template>
 
 <script>
-import { nextTick } from 'vue'
 import FeatureCards from '../Shared/FeatureCards.vue'
 import Form from './Form.vue'
 
@@ -199,26 +184,7 @@ export default {
     return {
       heroImage: '/assets/images/Hero.png',
       careerImage: '/assets/images/Content.png',
-      resetTimeout: null,
       benefits: [
-        // {
-        //   icon: 'fas fa-dollar-sign',
-        //   title: 'Competitive Pay',
-        //   description:
-        //     'We offer industry-leading compensation packages with performance bonuses and overtime opportunities.',
-        // },
-        // {
-        //   icon: 'fas fa-heart',
-        //   title: 'Health Benefits',
-        //   description:
-        //     'Comprehensive health, dental, and vision insurance for you and your family.',
-        // },
-        // {
-        //   icon: 'fas fa-graduation-cap',
-        //   title: 'Training & Growth',
-        //   description:
-        //     'Professional development programs and clear career advancement paths for all employees.',
-        // },
         {
           icon: 'fas fa-calendar-check',
           title: 'Flexible Schedule',
@@ -237,38 +203,6 @@ export default {
             'Earn additional income through tips, performance bonuses, and recognition programs.',
         },
       ],
-      formData: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        position: '',
-        experience: '',
-        availability: '',
-        message: '',
-        agreeToPolicy: false,
-      },
-      uploadedFiles: [],
-      fieldErrors: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        position: '',
-        resume: '',
-        agreeToPolicy: '',
-      },
-      fieldTouched: {
-        firstName: false,
-        lastName: false,
-        email: false,
-        phone: false,
-        position: false,
-        agreeToPolicy: false,
-      },
-      isSubmitting: false,
-      submitMessage: '',
-      submitSuccess: false,
     }
   },
   methods: {
@@ -281,126 +215,6 @@ export default {
         formSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     },
-    updateFormData(data) {
-      this.formData = data
-    },
-    updateFieldErrors(errors) {
-      this.fieldErrors = errors
-    },
-    updateFieldTouched(touched) {
-      this.fieldTouched = touched
-    },
-    updateUploadedFiles(files) {
-      this.uploadedFiles = files
-    },
-    handleValidationFailed() {
-      this.submitSuccess = false
-      this.submitMessage = 'Please fix the errors before submitting'
-
-      // Clear any existing timeout
-      if (this.resetTimeout) {
-        clearTimeout(this.resetTimeout)
-      }
-
-      // Clear message after 5 seconds
-      this.resetTimeout = setTimeout(() => {
-        this.submitMessage = ''
-        this.resetTimeout = null
-      }, 5000)
-    },
-    async handleSubmit() {
-      if (this.isSubmitting) return
-
-      this.isSubmitting = true
-      this.submitMessage = ''
-
-      try {
-        const formDataToSend = new FormData()
-        formDataToSend.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY)
-        formDataToSend.append('form', 'Careers')
-        formDataToSend.append('first_name', this.formData.firstName)
-        formDataToSend.append('last_name', this.formData.lastName)
-        formDataToSend.append('email', this.formData.email)
-        formDataToSend.append('phone', this.formData.phone)
-        formDataToSend.append('position', this.formData.position)
-        formDataToSend.append('experience', this.formData.experience)
-        formDataToSend.append('availability', this.formData.availability)
-        formDataToSend.append('message', this.formData.message)
-
-        this.uploadedFiles.forEach((file, index) => {
-          formDataToSend.append(`resume_${index}`, file)
-        })
-
-        const response = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: formDataToSend,
-        })
-
-        const data = await response.json()
-
-        if (data.success) {
-          this.submitSuccess = true
-          this.submitMessage =
-            'Thank you for your application! We will review it and get back to you within 48 hours.'
-
-          // Clear any existing timeout
-          if (this.resetTimeout) {
-            clearTimeout(this.resetTimeout)
-          }
-
-          this.resetTimeout = setTimeout(() => {
-            this.formData = {
-              firstName: '',
-              lastName: '',
-              email: '',
-              phone: '',
-              position: '',
-              experience: '',
-              availability: '',
-              message: '',
-              agreeToPolicy: false,
-            }
-            this.uploadedFiles = []
-            this.fieldErrors = {
-              firstName: '',
-              lastName: '',
-              email: '',
-              phone: '',
-              position: '',
-              resume: '',
-              agreeToPolicy: '',
-            }
-            this.fieldTouched = {
-              firstName: false,
-              lastName: false,
-              email: false,
-              phone: false,
-              position: false,
-              agreeToPolicy: false,
-            }
-            this.submitMessage = ''
-            this.submitSuccess = false
-            this.resetTimeout = null
-          }, 5000)
-        } else {
-          this.submitSuccess = false
-          this.submitMessage =
-            'Something went wrong. Please try again or call us at (800) 889-9788.'
-        }
-      } catch (error) {
-        this.submitSuccess = false
-        this.submitMessage = 'Network error. Please check your connection and try again.'
-      } finally {
-        this.isSubmitting = false
-      }
-    },
-  },
-  beforeUnmount() {
-    // Clear timeout when component is destroyed
-    if (this.resetTimeout) {
-      clearTimeout(this.resetTimeout)
-      this.resetTimeout = null
-    }
   },
 }
 </script>

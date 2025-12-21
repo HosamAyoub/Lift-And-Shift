@@ -18,7 +18,7 @@
             <h3 class="text-white mb-4">Get Your Instant Estimate</h3>
             <p class="text-gray small mb-4">
               Adjust the slider to match your load size or click the truck segments. Upload photos
-              for a more accurate quote.
+              for a more accurate quote. Most projects fall within ±15% of this range once photos are reviewed.
             </p>
 
             <!-- Truck Container Visualization -->

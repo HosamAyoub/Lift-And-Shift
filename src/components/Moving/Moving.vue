@@ -286,6 +286,7 @@ export default {
         email: '',
         phone: '',
         helpType: '',
+        pickupStreet: '',
         pickupCity: '',
         pickupState: '',
         pickupZip: '',
@@ -293,6 +294,7 @@ export default {
         pickupFloor: '',
         pickupDate: '',
         pickupTime: '',
+        dropoffStreet: '',
         dropoffCity: '',
         dropoffState: '',
         dropoffZip: '',
@@ -308,11 +310,13 @@ export default {
         email: '',
         phone: '',
         helpType: '',
+        pickupStreet: '',
         pickupCity: '',
         pickupState: '',
         pickupZip: '',
         pickupDate: '',
         pickupTime: '',
+        dropoffStreet: '',
         dropoffCity: '',
         dropoffState: '',
         dropoffZip: '',
@@ -323,11 +327,13 @@ export default {
         email: false,
         phone: false,
         helpType: false,
+        pickupStreet: false,
         pickupCity: false,
         pickupState: false,
         pickupZip: false,
         pickupDate: false,
         pickupTime: false,
+        dropoffStreet: false,
         dropoffCity: false,
         dropoffState: false,
         dropoffZip: false,
@@ -551,6 +557,7 @@ export default {
         formDataToSend.append('email', this.formData.email)
         formDataToSend.append('phone', this.formData.phone)
         formDataToSend.append('service_type', this.formData.helpType)
+        formDataToSend.append('pickup_street', this.formData.pickupStreet || 'N/A')
         formDataToSend.append('pickup_city', this.formData.pickupCity)
         formDataToSend.append('pickup_state', this.formData.pickupState)
         formDataToSend.append('pickup_zip', this.formData.pickupZip)
@@ -558,6 +565,7 @@ export default {
         formDataToSend.append('pickup_floor', this.formData.pickupFloor || 'N/A')
         formDataToSend.append('pickup_date', this.formData.pickupDate)
         formDataToSend.append('pickup_time', this.formData.pickupTime)
+        formDataToSend.append('dropoff_street', this.formData.dropoffStreet || 'N/A')
         formDataToSend.append('dropoff_city', this.formData.dropoffCity)
         formDataToSend.append('dropoff_state', this.formData.dropoffState)
         formDataToSend.append('dropoff_zip', this.formData.dropoffZip)

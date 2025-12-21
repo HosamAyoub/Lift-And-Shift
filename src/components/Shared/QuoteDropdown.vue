@@ -98,6 +98,7 @@ export default {
 .quote-dropdown .btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--gap-sm);
   white-space: nowrap;
 }

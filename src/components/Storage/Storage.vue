@@ -1059,7 +1059,7 @@ export default {
       try {
         const formData = new FormData()
         formData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY)
-        formData.append('form', 'Storage Reservation')
+        formData.append('form', 'Storage')
         formData.append('first_name', this.formData.firstName)
         formData.append('last_name', this.formData.lastName)
         formData.append('phone', this.formData.phone)

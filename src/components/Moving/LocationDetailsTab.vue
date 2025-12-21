@@ -6,9 +6,23 @@
     <div class="row g-4">
       <!-- Pickup Location -->
       <div class="col-12">
-        <h5 class="text-white mb-3">
-          <i class="fas fa-arrow-up text-orange me-2"></i>Pickup Location
-        </h5>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="text-white mb-0">
+            <i class="fas fa-arrow-up text-orange me-2"></i>Pickup Location
+          </h5>
+          <button
+            type="button"
+            @click="useMyLocation"
+            :disabled="isLoadingLocation"
+            class="btn btn-outline-orange btn-sm"
+          >
+            <i
+              class="fas"
+              :class="isLoadingLocation ? 'fa-spinner fa-spin' : 'fa-location-crosshairs'"
+            ></i>
+            {{ isLoadingLocation ? 'Getting location...' : 'Use my location' }}
+          </button>
+        </div>
         <div class="row g-3">
           <div class="col-md-8">
             <label class="text-white fw-bold d-block mb-2">
@@ -283,6 +297,8 @@
 </template>
 
 <script>
+import { USE_MOCK_LOCATION, MOCK_COORDINATES } from '../../utils/mockLocation.js'
+
 export default {
   name: 'LocationDetailsTab',
   props: {
@@ -311,6 +327,7 @@ export default {
         { value: 'midday', label: 'Mid-day (12PM - 3PM)', icon: 'fas fa-cloud-sun' },
         { value: 'afternoon', label: 'Afternoon (3PM - 6PM)', icon: 'fas fa-cloud' },
       ],
+      isLoadingLocation: false,
     }
   },
   computed: {
@@ -344,6 +361,86 @@ export default {
     clearFieldError(field) {
       const updatedErrors = { ...this.fieldErrors, [field]: '' }
       this.$emit('update:fieldErrors', updatedErrors)
+    },
+    async useMyLocation() {
+      if (!USE_MOCK_LOCATION && !navigator.geolocation) {
+        alert('Geolocation is not supported by your browser')
+        return
+      }
+
+      this.isLoadingLocation = true
+
+      try {
+        let latitude, longitude
+
+        if (USE_MOCK_LOCATION) {
+          // Use mock coordinates for testing
+          latitude = MOCK_COORDINATES.latitude
+          longitude = MOCK_COORDINATES.longitude
+        } else {
+          // Use actual geolocation
+          const position = await new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject, {
+              enableHighAccuracy: true,
+              timeout: 10000,
+              maximumAge: 0,
+            })
+          })
+          latitude = position.coords.latitude
+          longitude = position.coords.longitude
+        }
+
+        // Use Nominatim (OpenStreetMap) for reverse geocoding
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`,
+          {
+            headers: {
+              'Accept-Language': 'en',
+            },
+          },
+        )
+
+        if (!response.ok) {
+          throw new Error('Failed to get address from coordinates')
+        }
+
+        const data = await response.json()
+        const address = data.address
+
+        // Extract address components
+        const street = [address.house_number, address.road || address.street]
+          .filter(Boolean)
+          .join(' ')
+
+        const city = address.city || address.town || address.village || address.municipality || ''
+
+        const state = address.state || ''
+        const zip = address.postcode || ''
+
+        // Batch update all form fields at once to prevent overwriting
+        const updated = {
+          ...this.formData,
+          ...(street && { pickupStreet: street }),
+          ...(city && { pickupCity: city }),
+          ...(state && { pickupState: state }),
+          ...(zip && { pickupZip: zip }),
+        }
+
+        this.$emit('update:formData', updated)
+      } catch (error) {
+        if (error.code === 1) {
+          alert('Location access denied. Please enable location services and try again.')
+        } else if (error.code === 2) {
+          alert('Location information unavailable. Please enter your address manually.')
+        } else if (error.code === 3) {
+          alert('Location request timed out. Please try again or enter manually.')
+        } else {
+          alert('Failed to get your location. Please enter your address manually.')
+        }
+        console.error('Geolocation error:', error)
+      } finally {
+        this.isLoadingLocation = false
+      }
     },
   },
 }
@@ -411,5 +508,28 @@ export default {
   .time-options {
     grid-template-columns: 1fr;
   }
+}
+
+.btn-outline-orange {
+  color: var(--accent-orange);
+  border: 2px solid var(--accent-orange);
+  background: transparent;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-outline-orange:hover:not(:disabled) {
+  background: var(--accent-orange);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--orange-20);
+}
+
+.btn-outline-orange:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 </style>

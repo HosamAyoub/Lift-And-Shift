@@ -200,10 +200,15 @@ export default {
 
   .hero-buttons {
     flex-direction: column;
+    gap: var(--gap-md);
   }
 
-  .hero-buttons .btn {
-    width: 100%;
+  .hero-buttons .btn,
+  .hero-buttons > *,
+  .hero-buttons > * > .btn,
+  .hero-buttons :deep(.btn) {
+    width: 100% !important;
+    margin: 0 !important;
   }
 }
 </style>

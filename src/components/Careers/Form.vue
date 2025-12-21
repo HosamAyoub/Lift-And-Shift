@@ -1,18 +1,19 @@
 <template>
   <div class="careers-form">
     <form @submit.prevent="handleSubmit">
-      <div class="row g-4">
+      <div class="row g-3">
         <!-- First Name -->
         <div class="col-md-6">
-          <label class="form-label fw-bold"> First Name <span class="text-orange">*</span> </label>
+          <label class="form-label text-white fw-bold">
+            First Name <span class="text-orange">*</span>
+          </label>
           <input
+            v-model="form.firstName"
             type="text"
-            :value="formData.firstName"
-            @input="updateFormField('firstName', $event.target.value)"
-            @blur="handleBlur('firstName')"
             class="form-control"
             :class="{ invalid: fieldTouched.firstName && fieldErrors.firstName }"
             placeholder="John"
+            @blur="validateField('firstName')"
           />
           <div v-if="fieldTouched.firstName && fieldErrors.firstName" class="field-error">
             {{ fieldErrors.firstName }}
@@ -21,15 +22,16 @@
 
         <!-- Last Name -->
         <div class="col-md-6">
-          <label class="form-label fw-bold"> Last Name <span class="text-orange">*</span> </label>
+          <label class="form-label text-white fw-bold">
+            Last Name <span class="text-orange">*</span>
+          </label>
           <input
+            v-model="form.lastName"
             type="text"
-            :value="formData.lastName"
-            @input="updateFormField('lastName', $event.target.value)"
-            @blur="handleBlur('lastName')"
             class="form-control"
             :class="{ invalid: fieldTouched.lastName && fieldErrors.lastName }"
             placeholder="Doe"
+            @blur="validateField('lastName')"
           />
           <div v-if="fieldTouched.lastName && fieldErrors.lastName" class="field-error">
             {{ fieldErrors.lastName }}
@@ -38,17 +40,16 @@
 
         <!-- Email -->
         <div class="col-md-6">
-          <label class="form-label fw-bold">
+          <label class="form-label text-white fw-bold">
             Email Address <span class="text-orange">*</span>
           </label>
           <input
+            v-model="form.email"
             type="email"
-            :value="formData.email"
-            @input="updateFormField('email', $event.target.value)"
-            @blur="handleBlur('email')"
             class="form-control"
             :class="{ invalid: fieldTouched.email && fieldErrors.email }"
             placeholder="john.doe@example.com"
+            @blur="validateField('email')"
           />
           <div v-if="fieldTouched.email && fieldErrors.email" class="field-error">
             {{ fieldErrors.email }}
@@ -57,17 +58,17 @@
 
         <!-- Phone -->
         <div class="col-md-6">
-          <label class="form-label fw-bold">
+          <label class="form-label text-white fw-bold">
             Phone Number <span class="text-orange">*</span>
           </label>
           <input
+            v-model="form.phone"
             type="tel"
-            :value="formData.phone"
-            @input="handlePhoneInput($event.target.value)"
-            @blur="handleBlur('phone')"
             class="form-control"
             :class="{ invalid: fieldTouched.phone && fieldErrors.phone }"
             placeholder="(555) 123-4567"
+            @input="handlePhoneInput"
+            @blur="validateField('phone')"
           />
           <div v-if="fieldTouched.phone && fieldErrors.phone" class="field-error">
             {{ fieldErrors.phone }}
@@ -76,15 +77,14 @@
 
         <!-- Position -->
         <div class="col-md-6">
-          <label class="form-label fw-bold">
+          <label class="form-label text-white fw-bold">
             Position Applied For <span class="text-orange">*</span>
           </label>
           <select
-            :value="formData.position"
-            @change="updateFormField('position', $event.target.value)"
-            @blur="handleBlur('position')"
+            v-model="form.position"
             class="form-control form-select"
             :class="{ invalid: fieldTouched.position && fieldErrors.position }"
+            @blur="validateField('position')"
           >
             <option value="">Select a position...</option>
             <option value="mover">Mover</option>
@@ -103,12 +103,8 @@
 
         <!-- Years of Experience -->
         <div class="col-md-6">
-          <label class="form-label fw-bold">Years of Experience</label>
-          <select
-            :value="formData.experience"
-            @change="updateFormField('experience', $event.target.value)"
-            class="form-control form-select"
-          >
+          <label class="form-label text-white fw-bold">Years of Experience</label>
+          <select v-model="form.experience" class="form-control form-select">
             <option value="">Select experience...</option>
             <option value="0-1">Less than 1 year</option>
             <option value="1-3">1-3 years</option>
@@ -120,12 +116,8 @@
 
         <!-- Availability -->
         <div class="col-12">
-          <label class="form-label fw-bold">Availability</label>
-          <select
-            :value="formData.availability"
-            @change="updateFormField('availability', $event.target.value)"
-            class="form-control form-select"
-          >
+          <label class="form-label text-white fw-bold">Availability</label>
+          <select v-model="form.availability" class="form-control form-select">
             <option value="">Select availability...</option>
             <option value="immediate">Immediate</option>
             <option value="2-weeks">2 weeks notice</option>
@@ -159,10 +151,9 @@
 
         <!-- Additional Message -->
         <div class="col-12">
-          <label class="form-label fw-bold">Cover Letter / Additional Information</label>
+          <label class="form-label text-white fw-bold">Cover Letter / Additional Information</label>
           <textarea
-            :value="formData.message"
-            @input="updateFormField('message', $event.target.value)"
+            v-model="form.message"
             class="form-control"
             rows="5"
             placeholder="Tell us why you'd be a great fit for our team..."
@@ -176,9 +167,9 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                :checked="formData.agreeToPolicy"
-                @change="updateFormField('agreeToPolicy', $event.target.checked)"
+                v-model="form.agreeToPolicy"
                 id="agreeToPolicyCareers"
+                @change="clearFieldError('agreeToPolicy')"
               />
               <label class="form-check-label text-white" for="agreeToPolicyCareers">
                 I agree to the Lift & Shift Privacy Policy and Terms of Service
@@ -190,15 +181,16 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Submit Button -->
-      <div class="d-flex justify-content-end mt-4">
-        <button type="submit" class="btn btn-primary btn-lg" :disabled="isSubmitting">
-          <i v-if="!isSubmitting" class="fas fa-paper-plane me-2"></i>
-          <span v-if="isSubmitting" class="spinner-border spinner-border-sm me-2"></span>
-          {{ isSubmitting ? 'Submitting...' : 'Submit Application' }}
-        </button>
+        <!-- Submit Button -->
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-lg w-100" :disabled="isSubmitting">
+            <span v-if="!isSubmitting">
+              <i class="fas fa-paper-plane me-2"></i>Submit Application
+            </span>
+            <span v-else> <i class="fas fa-spinner fa-spin me-2"></i>Submitting... </span>
+          </button>
+        </div>
       </div>
 
       <!-- Success/Error Messages -->
@@ -229,164 +221,231 @@ export default {
   components: {
     FileUpload,
   },
-  props: {
-    formData: {
-      type: Object,
-      required: true,
-    },
-    fieldErrors: {
-      type: Object,
-      required: true,
-    },
-    fieldTouched: {
-      type: Object,
-      required: true,
-    },
-    uploadedFiles: {
-      type: Array,
-      required: true,
-    },
-    isSubmitting: {
-      type: Boolean,
-      default: false,
-    },
-    submitMessage: {
-      type: String,
-      default: '',
-    },
-    submitSuccess: {
-      type: Boolean,
-      default: false,
-    },
+  data() {
+    return {
+      form: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        position: '',
+        experience: '',
+        availability: '',
+        message: '',
+        agreeToPolicy: false,
+      },
+      uploadedFiles: [],
+      fieldErrors: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        position: '',
+        resume: '',
+        agreeToPolicy: '',
+      },
+      fieldTouched: {
+        firstName: false,
+        lastName: false,
+        email: false,
+        phone: false,
+        position: false,
+        agreeToPolicy: false,
+      },
+      isSubmitting: false,
+      submitMessage: '',
+      submitSuccess: false,
+    }
   },
-  emits: [
-    'update:formData',
-    'update:fieldErrors',
-    'update:fieldTouched',
-    'update:uploadedFiles',
-    'submit',
-    'validation-failed',
-  ],
   methods: {
-    updateFormField(field, value) {
-      this.$emit('update:formData', { ...this.formData, [field]: value })
-      this.clearFieldError(field)
-    },
-    handlePhoneInput(value) {
-      const formatted = validators.phone.format(value)
-      this.$emit('update:formData', { ...this.formData, phone: formatted })
+    handlePhoneInput() {
+      this.form.phone = validators.phone.format(this.form.phone)
       this.clearFieldError('phone')
-    },
-    handleBlur(field) {
-      const touched = { ...this.fieldTouched, [field]: true }
-      this.$emit('update:fieldTouched', touched)
-      this.validateField(field)
     },
     clearFieldError(field) {
       if (this.fieldErrors[field]) {
-        this.$emit('update:fieldErrors', { ...this.fieldErrors, [field]: '' })
+        this.fieldErrors[field] = ''
       }
     },
     validateField(field) {
-      const errors = { ...this.fieldErrors }
+      this.fieldTouched[field] = true
 
       switch (field) {
         case 'firstName':
         case 'lastName':
-          const nameResult = validators.name.validate(this.formData[field])
-          errors[field] = nameResult.error
+          const nameResult = validators.name.validate(this.form[field])
+          this.fieldErrors[field] = nameResult.error
           break
         case 'email':
-          const emailResult = validators.email.validate(this.formData[field], true)
-          errors[field] = emailResult.error
+          const emailResult = validators.email.validate(this.form[field], true)
+          this.fieldErrors[field] = emailResult.error
           break
         case 'phone':
-          const phoneResult = validators.phone.validate(this.formData[field], true)
-          errors[field] = phoneResult.error
+          const phoneResult = validators.phone.validate(this.form[field], true)
+          this.fieldErrors[field] = phoneResult.error
           break
         case 'position':
-          errors[field] = !this.formData[field] ? 'Please select a position' : ''
+          this.fieldErrors[field] = !this.form[field] ? 'Please select a position' : ''
+          break
+        case 'agreeToPolicy':
+          this.fieldErrors[field] = !this.form[field]
+            ? 'You must agree to the Privacy Policy and Terms of Service'
+            : ''
           break
       }
-
-      this.$emit('update:fieldErrors', errors)
     },
     validateForm() {
       let isValid = true
-      const errors = { ...this.fieldErrors }
-      const touched = { ...this.fieldTouched }
+
+      // Mark all fields as touched
+      Object.keys(this.fieldTouched).forEach((key) => {
+        this.fieldTouched[key] = true
+      })
 
       // Validate first name
-      touched.firstName = true
-      const firstNameResult = validators.name.validate(this.formData.firstName)
-      errors.firstName = firstNameResult.error
+      const firstNameResult = validators.name.validate(this.form.firstName)
+      this.fieldErrors.firstName = firstNameResult.error
       if (!firstNameResult.valid) isValid = false
 
       // Validate last name
-      touched.lastName = true
-      const lastNameResult = validators.name.validate(this.formData.lastName)
-      errors.lastName = lastNameResult.error
+      const lastNameResult = validators.name.validate(this.form.lastName)
+      this.fieldErrors.lastName = lastNameResult.error
       if (!lastNameResult.valid) isValid = false
 
       // Validate email
-      touched.email = true
-      const emailResult = validators.email.validate(this.formData.email, true)
-      errors.email = emailResult.error
+      const emailResult = validators.email.validate(this.form.email, true)
+      this.fieldErrors.email = emailResult.error
       if (!emailResult.valid) isValid = false
 
       // Validate phone
-      touched.phone = true
-      const phoneResult = validators.phone.validate(this.formData.phone, true)
-      errors.phone = phoneResult.error
+      const phoneResult = validators.phone.validate(this.form.phone, true)
+      this.fieldErrors.phone = phoneResult.error
       if (!phoneResult.valid) isValid = false
 
       // Validate position
-      touched.position = true
-      if (!this.formData.position) {
-        errors.position = 'Please select a position'
+      if (!this.form.position) {
+        this.fieldErrors.position = 'Please select a position'
         isValid = false
       } else {
-        errors.position = ''
+        this.fieldErrors.position = ''
       }
 
       // Validate resume upload
       if (this.uploadedFiles.length === 0) {
-        errors.resume = 'Please upload your resume'
+        this.fieldErrors.resume = 'Please upload your resume'
         isValid = false
       } else {
-        errors.resume = ''
+        this.fieldErrors.resume = ''
       }
 
       // Validate policy agreement
-      touched.agreeToPolicy = true
-      if (!this.formData.agreeToPolicy) {
-        errors.agreeToPolicy = 'You must agree to the Privacy Policy and Terms of Service'
+      if (!this.form.agreeToPolicy) {
+        this.fieldErrors.agreeToPolicy = 'You must agree to the Privacy Policy and Terms of Service'
         isValid = false
       } else {
-        errors.agreeToPolicy = ''
+        this.fieldErrors.agreeToPolicy = ''
       }
 
-      this.$emit('update:fieldErrors', errors)
-      this.$emit('update:fieldTouched', touched)
-
-      return isValid
-    },
-    handleSubmit() {
-      if (this.validateForm()) {
-        this.$emit('submit')
-      } else {
-        // Emit validation failed event
-        this.$emit('validation-failed')
-        // Only scroll when validation fails to show errors
+      if (!isValid) {
         const firstError = document.querySelector('.field-error')
         if (firstError) {
           firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
         }
       }
+
+      return isValid
+    },
+    async handleSubmit() {
+      if (!this.validateForm()) {
+        this.submitSuccess = false
+        this.submitMessage = 'Please fix the errors before submitting'
+        setTimeout(() => {
+          this.submitMessage = ''
+        }, 5000)
+        return
+      }
+
+      if (this.isSubmitting) return
+
+      this.isSubmitting = true
+      this.submitMessage = ''
+
+      try {
+        const formDataToSend = new FormData()
+        formDataToSend.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY)
+        formDataToSend.append('form', 'Careers')
+        formDataToSend.append('first_name', this.form.firstName)
+        formDataToSend.append('last_name', this.form.lastName)
+        formDataToSend.append('email', this.form.email)
+        formDataToSend.append('phone', this.form.phone)
+        formDataToSend.append('position', this.form.position)
+        formDataToSend.append('experience', this.form.experience)
+        formDataToSend.append('availability', this.form.availability)
+        formDataToSend.append('message', this.form.message)
+
+        this.uploadedFiles.forEach((file, index) => {
+          formDataToSend.append(`resume_${index}`, file)
+        })
+
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formDataToSend,
+        })
+
+        const data = await response.json()
+
+        if (data.success) {
+          this.submitSuccess = true
+          this.submitMessage =
+            'Thank you for your application! We will review it and get back to you within 48 hours.'
+
+          setTimeout(() => {
+            this.form = {
+              firstName: '',
+              lastName: '',
+              email: '',
+              phone: '',
+              position: '',
+              experience: '',
+              availability: '',
+              message: '',
+              agreeToPolicy: false,
+            }
+            this.uploadedFiles = []
+            this.fieldErrors = {
+              firstName: '',
+              lastName: '',
+              email: '',
+              phone: '',
+              position: '',
+              resume: '',
+              agreeToPolicy: '',
+            }
+            this.fieldTouched = {
+              firstName: false,
+              lastName: false,
+              email: false,
+              phone: false,
+              position: false,
+              agreeToPolicy: false,
+            }
+            this.submitMessage = ''
+            this.submitSuccess = false
+          }, 5000)
+        } else {
+          this.submitSuccess = false
+          this.submitMessage =
+            'Something went wrong. Please try again or call us at (800) 889-9788.'
+        }
+      } catch (error) {
+        this.submitSuccess = false
+        this.submitMessage = 'Network error. Please check your connection and try again.'
+      } finally {
+        this.isSubmitting = false
+      }
     },
     handleFilesChange(files) {
-      this.$emit('update:uploadedFiles', files)
-      // Clear resume error when files are uploaded
+      this.uploadedFiles = files
       if (files.length > 0) {
         this.clearFieldError('resume')
       }
@@ -404,23 +463,8 @@ export default {
   padding: var(--gap-md) 0;
 }
 
-.policy-agreement .form-check {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-md);
-}
-
-.policy-agreement .form-check-input {
-  width: 1.25rem;
-  height: 1.25rem;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.policy-agreement .form-check-label {
-  cursor: pointer;
-  font-weight: 600;
-  margin: 0;
+.text-gray {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Success/Error message styling */
@@ -448,111 +492,9 @@ export default {
   color: var(--accent-red) !important;
 }
 
-.spinner-border {
-  width: 1rem;
-  height: 1rem;
-  border-width: 0.15em;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Form Inputs use global styles */
-
-.form-select option {
-  background: var(--secondary-dark);
-  color: white;
-}
-
-.form-control.invalid,
-.form-select.invalid {
-  border-color: var(--accent-red);
-  animation: shake 0.5s ease;
-}
-
-@keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    transform: translateX(-5px);
-  }
-  20%,
-  40%,
-  60%,
-  80% {
-    transform: translateX(5px);
-  }
-}
-
-.form-label {
-  color: white;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-.field-error {
-  color: var(--accent-red);
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  animation: fadeInUp 0.3s ease;
-}
-
-.field-error::before {
-  content: '⚠';
-  font-size: 1rem;
-}
-
-/* Submit Button */
-.btn-primary {
-  background: var(--accent-orange);
-  border: none;
-  padding: 1rem 3rem;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: var(--transition-base);
-  color: white;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background: var(--accent-orange-light);
-  transform: translateY(-2px);
-}
-
-.btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-primary:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-textarea.form-control {
-  min-height: 120px;
-  resize: vertical;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .btn-primary {
-    width: 100%;
     padding: 0.875rem 2rem;
     font-size: 1rem;
   }
