@@ -13,45 +13,22 @@
       <!-- Main Instant Estimate Section -->
       <div class="row g-4 align-items-stretch">
         <!-- Left Column: Visual Slider -->
-        <div class="col-lg-6 d-flex flex-column">
+        <div class="col-lg-7 d-flex flex-column">
           <div class="card-dark shadow-lg h-100">
             <h3 class="text-white mb-4">Get Your Instant Estimate</h3>
             <p class="text-gray small mb-4">
               Adjust the slider to match your load size or click the truck segments. Upload photos
-              for a more accurate quote. Most projects fall within ±15% of this range once photos are reviewed.
+              for a more accurate quote. Most projects fall within ±15% of this range once photos
+              are reviewed.
             </p>
 
             <!-- Truck Container Visualization -->
-            <div class="truck-container mb-4">
-              <div class="truck-area">
-                <!-- Tractor -->
-                <div class="tractor">
-                  <div class="hood"></div>
-                  <div class="cab-body">
-                    <div class="cab-window"></div>
-                  </div>
-                  <div class="exhaust"></div>
-                </div>
-                <!-- Trailer with interactive segments -->
-                <div class="trailer">
-                  <div
-                    v-for="i in 4"
-                    :key="i"
-                    class="trailer-segment"
-                    :class="{ active: i <= currentTierIndex }"
-                    @click="onSegmentClick(i)"
-                  ></div>
-                </div>
-                <!-- Wheels -->
-                <div class="wheels">
-                  <div class="wheel front"></div>
-                  <div class="wheel back"></div>
-                  <div class="wheel trailer1"></div>
-                  <div class="wheel trailer2"></div>
-                  <div class="wheel trailer3"></div>
-                </div>
-              </div>
-            </div>
+            <TruckVisualization
+              :current-tier-index="currentTierIndex"
+              @segment-click="onSegmentClick"
+              class="mb-4"
+            />
+
             <!-- Load Slider -->
             <div class="load-slider-container">
               <div class="d-flex justify-content-between align-items-center mb-3">
@@ -124,7 +101,7 @@
         </div>
 
         <!-- Right Column: Estimate & Booking -->
-        <div class="col-lg-6 d-flex flex-column">
+        <div class="col-lg-5 d-flex flex-column">
           <div class="card-dark shadow-lg h-100">
             <!-- Price Display -->
             <div class="price-display mb-4 pb-4">
@@ -249,7 +226,14 @@
                     id="agreeToPolicyHauling"
                   />
                   <label class="form-check-label text-white" for="agreeToPolicyHauling">
-                    I agree to the Lift & Shift Privacy Policy and Terms of Service
+                    I agree to the Lift & Shift
+                    <router-link to="/privacy" class="text-orange" target="_blank"
+                      >Privacy Policy</router-link
+                    >
+                    and
+                    <router-link to="/terms" class="text-orange" target="_blank"
+                      >Terms & Conditions</router-link
+                    >
                     <span class="text-orange">*</span>
                   </label>
                 </div>
@@ -336,6 +320,7 @@ import PageHeader from './PageHeader.vue'
 import PricingCard from './PricingCard.vue'
 import BenefitCard from './BenefitCard.vue'
 import FileUpload from '../Shared/FileUpload.vue'
+import TruckVisualization from './TruckVisualization.vue'
 import { validators } from '../../utils/validators.js'
 
 export default {
@@ -345,6 +330,7 @@ export default {
     PricingCard,
     BenefitCard,
     FileUpload,
+    TruckVisualization,
   },
   data() {
     return {
@@ -457,12 +443,14 @@ export default {
         {
           icon: 'fas fa-tag',
           title: 'Transparent, Structured Pricing ',
-          description: 'No hidden fees, no last-minute surprises, what you\'re quoted is what you pay!',
+          description:
+            "No hidden fees, no last-minute surprises, what you're quoted is what you pay!",
         },
         {
           icon: 'fas fa-users',
           title: 'Professional Trained Crew',
-          description: 'Our crews are trained to work efficiently while protecting your property, floors, and surroundings.',
+          description:
+            'Our crews are trained to work efficiently while protecting your property, floors, and surroundings.',
         },
       ],
     }
@@ -668,162 +656,6 @@ label {
   font-size: 0.875rem;
 }
 
-/* Truck Container */
-.truck-container {
-  background: var(--primary-dark);
-  padding: 2rem;
-  border-radius: var(--radius-xl);
-  border: 2px solid var(--orange-10);
-}
-
-.truck-area {
-  position: relative;
-  height: 230px;
-  width: 100%;
-}
-
-/* Tractor */
-.tractor {
-  position: absolute;
-  left: 0;
-  bottom: 30px;
-  width: 28%;
-  height: 90px;
-  display: flex;
-  align-items: flex-end;
-}
-
-.hood {
-  position: relative;
-  left: 3%;
-  width: 40%;
-  height: 69px;
-  background: var(--primary-dark);
-  border: 2px solid var(--text-gray);
-  border-radius: 6px;
-  border-right: none;
-}
-
-.cab-body {
-  position: relative;
-  width: 60%;
-  height: 85px;
-  background: var(--primary-dark);
-  border: 2px solid var(--text-gray);
-  border-left: none;
-  border-radius: 6px 6px 4px 0;
-}
-
-.cab-body::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: 10%;
-  width: 80%;
-  height: 36px;
-  background: var(--primary-dark);
-  border: 2px solid var(--text-gray);
-  border-bottom: none;
-  border-radius: 8px 8px 0 0;
-}
-
-.cab-window {
-  position: absolute;
-  top: 5px;
-  left: 22%;
-  width: 50%;
-  height: 30px;
-  background: var(--secondary-dark);
-  border: 2px solid var(--orange-10);
-  border-radius: 4px;
-}
-
-.exhaust {
-  position: absolute;
-  right: -6px;
-  bottom: 60px;
-  width: 8px;
-  height: 50px;
-  background: var(--primary-dark);
-  border: 2px solid var(--text-gray);
-  border-radius: 4px;
-}
-
-/* Trailer */
-.trailer {
-  position: absolute;
-  left: 28%;
-  bottom: 30px;
-  width: 72%;
-  height: 90px;
-  background: var(--primary-dark);
-  border: 2px solid var(--text-gray);
-  border-radius: 4px;
-  display: flex;
-  overflow: hidden;
-}
-
-.trailer-segment {
-  flex: 1;
-  border-right: 1px dashed var(--orange-10);
-  background: var(--secondary-dark);
-  transition:
-    background 0.25s,
-    box-shadow 0.25s;
-  cursor: pointer;
-}
-
-.trailer-segment:last-child {
-  border-right: none;
-}
-
-.trailer-segment.active {
-  background: var(--orange-20);
-  box-shadow:
-    inset 0 0 0 0.1px var(--accent-orange),
-    0 0 10px var(--orange-20);
-}
-
-.trailer-segment:hover {
-  background: var(--orange-10);
-}
-
-/* Wheels */
-.wheels {
-  position: absolute;
-  bottom: 0;
-  left: 7%;
-  width: 100%;
-  height: 40px;
-}
-
-.wheel {
-  position: absolute;
-  bottom: 0;
-  width: 32px;
-  height: 32px;
-  background: var(--secondary-dark);
-  border: 4px solid var(--text-gray);
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 3px var(--primary-dark);
-}
-
-.wheel.front {
-  left: 28%;
-}
-
-.wheel.trailer1 {
-  left: 35%;
-}
-
-.wheel.trailer2 {
-  left: 70%;
-}
-
-.wheel.trailer3 {
-  left: 77%;
-}
-
 /* Slider */
 .slider {
   width: 100%;
@@ -941,37 +773,13 @@ label {
 
 .policy-agreement .form-check-label {
   cursor: pointer;
+  font-size: 0.95rem;
   font-weight: 600;
   margin: 0;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .truck-area {
-    height: 180px;
-  }
-
-  .tractor {
-    width: 30%;
-    height: 70px;
-  }
-
-  .exhaust {
-    height: 40px;
-    bottom: 45px;
-  }
-
-  .trailer {
-    left: 30%;
-    width: 70%;
-    height: 70px;
-  }
-
-  .wheel {
-    width: 24px;
-    height: 24px;
-  }
-
   .d-flex.gap-2 {
     flex-direction: column;
   }

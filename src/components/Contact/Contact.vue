@@ -112,7 +112,14 @@
                         @change="clearFieldError('agreeToPolicy')"
                       />
                       <label class="form-check-label text-white" for="agreeToPolicyContact">
-                        I agree to the Lift & Shift Privacy Policy and Terms of Service
+                        I agree to the Lift & Shift
+                        <router-link to="/privacy" class="text-orange" target="_blank"
+                          >Privacy Policy</router-link
+                        >
+                        and
+                        <router-link to="/terms" class="text-orange" target="_blank"
+                          >Terms & Conditions</router-link
+                        >
                         <span class="text-orange">*</span>
                       </label>
                     </div>
@@ -180,8 +187,8 @@
               </div>
               <div>
                 <h6 class="text-white mb-1">Email</h6>
-                <a href="mailto:contact@liftshiftservices.com" class="text-orange"
-                  >contact@liftshiftservices.com</a
+                <a href="mailto:Contact@liftshiftservices.com" class="text-orange"
+                  >Contact@liftshiftservices.com</a
                 >
               </div>
             </div>

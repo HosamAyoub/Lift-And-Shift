@@ -336,7 +336,7 @@
                   </p>
                   <p>
                     <i class="fas fa-check text-orange me-2"></i>
-                    Kitchen table non-folding, solid wood (6–8 person)
+                    Kitchen table non-folding, solid wood (6-8 person)
                   </p>
                 </div>
               </div>

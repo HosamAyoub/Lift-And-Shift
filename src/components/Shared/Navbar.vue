@@ -102,7 +102,7 @@ export default {
   name: 'Navbar',
   computed: {
     logo() {
-      return '/assets/images/logo.png'
+      return '/assets/images/logo.svg'
     },
   },
 }

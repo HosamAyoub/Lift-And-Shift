@@ -8,6 +8,8 @@ import MovingView from '@/views/MovingView.vue'
 import HaulingView from '@/views/HaulingView.vue'
 import StorageView from '@/views/StorageView.vue'
 import ThankYouView from '@/views/ThankYouView.vue'
+import TermsView from '@/views/TermsView.vue'
+import PrivacyView from '@/views/PrivacyView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +58,16 @@ const router = createRouter({
       path: '/thank-you',
       name: 'thank-you',
       component: ThankYouView,
+    },
+    {
+      path: '/terms',
+      name: 'terms',
+      component: TermsView,
+    },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: PrivacyView,
     },
   ],
 })

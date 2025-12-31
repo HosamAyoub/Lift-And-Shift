@@ -26,8 +26,8 @@
               <i class="fas fa-envelope"></i>
             </div>
             <h5>Email Us</h5>
-            <a href="mailto:contact@liftshiftservices.com" class="contact-link">
-              contact@liftshiftservices.com
+            <a href="mailto:Contact@liftshiftservices.com" class="contact-link">
+              Contact@liftshiftservices.com
             </a>
           </div>
         </div>

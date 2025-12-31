@@ -298,7 +298,14 @@
                     id="agreeToPolicyDemolition"
                   />
                   <label class="form-check-label text-white" for="agreeToPolicyDemolition">
-                    I agree to the Lift & Shift Privacy Policy and Terms of Service
+                    I agree to the Lift & Shift
+                    <router-link to="/privacy" class="text-orange" target="_blank"
+                      >Privacy Policy</router-link
+                    >
+                    and
+                    <router-link to="/terms" class="text-orange" target="_blank"
+                      >Terms & Conditions</router-link
+                    >
                     <span class="text-orange">*</span>
                   </label>
                 </div>

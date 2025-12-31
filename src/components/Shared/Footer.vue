@@ -7,20 +7,33 @@
           <div class="col-lg-4 col-md-6">
             <div class="footer-widget">
               <div class="footer-logo mb-3 justify-content-center">
-                <img :src="logo" alt="Lift & Shift"/>
+                <img :src="logo" alt="Lift & Shift" />
                 <!-- <span class="footer-brand">Lift & Shift</span> -->
               </div>
-              <h5 class="footer-description text-center">
-                Residential • Commercial • Campuses
-              </h5>
+              <h5 class="footer-description text-center">Residential • Commercial • Campuses</h5>
               <div class="social-links mt-4 justify-content-center">
-                <a href="https://www.facebook.com/profile.php?id=61581578024840" class="social-link" aria-label="Facebook" target="_blank">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61581578024840"
+                  class="social-link"
+                  aria-label="Facebook"
+                  target="_blank"
+                >
                   <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://www.instagram.com/liftshiftservices?igsh=MTkyYm82ZHAxYXNidA%3D%3D&utm_source=qr" class="social-link" aria-label="Instagram" target="_blank">
+                <a
+                  href="https://www.instagram.com/liftshiftservices?igsh=MTkyYm82ZHAxYXNidA%3D%3D&utm_source=qr"
+                  class="social-link"
+                  aria-label="Instagram"
+                  target="_blank"
+                >
                   <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://www.linkedin.com/company/lift-shift/about/?viewAsMember=true" class="social-link" aria-label="LinkedIn" target="_blank">
+                <a
+                  href="https://www.linkedin.com/company/lift-shift/about/?viewAsMember=true"
+                  class="social-link"
+                  aria-label="LinkedIn"
+                  target="_blank"
+                >
                   <i class="fab fa-linkedin-in"></i>
                 </a>
               </div>
@@ -90,7 +103,7 @@
               <ul class="footer-contact">
                 <li class="align-items-center">
                   <i class="fas fa-envelope"></i>
-                  <a href="mailto:contact@liftshiftservices.com"> contact@liftshiftservices.com </a>
+                  <a href="mailto:Contact@liftshiftservices.com"> Contact@liftshiftservices.com </a>
                 </li>
                 <li class="align-items-center">
                   <i class="fas fa-map-marker-alt"></i>
@@ -120,8 +133,12 @@
           </div>
           <div class="col-md-6 text-center text-md-end">
             <ul class="footer-bottom-links">
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
+              <li>
+                <router-link to="/privacy">Privacy Policy</router-link>
+              </li>
+              <li>
+                <router-link to="/terms">Terms & Conditions</router-link>
+              </li>
             </ul>
           </div>
         </div>
@@ -138,7 +155,7 @@ export default {
   },
   computed: {
     logo() {
-      return '/assets/images/logo.png'
+      return '/assets/images/logo.svg'
     },
     currentYear() {
       return new Date().getFullYear()
