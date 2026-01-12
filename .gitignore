@@ -42,3 +42,6 @@ __screenshots__/
 
 # Firebase
 .firebase/
+
+#Claude
+.claude/
