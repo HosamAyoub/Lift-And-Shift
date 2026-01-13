@@ -24,7 +24,7 @@
         </defs>
 
         <!-- Background panel -->
-        <rect class="bg-panel" x="18" y="18" width="944" height="234" rx="22" fill="url(#bgGlow)" />
+        <rect class="bg-panel" x="5" y="18" width="960" height="234" rx="22" fill="url(#bgGlow)" />
 
         <!-- Ground rail -->
         <rect class="ground-rail" x="48" y="206" width="884" height="8" rx="4" />

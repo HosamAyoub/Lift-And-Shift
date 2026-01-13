@@ -291,6 +291,7 @@ export default {
         pickupState: '',
         pickupZip: '',
         pickupBuilding: '',
+        pickupBuildingFloor: '',
         pickupFloor: '',
         pickupDate: '',
         pickupTime: '',
@@ -299,6 +300,7 @@ export default {
         dropoffState: '',
         dropoffZip: '',
         dropoffBuilding: '',
+        dropoffBuildingFloor: '',
         dropoffFloor: '',
         description: '',
         hearAboutUs: '',
@@ -562,6 +564,7 @@ export default {
         formDataToSend.append('pickup_state', this.formData.pickupState)
         formDataToSend.append('pickup_zip', this.formData.pickupZip)
         formDataToSend.append('pickup_building', this.formData.pickupBuilding || 'N/A')
+        formDataToSend.append('pickup_building_floor', this.formData.pickupBuildingFloor || 'N/A')
         formDataToSend.append('pickup_floor', this.formData.pickupFloor || 'N/A')
         formDataToSend.append('pickup_date', this.formData.pickupDate)
         formDataToSend.append('pickup_time', this.formData.pickupTime)
@@ -570,6 +573,7 @@ export default {
         formDataToSend.append('dropoff_state', this.formData.dropoffState)
         formDataToSend.append('dropoff_zip', this.formData.dropoffZip)
         formDataToSend.append('dropoff_building', this.formData.dropoffBuilding || 'N/A')
+        formDataToSend.append('dropoff_building_floor', this.formData.dropoffBuildingFloor || 'N/A')
         formDataToSend.append('dropoff_floor', this.formData.dropoffFloor || 'N/A')
         formDataToSend.append('description', this.formData.description || 'N/A')
         formDataToSend.append('hear_about_us', this.formData.hearAboutUs || 'N/A')
@@ -602,6 +606,7 @@ export default {
               pickupState: '',
               pickupZip: '',
               pickupBuilding: '',
+              pickupBuildingFloor: '',
               pickupFloor: '',
               pickupDate: '',
               pickupTime: '',
@@ -609,6 +614,7 @@ export default {
               dropoffState: '',
               dropoffZip: '',
               dropoffBuilding: '',
+              dropoffBuildingFloor: '',
               dropoffFloor: '',
               description: '',
               hearAboutUs: '',

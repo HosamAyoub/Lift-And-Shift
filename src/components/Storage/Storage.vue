@@ -293,7 +293,7 @@
                 </p>
               </div>
               <div class="pricing-price">
-                <span class="price">$66</span>
+                <span class="price">$55</span>
                 <span class="price-label">Monthly per item</span>
               </div>
               <i class="fas fa-chevron-down pricing-toggle"></i>
@@ -1401,12 +1401,6 @@ export default {
     gap: 1rem;
   }
 
-  .pricing-price {
-    grid-column: 1 / 2;
-    grid-row: 2;
-    text-align: left;
-    margin-left: 76px;
-  }
 
   .pricing-toggle {
     grid-column: 2 / 3;

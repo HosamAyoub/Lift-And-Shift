@@ -12,8 +12,10 @@
             <div class="step-label rounded-pill text-center">Step 1</div>
             <h3 class="step-title">Free Boxes & Supplies</h3>
             <p class="step-description">
-              Reusable 24×18×18 moving boxes delivered to you. Our reusable boxes are approximately
-              <b class="text-orange">10% larger</b> than standard and designed for secure stacking.
+              We provide 24×18×18 moving boxes branded with Lift & Shift. These boxes are
+              approximately
+              <b class="text-orange">10% larger</b> than standard boxes and designed for secure
+              stacking.
             </p>
           </div>
         </div>
@@ -23,10 +25,10 @@
             <div class="step-label rounded-pill text-center">Step 2</div>
             <h3 class="step-title">Pickup & Secure Storage</h3>
             <p class="step-description">
-              Our team picks up your items from your location and stores them safely in our
-              <b class="text-orange">climate controlled facility</b>. Free delivery applies to
-              scheduled pick-up dates within the service area. A minimum 4-month storage term
-              applies.
+              We pick up and store your items in our
+              <b class="text-orange">climate controlled facility</b>. Free delivery applies to our
+              scheduled pick-up/drop-off within the service area. 4-month minimum storage term
+              required.
             </p>
           </div>
         </div>
@@ -38,7 +40,8 @@
             <p class="step-description">
               When you're ready, your belongings are delivered to your new location.
               <b class="text-orange">Free delivery</b>
-              applies to scheduled drop-off dates within the service area.
+              applies to scheduled drop-off dates within the service area (Early pick-up or drop-off
+              available upon request).
             </p>
           </div>
         </div>

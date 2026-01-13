@@ -115,7 +115,7 @@
             </div>
           </div>
 
-          <div class="col-md-12">
+          <div class="col-md-8">
             <label class="text-white fw-bold d-block mb-2">Organization / Building</label>
             <input
               type="text"
@@ -123,6 +123,18 @@
               @input="updateFormField('pickupBuilding', $event.target.value)"
               class="form-control"
               placeholder="Building name or organization (optional)"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label class="text-white fw-bold d-block mb-2">Floor</label>
+            <input
+              type="number"
+              :value="formData.pickupBuildingFloor"
+              @input="updateFormField('pickupBuildingFloor', $event.target.value)"
+              class="form-control"
+              placeholder="Floor (optional)"
+              min="0"
             />
           </div>
         </div>
@@ -225,14 +237,26 @@
             </div>
           </div>
 
-          <div class="col-md-12">
-            <label class="text-white fw-bold d-block mb-2">Building / Organization</label>
+          <div class="col-md-8">
+            <label class="text-white fw-bold d-block mb-2">Organization / Building</label>
             <input
               type="text"
               :value="formData.dropoffBuilding"
               @input="updateFormField('dropoffBuilding', $event.target.value)"
               class="form-control"
               placeholder="Enter building name (optional)"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label class="text-white fw-bold d-block mb-2">Floor</label>
+            <input
+              type="number"
+              :value="formData.dropoffBuildingFloor"
+              @input="updateFormField('dropoffBuildingFloor', $event.target.value)"
+              class="form-control"
+              placeholder="Floor (optional)"
+              min="0"
             />
           </div>
         </div>

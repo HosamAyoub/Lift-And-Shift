@@ -194,7 +194,7 @@ export default {
   }
 
   .cities-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
 
@@ -209,7 +209,7 @@ export default {
   }
 
   .cities-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .cities-section {

@@ -11,7 +11,7 @@
               </h1>
             </transition>
             <transition name="fade-up" appear>
-              <h4 v-if="show" :style="{ transitionDelay: '0.1s' }">
+              <h4 v-if="show" :style="{ transitionDelay: '0.1s' }" class="sub-hero-title">
                 Residential • Commercial • Campuses
               </h4>
             </transition>
@@ -287,6 +287,11 @@ export default {
 @media (max-width: 576px) {
   .hero-title {
     font-size: 2rem;
+    text-align: center;
+  }
+
+  .sub-hero-title {
+    text-align: center;
   }
 
   .hero-subtitle {
@@ -304,6 +309,10 @@ export default {
   .hero-buttons :deep(.btn) {
     width: 100% !important;
     margin: 0 !important;
+  }
+
+  .hero-section {
+    margin: 0px 15px;
   }
 }
 </style>

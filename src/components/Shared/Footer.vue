@@ -37,6 +37,18 @@
                   <i class="fab fa-linkedin-in"></i>
                 </a>
               </div>
+              <div class="text-center mt-3">
+                <h5>Powered By:</h5>
+                <div class="d-flex align-items-center justify-content-center">
+                  <img src="/assets/images/Square.png" alt="" style="width: 150px" class="me-3" />
+                  <img
+                    src="/assets/images/Movegistics.png"
+                    alt=""
+                    style="width: 150px; background: white; height: 25px"
+                    class="rounded-1"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -75,8 +87,11 @@
               <h5 class="footer-title">Company</h5>
               <ul class="footer-links">
                 <li>
-                  <router-link to="/aboutUs">
-                    <i class="fas fa-chevron-right"></i> About Us
+                  <router-link to="/"> <i class="fas fa-chevron-right"></i> Home </router-link>
+                </li>
+                <li>
+                  <router-link to="/contact">
+                    <i class="fas fa-chevron-right"></i> Contact
                   </router-link>
                 </li>
                 <li>
@@ -85,12 +100,9 @@
                   </router-link>
                 </li>
                 <li>
-                  <router-link to="/contact">
-                    <i class="fas fa-chevron-right"></i> Contact
+                  <router-link to="/aboutUs">
+                    <i class="fas fa-chevron-right"></i> About Us
                   </router-link>
-                </li>
-                <li>
-                  <router-link to="/"> <i class="fas fa-chevron-right"></i> Home </router-link>
                 </li>
               </ul>
             </div>
@@ -131,8 +143,8 @@
           <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
             <p class="mb-0">&copy; {{ currentYear }} Lift & Shift. All rights reserved.</p>
           </div>
-          <div class="col-md-6 text-center text-md-end">
-            <ul class="footer-bottom-links">
+          <div class="col-md-6 text-md-end">
+            <ul class="footer-bottom-links justify-content-end">
               <li>
                 <router-link to="/privacy">Privacy Policy</router-link>
               </li>
@@ -384,7 +396,7 @@ export default {
 }
 
 .footer-bottom {
-  padding: 30px 0;
+  padding: 0 0 25px 0;
   margin-top: 30px;
   opacity: 0;
   transform: translateY(20px);
@@ -448,6 +460,11 @@ export default {
 
   .social-links {
     justify-content: center;
+  }
+
+  .footer-title::after
+  {
+    left: 4%;
   }
 }
 
