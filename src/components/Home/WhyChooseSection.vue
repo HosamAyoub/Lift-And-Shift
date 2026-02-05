@@ -67,8 +67,8 @@
             <div class="feature-box-content">
               <h5>Transparent Pricing</h5>
               <p>
-                Packing - Upfront, clearly explained pricing with no hidden fees, supported by
-                detailed estimates so you know exactly what to expect before your move begins.
+                Upfront, clearly explained pricing with no hidden fees, supported by detailed
+                estimates so you know exactly what to expect before your move begins.
               </p>
             </div>
           </div>
