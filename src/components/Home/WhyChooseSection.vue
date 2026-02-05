@@ -37,7 +37,7 @@
               <h5>Professional Equipment</h5>
               <p>
                 We invest in modern trucks and professional moving equipment to ensure secure
-                transport, controlled handling, and a smoother moving experience for our clients .
+                transport, controlled handling, and a smoother moving experience for our clients.
               </p>
             </div>
           </div>
