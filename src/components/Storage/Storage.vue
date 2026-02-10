@@ -118,12 +118,23 @@
     </div>
   </section>
 
+  <div class="student-storage-btn-wrapper mt-4 text-center">
+    <a
+      class="btn btn-primary student-storage-btn"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSeZJ77AsD827AXFJVtErXP_tzxg5Hv6STtPLSvMoTDut0cg8Q/viewform?usp=dialog"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <h5 class="my-1">Student Storage Request</h5>
+    </a>
+  </div>
+
   <!-- Pricing Tiers Section -->
   <section class="section section-dark py-5">
     <div class="container">
       <div class="text-center mb-5">
-        <h2 class="section-title">Moving <span class="text-orange">Pricing</span></h2>
-        <p class="section-subtitle">No measuring, No hassle.</p>
+        <h2 class="section-title">Storage <span class="text-orange">Pricing</span></h2>
+        <p class="section-subtitle">We skip measuring. You skip stress.</p>
       </div>
 
       <div class="row g-4 justify-content-center">
@@ -1401,7 +1412,6 @@ export default {
     gap: 1rem;
   }
 
-
   .pricing-toggle {
     grid-column: 2 / 3;
     grid-row: 1;
@@ -1596,3 +1606,8 @@ export default {
   }
 }
 </style>
+
+/* Student Storage Button Custom Styles */ .student-storage-btn-wrapper { display: flex;
+flex-direction: column; align-items: center; justify-content: center; } .student-storage-btn {
+min-width: 220px; max-width: 320px; width: auto; font-size: 1rem; padding-left: 2rem; padding-right:
+2rem; }

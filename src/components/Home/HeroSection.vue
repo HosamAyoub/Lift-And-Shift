@@ -24,7 +24,7 @@
             <transition name="fade-up" appear>
               <div class="hero-buttons mb-3" v-if="show" :style="{ transitionDelay: '0.3s' }">
                 <QuoteDropdown button-class="btn-lg me-3" />
-                <a class="btn btn-outline-primary btn-lg" href="tel:+18008899788">Get Contact</a>
+                <a class="btn btn-outline-primary btn-lg" href="tel:+18008899788">Contact Us</a>
               </div>
             </transition>
           </div>
