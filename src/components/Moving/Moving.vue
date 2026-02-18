@@ -240,10 +240,10 @@ export default {
     return {
       citiesByState: citiesByStateData,
       movingServices: [
-        { value: 'packing', label: 'Packing Only', icon: 'fas fa-box' },
         { value: 'moving', label: 'Moving Only', icon: 'fas fa-truck-fast' },
+        { value: 'packing', label: 'Packing Only', icon: 'fas fa-box' },
         // { value: 'storage', label: 'Storage Only', icon: 'fas fa-warehouse' },
-        { value: 'packing-moving', label: 'Packing & Moving', icon: 'fas fa-boxes' },
+        { value: 'moving & packing', label: 'Moving & Packing', icon: 'fas fa-boxes' },
         // { value: 'full-service', label: 'Full Service (All)', icon: 'fas fa-star' },
       ],
       movingBenefits: [
